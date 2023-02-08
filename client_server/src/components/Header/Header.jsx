@@ -46,7 +46,8 @@ export default function Header() {
     <AppBar
       position="static"
       sx={{
-        backgroundImage: "linear-gradient(var(--negro),var(--primario_claro))",
+        backgroundImage:
+          "linear-gradient(var(--negro_claro),var(--primario_claro))",
       }}
     >
       <Container maxWidth="xl">
