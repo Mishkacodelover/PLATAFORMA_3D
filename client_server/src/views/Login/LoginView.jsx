@@ -1,11 +1,8 @@
 import { Button, Container, Box, Grid } from "@mui/material";
 import { Send, Delete } from "@mui/icons-material";
 import LoginForm from "../../components/LoginForm";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import { useState } from "react";
 
 export default function LoginView() {
-  const [register, setRegister] = useState(false);
   return (
     <>
       <Container>
@@ -98,8 +95,7 @@ export default function LoginView() {
         </Button>
         <Box>
           <Grid>
-            <LoginForm register={() => setRegister(!register)} />
-            {register && <RegistrationForm />}
+            <LoginForm />
           </Grid>
         </Box>
       </Container>

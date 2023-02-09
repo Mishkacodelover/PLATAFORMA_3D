@@ -8,10 +8,7 @@ export const RegistrationFormSchema = yup.object().shape({
     .string()
     .min(3, "EL nombre tiene que tener mínimo 3 letras")
     .required("Debes escribir un nombre"),
-  surname: yup
-    .string()
-    .min(3, "El apellido tiene que tener mínimo 3 letras")
-    .required("Debes escribir un apellido"),
+
   email: yup
     .string()
     .email("Porfavor escriba un email válido")

@@ -3,13 +3,29 @@ import { RegistrationFormSchema } from "./RegistrationForm_schema";
 import { initialValues } from "./utils/form";
 import { TextField, Grid, MenuItem, Button } from "@mui/material";
 import { options } from "./utils/options";
-
-const onSubmit = async (values, actions) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+import { REGISTRATION } from "../../utilities/settings";
 
 export default function RegistrationForm() {
+  const onSubmit = (actions, values) => {
+    async function register(values) {
+      const response = await fetch(REGISTRATION, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      try {
+        console.log(response);
+        alert("usuario registrado");
+      } catch (error) {
+        console.log("error");
+      }
+    }
+    register(values);
+    actions.resetForm();
+  };
+
   const { values, errors, isSubmitting, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -39,20 +55,8 @@ export default function RegistrationForm() {
                 error={errors.name}
                 helperText={errors.name}
               />
-            </Grid>
-            <Grid item xs={10} md={6}>
-              <TextField
-                type="text"
-                label="Apellidos"
-                name="surname"
-                variant="outlined"
-                fullWidth
-                value={values.surname}
-                onChange={handleChange}
-                error={errors.surname}
-                helperText={errors.surname}
-              />
             </Grid> */}
+
             <Grid item xs={10} md={6}>
               <TextField
                 type="email"

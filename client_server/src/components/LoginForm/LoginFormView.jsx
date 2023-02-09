@@ -2,13 +2,17 @@ import { useFormik } from "formik";
 import { LoginSchema } from "./LoginSchema";
 import { initialValues } from "./utils/inicialValues";
 import { TextField, Grid, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
 
-const onSubmit = async (values, actions) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  actions.resetForm();
-};
+export default function LoginFormView() {
+  const { login } = useAuthContext();
 
-export default function LoginFormView({ register }) {
+  const onSubmit = (values, actions) => {
+    login(values);
+    actions.resetForm();
+  };
+
   const { values, errors, isSubmitting, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -70,7 +74,9 @@ export default function LoginFormView({ register }) {
           </Grid>
         </form>
         <Typography>¿No estás registrado?</Typography>
-        <p onClick={register}>Crear cuenta</p>
+        <Link to="/registration">
+          <Typography>Crear cuenta</Typography>
+        </Link>
       </Grid>
     </>
   );

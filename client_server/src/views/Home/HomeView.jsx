@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import VideoTenis from "../../assets/videos/video_preview_h264.mp4";
+import VideoTenis from "../../assets/videos/video_preview-mujer.mp4";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import { Box, Typography, Stack } from "@mui/material";
 
