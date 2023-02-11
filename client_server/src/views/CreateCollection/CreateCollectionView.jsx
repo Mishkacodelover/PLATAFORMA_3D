@@ -7,14 +7,11 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
-import { useState } from "react";
 
 export default function CreateCollectionView({
   typeCollection,
   collectionUse,
 }) {
-  const [noShow, setNoShow] = useState(false);
-
   return (
     <>
       <Container maxWidth="100%">
@@ -80,13 +77,11 @@ export default function CreateCollectionView({
                   "radial-gradient(var(--primario),var(--negro))",
                 padding: "12px",
               }}
-              onClick={() => setNoShow(!noShow)}
             >
               Siguiente
             </Button>
           </Grid>
         </Box>
-        {noShow && <p>hola</p>}
       </Container>
     </>
   );
