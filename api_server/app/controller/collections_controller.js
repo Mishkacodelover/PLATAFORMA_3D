@@ -25,4 +25,32 @@ controller.addCollections = async (req, res) => {
   }
 };
 
+controller.getCollection = async (req, res) => {
+  try {
+    const collection = await dao.getCollectionById(req.params.id);
+
+    if (collection.length <= 0)
+      return res.status(404).send("La coleción no existe");
+
+    return res.send(collection[0]);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
+controller.getAllCollections = async (req, res) => {
+  try {
+    const collections = await dao.getAllCollections();
+
+    if (collections.length <= 0)
+      return res.status(404).send("No existen colecciones");
+
+    return res.send(collections);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
 export default controller;

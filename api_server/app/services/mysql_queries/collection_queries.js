@@ -63,4 +63,16 @@ collectionQueries.getCollectionByName = async (collectionName) => {
   }
 };
 
+collectionQueries.getAllCollections = async () => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query("SELECT * FROM collections", [], "select", conn);
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 export default collectionQueries;

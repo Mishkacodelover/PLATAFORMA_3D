@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import db from "./services/mysql.js";
 import userRouter from "./routes/user_router.js";
 import imagesRouter from "./routes/images_routes.js";
+import collectionRouter from "./routes/collections_router.js";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import { fileURLToPath } from "url";
@@ -38,6 +39,7 @@ app.use(
 app.use(express.static(join(__dirname, "public")));
 app.use("/user", userRouter);
 app.use("/images", imagesRouter);
+app.use("/collections", collectionRouter);
 
 await db.createConnection();
 
