@@ -5,10 +5,10 @@ import md5 from "md5";
 const controller = {};
 
 controller.addUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   console.log(req.body);
 
-  if (!email || !password)
+  if (!email || !password || !name)
     return res.status(400).send("Error al recibir el body");
 
   try {
@@ -45,7 +45,7 @@ controller.loginUser = async (req, res) => {
     const jwtConstructor = new SignJWT({
       id: user.id,
       email: user.email,
-      role: user.user_role,
+      role: user.role,
     });
     const encoder = new TextEncoder();
 
@@ -73,7 +73,7 @@ controller.deleteUser = async (req, res) => {
       token,
       encoder.encode(process.env.JWT_SECRET)
     );
-    if (payload.role > 0)
+    if (payload.role !== "admin")
       return res.status(409).send("no tiene permiso de administrador");
 
     const user = await dao.getUserbyId(req.params.id);
@@ -98,7 +98,7 @@ controller.updateUser = async (req, res) => {
     authorization,
     encoder.encode(process.env.JWT_SECRET)
   );
-  if (payload.role > 0)
+  if (payload.role !== "admin")
     return res.status(409).send("no tiene permiso de administrador");
   try {
     if (Object.entries(req.body).length === 0)

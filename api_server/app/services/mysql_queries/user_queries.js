@@ -1,5 +1,5 @@
 import db from "../mysql.js";
-import moment from "moment/moment.js";
+
 import md5 from "md5";
 import utils from "../../utils/utils.js";
 const userQueries = {};
@@ -9,7 +9,7 @@ userQueries.getUserbyEmail = async (email) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM users WHERE email = ?",
+      "SELECT * FROM user WHERE email = ?",
       email,
       "select",
       conn
@@ -44,12 +44,14 @@ userQueries.addUser = async (userData) => {
     conn = await db.createConnection();
 
     let userObj = {
+      name: userData.name,
+      surname: userData.surname,
       email: userData.email,
       password: md5(userData.password),
-      userRole: userData.userRole,
-      suscription: userData.suscription,
+      userType: userData.userType,
+      role: userData.role,
     };
-    return await db.query("INSERT INTO users SET ?", userObj, "insert", conn);
+    return await db.query("INSERT INTO user SET ?", userObj, "insert", conn);
   } catch (e) {
     throw new Error(e);
   } finally {
@@ -61,7 +63,7 @@ userQueries.deleteUser = async (id) => {
   let conn = null;
   try {
     conn = await db.createConnection();
-    return await db.query("DELETE FROM users WHERE id = ?", id, "delete", conn);
+    return await db.query("DELETE FROM user WHERE id = ?", id, "delete", conn);
   } catch (e) {
     throw new Error(e);
   } finally {
@@ -75,15 +77,41 @@ userQueries.updateUser = async (id, userData) => {
     conn = await db.createConnection();
 
     let userObj = {
+      name: userData.name,
+      surname: userData.surname,
       email: userData.email,
       password: userData.password ? md5(userData.password) : undefined,
-      userRole: userData.userRole,
-      suscription: userData.suscription,
+      userType: userData.userType,
+      role: userData.role,
+      isDelete: userData.isDelete,
     };
 
     userObj = await utils.removeUndefinedKeys(userObj);
     return await db.query(
-      "UPDATE users SET ? WHERE id = ?",
+      "UPDATE user SET ? WHERE id = ?",
+      [userObj, id],
+      "update",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+userQueries.falseDeleteUser = async (id, userData) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+
+    let userObj = {
+      isDelete: userData.isDelete,
+    };
+
+    userObj = await utils.removeUndefinedKeys(userObj);
+    return await db.query(
+      "UPDATE user SET ? WHERE id = ?",
       [userObj, id],
       "update",
       conn

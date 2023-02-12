@@ -43,7 +43,7 @@ export default function RegistrationForm() {
             spacing={2}
             sx={{ maxWidth: "100%" }}
           >
-            {/* <Grid item xs={10} md={6}>
+            <Grid item xs={10} md={6}>
               <TextField
                 type="text"
                 label="Nombre"
@@ -55,22 +55,22 @@ export default function RegistrationForm() {
                 error={errors.name}
                 helperText={errors.name}
               />
-            </Grid> */}
-
-            <Grid item xs={10} md={6}>
-              <TextField
-                type="email"
-                label="Email"
-                name="email"
-                variant="outlined"
-                fullWidth
-                value={values.email}
-                onChange={handleChange}
-                error={errors.email}
-                helperText={errors.email}
-              />
             </Grid>
             <Grid item xs={10} md={6}>
+              <TextField
+                type="text"
+                label="Apellidos"
+                name="surname"
+                variant="outlined"
+                fullWidth
+                value={values.surname}
+                onChange={handleChange}
+                error={errors.surname}
+                helperText={errors.surname}
+              />
+            </Grid>
+
+            {/* <Grid item xs={10} md={6}>
               <TextField
                 select
                 label="Suscripción"
@@ -88,7 +88,7 @@ export default function RegistrationForm() {
                   </MenuItem>
                 ))}
               </TextField>
-            </Grid>
+            </Grid> */}
             <Grid item xs={10} md={6}>
               <TextField
                 type="password"
@@ -114,6 +114,19 @@ export default function RegistrationForm() {
                 onChange={handleChange}
                 error={errors.confirmPassword}
                 helperText={errors.confirmPassword}
+              />
+            </Grid>
+            <Grid item xs={10} md={12}>
+              <TextField
+                type="email"
+                label="Email"
+                name="email"
+                variant="outlined"
+                fullWidth
+                value={values.email}
+                onChange={handleChange}
+                error={errors.email}
+                helperText={errors.email}
               />
             </Grid>
 

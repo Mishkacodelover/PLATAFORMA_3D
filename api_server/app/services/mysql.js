@@ -1,5 +1,14 @@
 import mysql from "mysql2";
+import path from "path";
+
+import __dirname from "path";
+
+import fs from "fs";
 let db = {};
+
+const pathCa = path.resolve("./DigiCertGlobalRootCA.crt.pem");
+
+const serverCa = [fs.readFileSync(pathCa, "utf8")];
 
 db.createConnection = async () => {
   return new Promise((resolve, reject) => {
@@ -9,6 +18,10 @@ db.createConnection = async () => {
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
         database: process.env.DB_NAME,
+        ssl: {
+          rejectUnauthorized: true,
+          ca: serverCa,
+        },
       });
 
       mysqlConnection.connect(async function (err) {
