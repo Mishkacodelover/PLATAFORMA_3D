@@ -1,12 +1,11 @@
 import mysql from "mysql2";
+import { currentDir } from "../index.js";
 import path from "path";
-
-import __dirname from "path";
-
 import fs from "fs";
 let db = {};
+const { __dirname } = currentDir();
 
-const pathCa = path.resolve("./DigiCertGlobalRootCA.crt.pem");
+const pathCa = path.resolve(__dirname, "services/DigiCertGlobalRootCA.crt.pem");
 
 const serverCa = [fs.readFileSync(pathCa, "utf8")];
 
