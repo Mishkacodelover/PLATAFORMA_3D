@@ -1,33 +1,23 @@
-import { Typography, Container, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Typography, Box, Grid } from "@mui/material";
 
 export default function AdminDashboardView() {
   return (
     <>
-      <Container maxWidth="100%">
-        <Typography variant="h2" textAlign="center">
-          Panel del administrador
-        </Typography>
+      <Typography variant="h6" textAlign="center">
+        Panel del administrador/aqui va el navbar
+      </Typography>
+      <Box>
         <Grid container direction="row" maxWidth="100%" maxHeight="100%">
-          <Grid item md={2} sx={{ border: "1px solid black" }}>
-            <Link to="/create-collection">
-              <Typography>crea nueva colección</Typography>
-            </Link>
-            <Link to="/admin-collection">
-              <Typography>administrar colecciones</Typography>
-            </Link>
-            <Link to="/admin">
-              <Typography>administrar permisos</Typography>
-            </Link>
+          <Grid item md={12}>
+            <Grid item>texto breve explicacion</Grid>
+            <Grid item>botón invitar usuarios</Grid>
           </Grid>
-          <Grid item md={10} sx={{ border: "1px solid black" }}>
-            Crea tu primera colección
-            <Link to="/create-collection">
-              <button>Crear colección</button>
-            </Link>
+          <Grid item>
+            <Grid item>texto</Grid>
+            <Grid item>renderizan los usuarios invitados</Grid>
           </Grid>
         </Grid>
-      </Container>
+      </Box>
     </>
   );
 }

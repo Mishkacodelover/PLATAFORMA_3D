@@ -26,7 +26,7 @@ userQueries.getUserbyId = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM users WHERE id = ?",
+      "SELECT * FROM user WHERE id = ?",
       id,
       "select",
       conn
@@ -40,6 +40,7 @@ userQueries.getUserbyId = async (id) => {
 
 userQueries.addUser = async (userData) => {
   let conn = null;
+
   try {
     conn = await db.createConnection();
 
@@ -48,9 +49,12 @@ userQueries.addUser = async (userData) => {
       surname: userData.surname,
       email: userData.email,
       password: md5(userData.password),
-      userType: userData.userType,
-      role: userData.role,
+      // confirmPassword: md5(userData.password),
+      // userType: userData.userType,
+      // isDelete: userData.isDelete,
+      // role: userData.role,
     };
+
     return await db.query("INSERT INTO user SET ?", userObj, "insert", conn);
   } catch (e) {
     throw new Error(e);

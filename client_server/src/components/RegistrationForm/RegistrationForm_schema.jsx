@@ -8,7 +8,7 @@ export const RegistrationFormSchema = yup.object().shape({
     .string()
     .min(3, "EL nombre tiene que tener mínimo 3 letras")
     .required("Debes escribir un nombre"),
-  surnmae: yup
+  surname: yup
     .string()
     .min(3, "EL apellido tiene que tener mínimo 3 letras")
     .required("Debes escribir un apellido"),
@@ -29,8 +29,4 @@ export const RegistrationFormSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "La constraseña debe coincidir")
     .required("Escribe una contraseña"),
-  suscription: yup
-    .string()
-    .oneOf(["Basic", "Middle", "Advanced"], "Suscripción no valida")
-    .required("Por favor escoja un tipo de suscripción"),
 });

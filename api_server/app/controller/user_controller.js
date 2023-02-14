@@ -5,10 +5,10 @@ import md5 from "md5";
 const controller = {};
 
 controller.addUser = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, surname, confirmPassword } = req.body;
   console.log(req.body);
 
-  if (!email || !password || !name)
+  if (!email || !password || !name || !surname || !confirmPassword)
     return res.status(400).send("Error al recibir el body");
 
   try {
@@ -63,7 +63,7 @@ controller.loginUser = async (req, res) => {
 
 controller.deleteUser = async (req, res) => {
   const { authorization } = req.headers;
-
+  //no olvidar que para probar este end-point, el token se pasa por el bearer sin comillas y eliminando la palabra bearer del prefijo abajo
   if (!authorization) return res.sendStatus(401);
   const token = authorization.split(" ")[1];
   try {
@@ -73,7 +73,7 @@ controller.deleteUser = async (req, res) => {
       token,
       encoder.encode(process.env.JWT_SECRET)
     );
-    if (payload.role !== "admin")
+    if (payload.role > 1)
       return res.status(409).send("no tiene permiso de administrador");
 
     const user = await dao.getUserbyId(req.params.id);
@@ -98,7 +98,7 @@ controller.updateUser = async (req, res) => {
     authorization,
     encoder.encode(process.env.JWT_SECRET)
   );
-  if (payload.role !== "admin")
+  if (payload.role > 1)
     return res.status(409).send("no tiene permiso de administrador");
   try {
     if (Object.entries(req.body).length === 0)

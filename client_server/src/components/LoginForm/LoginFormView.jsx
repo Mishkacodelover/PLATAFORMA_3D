@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
 import { LoginSchema } from "./LoginSchema";
 import { initialValues } from "./utils/inicialValues";
-import { TextField, Grid, Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { TextField, Button, Grid, Typography } from "@mui/material";
+
+import Link from "../Link/Link";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function LoginFormView() {
@@ -22,62 +23,58 @@ export default function LoginFormView() {
 
   return (
     <>
-      <Grid sx={{ maxWidth: "100%" }}>
-        <form onSubmit={handleSubmit} autoComplete="off">
-          <Grid
-            container
-            spacing={2}
-            direction="column"
-            sx={{ maxWidth: "100%" }}
-          >
-            <Grid item xs={10} md={6}>
-              <TextField
-                type="email"
-                label="Email"
-                name="email"
-                variant="outlined"
-                value={values.email}
-                onChange={handleChange}
-                error={errors.email}
-                helperText={errors.email}
-              />
-            </Grid>
-
-            <Grid item xs={10} md={6}>
-              <TextField
-                type="password"
-                label="Contraseña"
-                name="password"
-                variant="outlined"
-                value={values.password}
-                onChange={handleChange}
-                error={errors.password}
-                helperText={errors.password}
-              />
-            </Grid>
-
-            <Grid item xs={10} md={6}>
-              <Button
-                disabled={isSubmitting}
-                type="submit"
-                variant="contained"
-                sx={{
-                  backgroundImage:
-                    "linear-gradient(var(--negro),var(--primario))",
-                  color: "var(--blanco)",
-                  p: "16px 24px",
-                }}
-              >
-                Iniciar sesión
-              </Button>
-            </Grid>
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Grid container spacing={2} direction="column" sx={{ width: "100%" }}>
+          <Grid item xs={10} md={12}>
+            <TextField
+              type="email"
+              label="Email"
+              name="email"
+              variant="standard"
+              fullWidht
+              value={values.email}
+              onChange={handleChange}
+              error={errors.email}
+              helperText={errors.email}
+            />
           </Grid>
-        </form>
-        <Typography>¿No estás registrado?</Typography>
-        <Link to="/registration">
-          <Typography>Crear cuenta</Typography>
-        </Link>
-      </Grid>
+
+          <Grid item xs={10} md={12}>
+            <TextField
+              fullWidht
+              type="password"
+              label="Contraseña"
+              name="password"
+              variant="standard"
+              value={values.password}
+              onChange={handleChange}
+              error={errors.password}
+              helperText={errors.password}
+            />
+          </Grid>
+
+          <Grid item xs={10} md={12}>
+            <Button
+              fullWidht
+              disabled={isSubmitting}
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
+                // backgroundColor: "primary.main",
+                color: "var(--blanco)",
+                p: "16px 24px",
+              }}
+            >
+              Iniciar sesión
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+      <Typography>¿No estás registrado?</Typography>
+      <Link to="/registration">
+        <Typography>Crear cuenta</Typography>
+      </Link>
     </>
   );
 }

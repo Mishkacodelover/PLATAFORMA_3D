@@ -13,7 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 import DiamondSharpIcon from "@mui/icons-material/DiamondSharp";
-import { Link } from "react-router-dom";
+
+import Link from "../Link/Link";
 
 const pages = ["Producto", "Precios", "Sobre nosotros"];
 const settings = [
@@ -46,8 +47,10 @@ export default function Header() {
     <AppBar
       position="static"
       sx={{
-        backgroundImage:
-          "linear-gradient(var(--negro_claro),var(--primario_claro))",
+        // backgroundColor: "#282829",
+        // backgroundImage:
+        //   "linear-gradient(var(--negro_claro),var(--primario_claro))",
+        backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
       }}
     >
       <Container maxWidth="xl">
@@ -70,7 +73,7 @@ export default function Header() {
               textDecoration: "none",
             }}
           >
-            ONVERSED
+            METAVERSE DESIGN
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -128,7 +131,7 @@ export default function Header() {
               textDecoration: "none",
             }}
           >
-            3DESIGN
+            METAVERSE
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
