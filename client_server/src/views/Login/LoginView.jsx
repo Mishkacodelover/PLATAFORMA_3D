@@ -1,8 +1,9 @@
 import { Grid, Box } from "@mui/material";
 
-import Maniqui from "../../assets/images/maniquiclaro.jpg";
-import LoginBlack from "../../assets/images/negroclarologin.jpg";
+// import Maniqui from "../../assets/images/maniquiclaro.jpg";
+// import LoginBlack from "../../assets/images/negroclarologin.jpg";
 
+import LoginWhite from "../../assets/images/dibujoBlancoyNegroclaro.jpg";
 import LoginForm from "../../components/LoginForm";
 
 export default function LoginView() {
@@ -14,7 +15,7 @@ export default function LoginView() {
             width: "100%",
             maxHeight: "100%",
             minHeight: "560px",
-            backgroundImage: `url(${LoginBlack})`,
+            backgroundImage: `url(${LoginWhite})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

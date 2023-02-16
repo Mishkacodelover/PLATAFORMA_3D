@@ -4,9 +4,13 @@ import { Outlet } from "react-router-dom";
 export default function Layout() {
   return (
     <>
-      <Grid container direcion={"row"}>
-        <SideBar />
-        <Outlet />
+      <Grid container direcion={"row"} sx={{ maxWidth: "100%" }}>
+        <Grid item md={2}>
+          <SideBar />
+        </Grid>
+        <Grid item md={10}>
+          <Outlet />
+        </Grid>
       </Grid>
     </>
   );

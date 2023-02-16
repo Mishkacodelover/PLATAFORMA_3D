@@ -21,7 +21,7 @@ userQueries.getUserbyEmail = async (email) => {
   }
 };
 
-userQueries.getUserbyId = async (id) => {
+userQueries.getUserById = async (id) => {
   let conn = null;
   try {
     conn = await db.createConnection();
@@ -49,10 +49,8 @@ userQueries.addUser = async (userData) => {
       surname: userData.surname,
       email: userData.email,
       password: md5(userData.password),
-      // confirmPassword: md5(userData.password),
-      // userType: userData.userType,
-      // isDelete: userData.isDelete,
-      // role: userData.role,
+      userType: userData.userType,
+      role: userData.role,
     };
 
     return await db.query("INSERT INTO user SET ?", userObj, "insert", conn);
@@ -87,29 +85,6 @@ userQueries.updateUser = async (id, userData) => {
       password: userData.password ? md5(userData.password) : undefined,
       userType: userData.userType,
       role: userData.role,
-      isDelete: userData.isDelete,
-    };
-
-    userObj = await utils.removeUndefinedKeys(userObj);
-    return await db.query(
-      "UPDATE user SET ? WHERE id = ?",
-      [userObj, id],
-      "update",
-      conn
-    );
-  } catch (e) {
-    throw new Error(e);
-  } finally {
-    conn && (await conn.end());
-  }
-};
-
-userQueries.falseDeleteUser = async (id, userData) => {
-  let conn = null;
-  try {
-    conn = await db.createConnection();
-
-    let userObj = {
       isDelete: userData.isDelete,
     };
 

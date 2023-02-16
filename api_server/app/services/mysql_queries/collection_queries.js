@@ -1,24 +1,23 @@
 import db from "../mysql.js";
-import moment from "moment/moment.js";
 
 const collectionQueries = {};
 
-collectionQueries.addCollection = async (collectionData) => {
+collectionQueries.addCollection = async (collectionData, userId) => {
   let conn = null;
   try {
     conn = await db.createConnection();
 
     let collectionObj = {
-      name: collectionData.collection_name,
-      use: collectionData.collection_use,
-      type: collectionData.collection_type,
-      user: collectionData.usercollection,
-      reg_date: moment().format("YYYY-MM-DD HH:mm:ss"),
+      collectionName: collectionData.collectionName,
+      collectionType: collectionData.collectionType,
+      initialDate: collectionData.initialDate,
+      finishDate: collectionData.initialDate,
+      userCreated: userId,
     };
 
     return await db.query(
-      "INSERT INTO collections SET ?",
-      collectionObj,
+      "INSERT INTO collection SET ?",
+      [collectionObj],
       "insert",
       conn
     );
@@ -34,7 +33,7 @@ collectionQueries.getCollectionById = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM collections WHERE idcollections = ?",
+      "SELECT * FROM collection WHERE id = ?",
       id,
       "select",
       conn
@@ -51,7 +50,7 @@ collectionQueries.getCollectionByName = async (collectionName) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM collections WHERE collection_name = ?",
+      "SELECT * FROM collection WHERE collectionName = ?",
       collectionName,
       "select",
       conn
@@ -67,7 +66,7 @@ collectionQueries.getAllCollections = async () => {
   let conn = null;
   try {
     conn = await db.createConnection();
-    return await db.query("SELECT * FROM collections", [], "select", conn);
+    return await db.query("SELECT * FROM collection", [], "select", conn);
   } catch (e) {
     throw new Error(e);
   } finally {

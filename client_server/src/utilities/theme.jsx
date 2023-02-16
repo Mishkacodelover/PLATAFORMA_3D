@@ -5,8 +5,9 @@ export const theme = createTheme({
     primary: {
       light: "hsl(184, 90%, 50%)",
       // main: "hsl(184, 84%, 28%)",
-      main: "hsl(184, 3%, 94%)",
+      // main: "hsl(184, 3%, 94%)",
       dark: "hsl(184, 91%, 19%)",
+      main: "hsl(184, 96%, 3%)",
     },
     secondary: {
       light: "hsl(184, 3%, 94%)",

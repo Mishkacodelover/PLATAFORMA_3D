@@ -7,7 +7,8 @@ const AuthContext = createContext({
   logout: () => {},
   authorization: {
     email: null,
-    user_role: null,
+    role: null,
+    id: null,
   },
 });
 const MY_AUTH_APP = "MY_AUTH_APP";
@@ -18,7 +19,8 @@ export function AuthContextProvider({ children }) {
   const [authorization, setAuthorization] = useState(
     JSON.parse(window.localStorage.getItem(MY_AUTH_APP)) ?? {
       email: null,
-      user_role: null,
+      role: null,
+      id: null,
     }
   );
 
@@ -32,9 +34,12 @@ export function AuthContextProvider({ children }) {
     });
     try {
       const token = await response.json();
-      setAuthorization(jwtDecode(token.jwt));
-      window.localStorage.setItem(MY_AUTH_APP, JSON.stringify(token.jwt));
-      alert("usuario logueado");
+      const data = jwtDecode(token.jwt);
+      setAuthorization({ ...data, token: token.jwt });
+      window.localStorage.setItem(
+        MY_AUTH_APP,
+        JSON.stringify({ ...data, token: token.jwt })
+      );
     } catch (error) {
       console.log("error");
     }
@@ -44,7 +49,8 @@ export function AuthContextProvider({ children }) {
     window.localStorage.removeItem(MY_AUTH_APP);
     setAuthorization({
       email: null,
-      user_role: null,
+      role: null,
+      id: null,
     });
   }
 
@@ -53,6 +59,7 @@ export function AuthContextProvider({ children }) {
     login,
     logout,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

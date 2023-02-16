@@ -1,11 +1,12 @@
 import userQueries from "./mysql_queries/user_queries.js";
 import imagesQueries from "./mysql_queries/images_queries.js";
 import collectionQueries from "./mysql_queries/collection_queries.js";
+import fiscalDataQueries from "./mysql_queries/fiscalData_queries.js";
 const dao = {};
 
 dao.getUserbyEmail = async (email) => await userQueries.getUserbyEmail(email);
 
-dao.getUserbyId = async (id) => await userQueries.getUserbyId(id);
+dao.getUserById = async (id) => await userQueries.getUserById(id);
 
 dao.addUser = async (userData) => await userQueries.addUser(userData);
 
@@ -14,8 +15,8 @@ dao.deleteUser = async (id) => await userQueries.deleteUser(id);
 dao.updateUser = async (id, userData) =>
   await userQueries.updateUser(id, userData);
 
-dao.addCollection = async (collectionData) =>
-  await collectionQueries.addCollection(collectionData);
+dao.addCollection = async (collectionData, userId) =>
+  await collectionQueries.addCollection(collectionData, userId);
 
 dao.getCollectionById = async (id) =>
   await collectionQueries.getCollectionById(id);
@@ -30,5 +31,17 @@ dao.getAllCollections = async () => await collectionQueries.getAllCollections();
 dao.addImage = async (imageData) => await imagesQueries.addImage(imageData);
 
 dao.getImageById = async (id) => await imagesQueries.getImageById(id);
+
+dao.addFiscalData = async (fiscalData, userId) =>
+  await fiscalDataQueries.addFiscalData(fiscalData, userId);
+
+dao.getFiscalDataByVatNumber = async (vatNumber) =>
+  await fiscalDataQueries.getFiscalDataByVatNumber(vatNumber);
+
+dao.updateFiscalData = async (id, fiscalData) =>
+  await fiscalDataQueries.updateFiscalData(id, fiscalData);
+
+dao.getFiscalDataByUserId = async (id, fiscalData) =>
+  await fiscalDataQueries.getFiscalDataByUserId(id, fiscalData);
 
 export default dao;

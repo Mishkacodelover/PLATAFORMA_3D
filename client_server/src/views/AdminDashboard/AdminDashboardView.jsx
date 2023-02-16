@@ -1,23 +1,39 @@
-import { Typography, Box, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+
+import InternalHeader from "../../components/InternalHeader/InternalHeader";
+import HandleUser from "../../components/HandleUser/HandleUser";
+import HandleRoles from "../../components/HandleRoles";
 
 export default function AdminDashboardView() {
   return (
-    <>
-      <Typography variant="h6" textAlign="center">
-        Panel del administrador/aqui va el navbar
-      </Typography>
-      <Box>
-        <Grid container direction="row" maxWidth="100%" maxHeight="100%">
-          <Grid item md={12}>
-            <Grid item>texto breve explicacion</Grid>
-            <Grid item>botón invitar usuarios</Grid>
+    <Box>
+      <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
+        <InternalHeader
+          text="Gestión de usuarios"
+          sx={{ textAlign: "left", p: "16px" }}
+        />
+        <Grid
+          container
+          sx={{
+            border: "1px solid black",
+            maxWidth: "100%",
+            maxHeight: "100%",
+          }}
+        >
+          <Grid item xs={10} md={7} sx={{ border: "1px solid black" }}>
+            <HandleRoles />
           </Grid>
-          <Grid item>
-            <Grid item>texto</Grid>
-            <Grid item>renderizan los usuarios invitados</Grid>
+          <Grid item xs={10} md={5} sx={{ border: "1px solid black" }}>
+            <HandleUser />
+          </Grid>
+          <Grid item xs={10} md={7} sx={{ border: "1px solid black" }}>
+            Invitaciones pendientes
+          </Grid>
+          <Grid item xs={10} md={5} sx={{ border: "1px solid black" }}>
+            abajo drch
           </Grid>
         </Grid>
-      </Box>
-    </>
+      </Grid>
+    </Box>
   );
 }

@@ -5,10 +5,10 @@ import md5 from "md5";
 const controller = {};
 
 controller.addUser = async (req, res) => {
-  const { email, password, name, surname, confirmPassword } = req.body;
+  const { email, password, name, surname } = req.body;
   console.log(req.body);
 
-  if (!email || !password || !name || !surname || !confirmPassword)
+  if (!email || !password || !name || !surname)
     return res.status(400).send("Error al recibir el body");
 
   try {
@@ -61,6 +61,19 @@ controller.loginUser = async (req, res) => {
   }
 };
 
+controller.getUser = async (req, res) => {
+  try {
+    const user = await dao.getUserById(req.params.id);
+
+    if (user.length <= 0) return res.status(404).send("EL usuario no existe");
+
+    return res.send(user[0]);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
 controller.deleteUser = async (req, res) => {
   const { authorization } = req.headers;
   //no olvidar que para probar este end-point, el token se pasa por el bearer sin comillas y eliminando la palabra bearer del prefijo abajo
@@ -76,7 +89,7 @@ controller.deleteUser = async (req, res) => {
     if (payload.role > 1)
       return res.status(409).send("no tiene permiso de administrador");
 
-    const user = await dao.getUserbyId(req.params.id);
+    const user = await dao.getUserById(req.params.id);
 
     if (user.length <= 0) return res.status(404).send("el usuario no existe");
 
@@ -89,24 +102,24 @@ controller.deleteUser = async (req, res) => {
 };
 
 controller.updateUser = async (req, res) => {
-  const { authorization } = req.headers;
+  // const { authorization } = req.headers;
 
-  if (!authorization) return res.sendStatus(401);
-  const encoder = new TextEncoder();
+  // if (!authorization) return res.sendStatus(401);
+  // const encoder = new TextEncoder();
 
-  const { payload } = await jwtVerify(
-    authorization,
-    encoder.encode(process.env.JWT_SECRET)
-  );
-  if (payload.role > 1)
-    return res.status(409).send("no tiene permiso de administrador");
+  // const { payload } = await jwtVerify(
+  //   authorization,
+  //   encoder.encode(process.env.JWT_SECRET)
+  // );
+  // if (!payload.role)
+  //   return res.status(409).send("no tiene permiso de administrador");
   try {
     if (Object.entries(req.body).length === 0)
       return res.status(400).send("Error al recibir el body");
 
     await dao.updateUser(req.params.id, req.body);
-
-    return res.send(`Usuario con id ${req.params.id} modificado`);
+    const user = await dao.getUserById(req.params.id);
+    return res.send(user[0]);
   } catch (e) {
     console.log(e.message);
   }

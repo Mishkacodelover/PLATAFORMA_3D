@@ -8,21 +8,26 @@ import Checkbox from "../Checkbox/Checkbox";
 
 export default function RegistrationForm() {
   async function register(values) {
-    const response = await fetch(REGISTRATION, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
     try {
-      console.log(response);
-      alert("usuario registrado");
+      const response = await fetch(REGISTRATION, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        alert("usuario registrado");
+      } else {
+        console.log("error en el registro");
+      }
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   }
-  const onSubmit = (actions, values) => {
+
+  const onSubmit = (values, actions) => {
     register(values);
     actions.resetForm();
   };
@@ -37,15 +42,7 @@ export default function RegistrationForm() {
   return (
     <>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <Grid
-          container
-          // justifyContent="space-evenly"
-          direciont="column"
-          // justifyContent="center"
-          // alignItems="center"
-          spacing={2}
-          maxWidth={"100%"}
-        >
+        <Grid container direciont="column" spacing={2} maxWidth={"100%"}>
           <Grid item xs={10} md={6}>
             <TextField
               type="text"
@@ -73,25 +70,6 @@ export default function RegistrationForm() {
             />
           </Grid>
 
-          {/* <Grid item xs={10} md={6}>
-              <TextField
-                select
-                label="Suscripción"
-                name="suscription"
-                variant="standard"
-                fullWidth
-                value={values.suscription}
-                onChange={handleChange}
-                error={errors.suscription}
-                helperText={errors.suscription}
-              >
-                {options.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid> */}
           <Grid item xs={10} md={6}>
             <TextField
               type="password"

@@ -8,6 +8,8 @@ userRouter.post("/", userController.addUser);
 
 userRouter.post("/login", validateLoginDto, userController.loginUser);
 
+userRouter.get("/:id", userController.getUser);
+
 userRouter.delete("/:id", userController.deleteUser);
 
 userRouter.patch("/:id", userController.updateUser);

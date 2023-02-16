@@ -1,7 +1,8 @@
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
-import Maniqui from "../../assets/images/maniquiclaro.jpg";
-import LoginBlack from "../../assets/images/negroclarologin.jpg";
+// import Maniqui from "../../assets/images/maniquiclaro.jpg";
+// import LoginBlack from "../../assets/images/negroclarologin.jpg";
+import LoginWhite from "../../assets/images/dibujoBlancoyNegroclaro.jpg";
 import { Grid, Box } from "@mui/material";
 
 export default function RegistrationView() {
@@ -12,7 +13,7 @@ export default function RegistrationView() {
           width: "100%",
           maxHeight: "100%",
           minHeight: "560px",
-          backgroundImage: `url(${LoginBlack})`,
+          backgroundImage: `url(${LoginWhite})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -24,7 +25,7 @@ export default function RegistrationView() {
           direction="column"
           alignItems={"flex-start"}
           sx={{
-            paddingTop: "184px",
+            paddingTop: "136px",
             width: "100%",
             paddingLeft: "126px",
           }}
