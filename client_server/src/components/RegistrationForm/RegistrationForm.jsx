@@ -18,7 +18,7 @@ export default function RegistrationForm() {
       });
 
       if (response.ok) {
-        alert("usuario registrado");
+        console.log(response);
       } else {
         console.log("error en el registro");
       }

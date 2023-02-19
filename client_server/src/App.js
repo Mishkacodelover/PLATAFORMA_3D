@@ -18,6 +18,7 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { useAuthContext } from "./contexts/AuthContext.jsx";
+import { UserContextProvider } from "./contexts/UserContext";
 
 import Home from "./views/Home";
 
@@ -32,36 +33,40 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<PublicRoutes />}>
+          <UserContextProvider>
+            <BrowserRouter>
+              <Routes>
                 <Route element={<Layout />}>
                   <Route path="/" element={<Home />} />
-                  <Route path="login" element={<Login />} />
+                  <Route element={<PublicRoutes />}>
+                    <Route path="login" element={<Login />} />
+                  </Route>
+
                   <Route path="registration" element={<Registration />} />
                 </Route>
-              </Route>
-              <Route
-                element={<PrivateRoutes allowedRoles={authorization.role} />}
-              >
-                <Route element={<LayoutInternal />}>
-                  <Route path="profile" element={<Profile />} />
-                  <Route path="admin" element={<AdminDashboard />} />
-                  <Route path="collections" element={<Collections />} />
-                  <Route
-                    path="create-collection"
-                    element={<CreateCollection />}
-                  />
-                  <Route path="piece" element={<Piece />} />
-                  <Route
-                    path="grafic-resources"
-                    element={<GraficResources />}
-                  />
-                  <Route path="patterns" element={<Patterns />} />
+
+                <Route
+                  element={<PrivateRoutes allowedRoles={authorization.role} />}
+                >
+                  <Route element={<LayoutInternal />}>
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="admin" element={<AdminDashboard />} />
+                    <Route path="collections" element={<Collections />} />
+                    <Route
+                      path="create-collection"
+                      element={<CreateCollection />}
+                    />
+                    <Route path="piece" element={<Piece />} />
+                    <Route
+                      path="grafic-resources"
+                      element={<GraficResources />}
+                    />
+                    <Route path="patterns" element={<Patterns />} />
+                  </Route>
                 </Route>
-              </Route>
-            </Routes>
-          </BrowserRouter>
+              </Routes>
+            </BrowserRouter>
+          </UserContextProvider>
         </AuthContextProvider>
       </ThemeProvider>
     </>

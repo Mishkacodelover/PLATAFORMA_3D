@@ -7,8 +7,6 @@ controller.addCollections = async (req, res) => {
   const { collectionName, collectionType, initialDate, finishDate } = req.body;
   const { authorization } = req.headers;
 
-  console.log(req.body);
-
   if (!collectionName || !collectionType || !initialDate || !finishDate)
     return res.status(400).send("Error al recibir el body");
 

@@ -1,4 +1,5 @@
 import * as yup from "yup";
+const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
 export const InviteMemberSchema = yup.object().shape({
   email: yup
@@ -8,4 +9,15 @@ export const InviteMemberSchema = yup.object().shape({
   name: yup.string().required("Debes escribir un nombre"),
 
   surname: yup.string().required("Debes escribir un apellido al menos"),
+  password: yup
+    .string()
+    .required("Debes ingresar una contraseña")
+    .min(5, "Debe tener al menos 5 caracteres")
+    .matches(passwordRules, {
+      message: " Incluya 1 letra mayúscula, 1 letra minúscula y 1 número.",
+    }),
+  role: yup
+    .string()
+    // .oneOf(["Administrador", "Diseñador", "Operador", "Taller"])
+    .required("Campo opligatorio"),
 });

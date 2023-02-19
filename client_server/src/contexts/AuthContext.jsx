@@ -41,6 +41,7 @@ export function AuthContextProvider({ children }) {
         JSON.stringify({ ...data, token: token.jwt })
       );
     } catch (error) {
+      alert("Por favor introduzca los datos correctos");
       console.log("error");
     }
   }

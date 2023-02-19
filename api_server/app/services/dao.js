@@ -8,6 +8,8 @@ dao.getUserbyEmail = async (email) => await userQueries.getUserbyEmail(email);
 
 dao.getUserById = async (id) => await userQueries.getUserById(id);
 
+dao.getLastFourUsers = async () => await userQueries.getLastFourUsers();
+
 dao.addUser = async (userData) => await userQueries.addUser(userData);
 
 dao.deleteUser = async (id) => await userQueries.deleteUser(id);
@@ -32,6 +34,8 @@ dao.addImage = async (imageData) => await imagesQueries.addImage(imageData);
 
 dao.getImageById = async (id) => await imagesQueries.getImageById(id);
 
+dao.getAllImages = async () => await imagesQueries.getAllImages();
+
 dao.addFiscalData = async (fiscalData, userId) =>
   await fiscalDataQueries.addFiscalData(fiscalData, userId);
 
@@ -41,7 +45,10 @@ dao.getFiscalDataByVatNumber = async (vatNumber) =>
 dao.updateFiscalData = async (id, fiscalData) =>
   await fiscalDataQueries.updateFiscalData(id, fiscalData);
 
-dao.getFiscalDataByUserId = async (id, fiscalData) =>
-  await fiscalDataQueries.getFiscalDataByUserId(id, fiscalData);
+dao.getFiscalDataByUserId = async (id) =>
+  await fiscalDataQueries.getFiscalDataByUserId(id);
+
+dao.getFiscalDataSuscriptionByUserId = async (id) =>
+  await fiscalDataQueries.getFiscalDataSuscriptionByUserId(id);
 
 export default dao;

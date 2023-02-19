@@ -2,16 +2,29 @@ import UserDataView from "./UserDataView";
 
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
+// import { useUserContext } from "../../contexts/UserContext";
+
+const userObj = {
+  name: "",
+  surname: "",
+  email: "",
+};
 
 export default function UserData() {
   const { authorization } = useAuthContext();
-  const [user, setUser] = useState(null);
+  // const { user } = useUserContext();
+  const [userData, setUserData] = useState(null);
   const [name, setName] = useState(false);
-  const [input, setInput] = useState({
-    name: "",
-    surname: "",
-    email: "",
-  });
+  const [surname, setSurname] = useState(false);
+  const [email, setEmail] = useState(false);
+  const [input, setInput] = useState(userObj);
+
+  function handleInput(event) {
+    setInput({
+      ...input,
+      [event.target.name]: event.target.value,
+    });
+  }
 
   useEffect(
     function () {
@@ -20,7 +33,7 @@ export default function UserData() {
           `http://localhost:8000/user/${authorization.id}`
         );
         const data = await response.json();
-        setUser(data);
+        setUserData(data);
       }
       fetchData();
     },
@@ -35,18 +48,25 @@ export default function UserData() {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          //   Authorization: authorization.token,
         },
         body: JSON.stringify(input),
       }
     );
     try {
       if (response.ok) {
-        setName(false);
-        setInput({ name: "", surname: "", email: "" });
-        const user = await response.json();
-        if (user) {
-          setUser(user);
+        setInput(userObj);
+
+        if (input.name) {
+          setName(false);
+        } else if (input.surname) {
+          setSurname(false);
+        } else if (input.email) {
+          setEmail(false);
+        }
+
+        const userEdited = await response.json();
+        if (userEdited) {
+          setUserData(userEdited);
         }
       } else {
         console.log("error al editar valor");
@@ -59,12 +79,17 @@ export default function UserData() {
   return (
     <>
       <UserDataView
-        user={user}
+        userData={userData}
         name={name}
         setName={setName}
         input={input}
         setInput={setInput}
         update={update}
+        handleInput={handleInput}
+        email={email}
+        setEmail={setEmail}
+        surname={surname}
+        setSurname={setSurname}
       />
     </>
   );

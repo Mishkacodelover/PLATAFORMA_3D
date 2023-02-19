@@ -1,87 +1,116 @@
 import {
   List,
   ListItem,
-  ListItemIcon,
   Typography,
   IconButton,
   Tooltip,
   TextField,
   Box,
+  ListItemButton,
+  Button,
+  ListItemText,
 } from "@mui/material";
 
-import UpdateIcon from "@mui/icons-material/Update";
 import SendIcon from "@mui/icons-material/Send";
 
 export default function UserDataView({
-  user,
+  userData,
   name,
   setName,
   input,
-  setInput,
+  handleInput,
   update,
+  email,
+  setEmail,
+  surname,
+  setSurname,
 }) {
-  function handleInput(event) {
-    setInput({
-      ...input,
-      [event.target.name]: event.target.value,
-    });
-  }
   return (
     <>
       <Box sx={{ p: "24px" }}>
         <Typography>Estos son tus datos de usuario:</Typography>
 
-        {user ? (
+        {userData ? (
           <List>
             <ListItem>
-              <Typography variant="inherit" color="black">
-                Nombre: {user.name}
-              </Typography>
+              <ListItemText primary={`Nombre:  ${userData.name}`} />
 
-              <ListItemIcon sx={{ justifyContent: "flex-end" }}>
-                <IconButton edge="end" aria-label="delete">
-                  <Tooltip title="Editar">
-                    <UpdateIcon onClick={() => setName(true)} />
+              {name && (
+                <form onSubmit={(event) => update(event, input)}>
+                  <TextField
+                    size="small"
+                    label="escribe tu nombre"
+                    name="name"
+                    value={input.name}
+                    onChange={handleInput}
+                    sx={{ marginLeft: "24px" }}
+                  />
+                  <Tooltip title="enviar">
+                    <IconButton type="submit">
+                      <SendIcon />
+                    </IconButton>
                   </Tooltip>
-                </IconButton>
-              </ListItemIcon>
+                </form>
+              )}
+
+              <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                <Button size="small" onClick={() => setName(true)}>
+                  Editar
+                </Button>
+              </ListItemButton>
             </ListItem>
-            {name && (
-              <form onSubmit={(event) => update(event, input)}>
-                <TextField
-                  label="escribe tu nombre"
-                  name="name"
-                  value={input.name}
-                  onChange={handleInput}
-                />
-                <IconButton type="submit">
-                  <SendIcon />
-                </IconButton>
-              </form>
-            )}
+
             <ListItem>
-              <Typography variant="inherit" color="black">
-                Apellidos: {user.surname}
-              </Typography>
-              <ListItemIcon sx={{ justifyContent: "flex-end" }}>
-                <IconButton edge="end" aria-label="delete">
-                  <Tooltip title="Editar">
-                    <UpdateIcon />
+              <ListItemText primary={`Apellidos:  ${userData.surname}`} />
+
+              {surname && (
+                <form onSubmit={(event) => update(event, input)}>
+                  <TextField
+                    size="small"
+                    label="escribe tus apellidos"
+                    name="surname"
+                    value={input.surname}
+                    onChange={handleInput}
+                    sx={{ marginLeft: "24px" }}
+                  />
+                  <Tooltip title="enviar">
+                    <IconButton type="submit">
+                      <SendIcon />
+                    </IconButton>
                   </Tooltip>
-                </IconButton>
-              </ListItemIcon>
+                </form>
+              )}
+              <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                <Button size="small" onClick={() => setSurname(true)}>
+                  Editar
+                </Button>
+              </ListItemButton>
             </ListItem>
             <ListItem>
-              <Typography variant="inherit" color="black">
-                Email: {user.email}
-              </Typography>
-              <ListItemIcon sx={{ justifyContent: "flex-end" }}>
-                <IconButton edge="end" aria-label="black">
-                  <Tooltip title="Editar">
-                    <UpdateIcon />
+              <ListItemText primary={`Email:  ${userData.email}`} />
+
+              {email && (
+                <form onSubmit={(event) => update(event, input)}>
+                  <TextField
+                    size="small"
+                    label="escribe tu email"
+                    name="email"
+                    value={input.email}
+                    onChange={handleInput}
+                    sx={{ marginLeft: "24px" }}
+                  />
+                  <Tooltip title="enviar">
+                    <IconButton type="submit">
+                      <SendIcon />
+                    </IconButton>
                   </Tooltip>
-                </IconButton>
-              </ListItemIcon>
+                </form>
+              )}
+              <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                <Button size="small" onClick={() => setEmail(true)}>
+                  Editar
+                </Button>
+              </ListItemButton>
             </ListItem>
           </List>
         ) : (

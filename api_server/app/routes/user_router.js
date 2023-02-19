@@ -10,6 +10,8 @@ userRouter.post("/login", validateLoginDto, userController.loginUser);
 
 userRouter.get("/:id", userController.getUser);
 
+userRouter.get("/last-users", userController.getLastFourUsers);
+
 userRouter.delete("/:id", userController.deleteUser);
 
 userRouter.patch("/:id", userController.updateUser);

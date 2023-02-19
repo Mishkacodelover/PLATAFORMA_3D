@@ -1,25 +1,32 @@
 import { Grid, Typography, Avatar } from "@mui/material";
 import { grey } from "@mui/material/colors";
+// import { useUserContext } from "../../contexts/UserContext";
 
-export default function InternalHeader({ sx, text }) {
+export default function InternalHeader({ text }) {
+  // const { user } = useUserContext();
   return (
     <>
       <Grid
-        item
         container
         direction={"row"}
+        spacing={2}
         sx={{
-          justifyContent: "flex-end",
+          alignItems: "center",
           maxWdth: "100%",
           p: "16px",
-          alignItems: "center",
+          justifyContent: "flex-end",
         }}
       >
-        <Typography sx={sx}>{text}</Typography>
-        <Typography sx={{ textAlign: "right", p: "16px" }}>
-          Bienvenido userName
-        </Typography>
-        <Avatar sx={{ bgcolor: grey[800] }}>H</Avatar>
+        <Grid item sx={{ paddingRight: "724px" }}>
+          <Typography>{text}</Typography>
+        </Grid>
+
+        <Grid item>
+          <Typography>Bienvenido </Typography>
+        </Grid>
+        <Grid item>
+          <Avatar sx={{ bgcolor: grey[800] }}>H</Avatar>
+        </Grid>
       </Grid>
     </>
   );

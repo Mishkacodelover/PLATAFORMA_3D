@@ -1,4 +1,5 @@
 import db from "../mysql.js";
+import utils from "../../utils/utils.js";
 
 const fiscalDataQueries = {};
 
@@ -12,7 +13,7 @@ fiscalDataQueries.addFiscalData = async (fiscalData, userId) => {
       vatNumber: fiscalData.vatNumber,
       fiscalAdress: fiscalData.fiscalAdress,
       user: userId,
-      isDeleted: fiscalData.isDeleted,
+
       userCreated: fiscalData.userCreated,
       userUpdated: fiscalData.userUpdated,
       suscription: fiscalData.suscription,
@@ -48,13 +49,13 @@ fiscalDataQueries.getFiscalDataByUserId = async (userId) => {
   }
 };
 
-fiscalDataQueries.getFiscalDataByVatNumber = async (vatNumber) => {
+fiscalDataQueries.getFiscalDataSuscriptionByUserId = async (userId) => {
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM fiscalData WHERE vatNumber = ?",
-      vatNumber,
+      "SELECT fiscaldata.companyName,fiscaldata.vatNumber,fiscaldata.fiscalAdress,fiscaldata.user,fiscaldata.suscription,suscription.name,suscription.price FROM fiscaldata join suscription on fiscaldata.suscription= suscription.id where fiscaldata.user = ?",
+      userId,
       "select",
       conn
     );
@@ -65,7 +66,28 @@ fiscalDataQueries.getFiscalDataByVatNumber = async (vatNumber) => {
   }
 };
 
-fiscalDataQueries.updateFiscalData = async (id, fiscalData) => {
+fiscalDataQueries.getFiscalDataByVatNumber = async (vatNumber) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    let dataObj = {
+      vatNumber: vatNumber.vatNumber,
+    };
+
+    return await db.query(
+      "SELECT * FROM fiscalData WHERE vatNumber = ?",
+      dataObj,
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+fiscalDataQueries.updateFiscalData = async (userId, fiscalData) => {
   let conn = null;
   try {
     conn = await db.createConnection();
@@ -74,17 +96,16 @@ fiscalDataQueries.updateFiscalData = async (id, fiscalData) => {
       companyName: fiscalData.companyName,
       vatNumber: fiscalData.vatNumber,
       fiscalAdress: fiscalData.fiscalAdress,
-      user: userId,
       isDeleted: fiscalData.isDeleted,
       userCreated: fiscalData.userCreated,
       userUpdated: fiscalData.userUpdated,
       suscription: fiscalData.suscription,
     };
 
-    userObj = await utils.removeUndefinedKeys(dataObj);
+    dataObj = await utils.removeUndefinedKeys(dataObj);
     return await db.query(
-      "UPDATE fiscalData SET ? WHERE id = ?",
-      [dataObj, id],
+      "UPDATE fiscalData SET ? WHERE user = ?",
+      [dataObj, userId],
       "update",
       conn
     );

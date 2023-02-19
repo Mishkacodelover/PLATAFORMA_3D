@@ -12,7 +12,6 @@ controller.uploadImage = async (req, res) => {
       return res.status(400).send("No se ha cargado ningún archivo");
     }
 
-    if (!req.query) return res.status(400).send("Sin id del producto");
     const images = !req.files.imagen.length
       ? [req.files.imagen]
       : req.files.imagen;
@@ -26,7 +25,6 @@ controller.uploadImage = async (req, res) => {
       await dao.addImage({
         name: image.name,
         path: BBDDPath,
-        productId: req.query.product_id,
       });
     });
 
@@ -44,6 +42,20 @@ controller.getImage = async (req, res) => {
     if (image.length <= 0) return res.status(404).send("La imagen no existe");
 
     return res.sendFile(image[0].path, { root: __dirname });
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
+controller.getAllImages = async (req, res) => {
+  try {
+    const resources = await dao.getAllImages();
+
+    if (resources.length <= 0)
+      return res.status(404).send("No existen recursos gráficos");
+
+    return res.send(resources);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);

@@ -38,6 +38,24 @@ userQueries.getUserById = async (id) => {
   }
 };
 
+//de momento solo traigo los últimos 4, query temporal
+userQueries.getLastFourUsers = async () => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT * FROM user order by tsCreated desc limit 4",
+      [],
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 userQueries.addUser = async (userData) => {
   let conn = null;
 

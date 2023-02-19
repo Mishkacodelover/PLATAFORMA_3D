@@ -3,12 +3,17 @@ import fiscalDataController from "../controller/fiscalData_controller.js";
 
 const fiscalDataRouter = express.Router();
 
-fiscalDataRouter.post("/", fiscalDataController.addFiscalData);
+fiscalDataRouter.post("/:id", fiscalDataController.addFiscalData);
 
 fiscalDataRouter.get("/:id", fiscalDataController.getFiscalDataByUserId);
 
 fiscalDataRouter.get(
-  "/vatNumber",
+  "suscription/:id",
+  fiscalDataController.getFiscalDataSuscriptionByUserId
+);
+
+fiscalDataRouter.get(
+  "/vat-number",
   fiscalDataController.getFiscalDataByVatNumber
 );
 

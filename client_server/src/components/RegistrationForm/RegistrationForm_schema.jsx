@@ -30,3 +30,7 @@ export const RegistrationFormSchema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "La constraseña debe coincidir")
     .required("Escribe una contraseña"),
 });
+
+// acceptedTC: yup
+//     .boolean()
+//     .oneOf([true], "Please accept the terms and conditions"),

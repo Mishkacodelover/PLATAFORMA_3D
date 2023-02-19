@@ -74,6 +74,19 @@ controller.getUser = async (req, res) => {
   }
 };
 
+controller.getLastFourUsers = async (req, res) => {
+  try {
+    const users = await dao.getLastFourUsers();
+
+    if (users.length <= 0) return res.status(404).send("No existen usuarios");
+
+    return res.send(users);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
 controller.deleteUser = async (req, res) => {
   const { authorization } = req.headers;
   //no olvidar que para probar este end-point, el token se pasa por el bearer sin comillas y eliminando la palabra bearer del prefijo abajo
@@ -102,17 +115,6 @@ controller.deleteUser = async (req, res) => {
 };
 
 controller.updateUser = async (req, res) => {
-  // const { authorization } = req.headers;
-
-  // if (!authorization) return res.sendStatus(401);
-  // const encoder = new TextEncoder();
-
-  // const { payload } = await jwtVerify(
-  //   authorization,
-  //   encoder.encode(process.env.JWT_SECRET)
-  // );
-  // if (!payload.role)
-  //   return res.status(409).send("no tiene permiso de administrador");
   try {
     if (Object.entries(req.body).length === 0)
       return res.status(400).send("Error al recibir el body");

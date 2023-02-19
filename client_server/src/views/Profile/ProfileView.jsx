@@ -26,16 +26,16 @@ export default function ProfileView() {
             maxHeight: "100%",
           }}
         >
-          <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={7} sx={{ border: "1px solid black" }}>
             <UserData />
           </Grid>
-          <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={5} sx={{ border: "1px solid black" }}>
             <CompleteData />
           </Grid>
-          <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={7} sx={{ border: "1px solid black" }}>
             <ProfileAvatar />
           </Grid>
-          <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={5} sx={{ border: "1px solid black" }}>
             <ProfileImage />
           </Grid>
         </Grid>

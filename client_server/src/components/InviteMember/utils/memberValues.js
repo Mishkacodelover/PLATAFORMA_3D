@@ -1,18 +1,18 @@
 export const memberValues = [
   {
-    value: 0,
+    value: 1,
     label: "Administrador",
   },
   {
-    value: 1,
-    label: "Operador",
-  },
-  {
-    value: 0,
+    value: 2,
     label: "Diseñador",
   },
   {
-    value: 0,
+    value: 3,
+    label: "Operador",
+  },
+  {
+    value: 4,
     label: "Taller",
   },
 ];

@@ -1,34 +1,51 @@
-import {
-  Grid,
-  TextField,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { Grid, TextField, MenuItem, Button } from "@mui/material";
 import { useFormik } from "formik";
 import { memberValues } from "./utils/memberValues";
 import { initialValues } from "./utils/inviteMemberValues";
 import { InviteMemberSchema } from "./inviteMemberSchema";
+import { REGISTRATION } from "../../utilities/settings";
 
 export default function InviteMember() {
+  async function registerMember(values) {
+    try {
+      const response = await fetch(REGISTRATION, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        console.log(response);
+      } else {
+        console.log("error en el registro");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const onSubmit = (values, actions) => {
+    registerMember(values);
     actions.resetForm();
   };
 
-  const { values, errors, handleChange, handleSubmit } = useFormik({
-    initialValues,
-    validationSchema: InviteMemberSchema,
-    onSubmit,
-  });
+  const { values, errors, isSubmitting, handleChange, handleSubmit } =
+    useFormik({
+      initialValues,
+      validationSchema: InviteMemberSchema,
+      onSubmit,
+    });
 
   return (
     <>
-      <Grid container direction={"column"}>
+      <Grid container direction={"column"} spacing={2}>
         <form onSubmit={handleSubmit}>
-          <Grid item xs={8} md={6}>
+          <Grid item xs={8} md={12}>
             <TextField
-              filled
+              fullWidth
+              variant="standard"
               type="text"
               label="Nombre"
               name="name"
@@ -38,9 +55,10 @@ export default function InviteMember() {
               helperText={errors.name}
             />
           </Grid>
-          <Grid item xs={8} md={6}>
+          <Grid item xs={8} md={12}>
             <TextField
-              filled
+              fullWidth
+              variant="standard"
               type="text"
               label="Apellidos"
               name="surname"
@@ -52,7 +70,8 @@ export default function InviteMember() {
           </Grid>
           <Grid item xs={8} md={12}>
             <TextField
-              filled
+              fullWidth
+              variant="standard"
               type="email"
               label="Correo electrónico"
               name="email"
@@ -62,18 +81,57 @@ export default function InviteMember() {
               helperText={errors.email}
             />
           </Grid>
+
           <Grid item xs={8} md={12}>
-            <FormLabel id="roles">Permisos de usuario</FormLabel>
-            <RadioGroup aria-labelledby="roles" defaultValue="1" name="roles">
-              {memberValues.map((rol) => (
-                <FormControlLabel
-                  key={rol.value}
-                  value={rol.value}
-                  label={rol.label}
-                  control={<Radio />}
-                />
+            <TextField
+              fullWidth
+              type="password"
+              label="Contraseña"
+              name="password"
+              variant="standard"
+              value={values.password}
+              onChange={handleChange}
+              error={errors.password}
+              helperText={errors.password}
+            />
+          </Grid>
+          <Grid item xs={8} md={12}>
+            <TextField
+              select
+              label="Rol"
+              name="role"
+              defaultValue="administrador"
+              variant="standard"
+              fullWidth
+              size="medium"
+              value={values.role}
+              onChange={handleChange}
+              error={errors.role}
+              helperText={errors.role}
+            >
+              {memberValues.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
               ))}
-            </RadioGroup>
+            </TextField>
+          </Grid>
+
+          <Grid item xs={8} md={12} sx={{ paddingTop: "8px" }}>
+            <Button
+              disabled={isSubmitting}
+              fullWidth
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
+
+                color: "var(--blanco)",
+                p: "16px 24px",
+              }}
+            >
+              Invitar miembro
+            </Button>
           </Grid>
         </form>
       </Grid>
