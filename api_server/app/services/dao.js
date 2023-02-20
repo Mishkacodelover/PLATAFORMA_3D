@@ -10,6 +10,8 @@ dao.getUserById = async (id) => await userQueries.getUserById(id);
 
 dao.getLastFourUsers = async () => await userQueries.getLastFourUsers();
 
+dao.getAllActiveUsers = async () => await userQueries.getAllActiveUsers();
+
 dao.addUser = async (userData) => await userQueries.addUser(userData);
 
 dao.deleteUser = async (id) => await userQueries.deleteUser(id);
@@ -28,7 +30,8 @@ dao.getCollectionByName = async (collectionName) =>
 
 dao.getCollection = async (id) => await collectionQueries.getCollectionById(id);
 
-dao.getAllCollections = async () => await collectionQueries.getAllCollections();
+dao.getAllCollections = async (userId) =>
+  await collectionQueries.getAllCollections(userId);
 
 dao.addImage = async (imageData) => await imagesQueries.addImage(imageData);
 

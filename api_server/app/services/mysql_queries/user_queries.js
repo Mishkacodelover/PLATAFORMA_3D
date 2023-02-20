@@ -56,6 +56,23 @@ userQueries.getLastFourUsers = async () => {
   }
 };
 
+userQueries.getAllActiveUsers = async () => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT * FROM user where isDelete = false",
+      [],
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 userQueries.addUser = async (userData) => {
   let conn = null;
 

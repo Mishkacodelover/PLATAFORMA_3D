@@ -1,7 +1,7 @@
 import ReactPlayer from "react-player";
 import VideoTenis from "../../assets/videos/video_preview_h264.mp4";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
-import imgMain from "../../assets/images/muestraHome.png";
+
 import prvImg from "../../assets/images/fotoMAinProvisionalgastado.jpeg";
 import { Box, Typography, Stack } from "@mui/material";
 

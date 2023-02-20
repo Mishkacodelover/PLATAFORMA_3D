@@ -41,7 +41,7 @@ controller.getCollection = async (req, res) => {
     const collection = await dao.getCollectionById(req.params.id);
 
     if (collection.length <= 0)
-      return res.status(404).send("La coleción no existe");
+      return res.status(404).send("La colección no existe");
 
     return res.send(collection[0]);
   } catch (e) {
@@ -52,7 +52,7 @@ controller.getCollection = async (req, res) => {
 
 controller.getAllCollections = async (req, res) => {
   try {
-    const collections = await dao.getAllCollections();
+    const collections = await dao.getAllCollections(req.params.id);
 
     if (collections.length <= 0)
       return res.status(404).send("No existen colecciones");

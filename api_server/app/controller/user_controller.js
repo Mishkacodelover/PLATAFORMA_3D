@@ -87,6 +87,20 @@ controller.getLastFourUsers = async (req, res) => {
   }
 };
 
+controller.getAllActiveUsers = async (req, res) => {
+  try {
+    const users = await dao.getAllActiveUsers();
+
+    if (users.length <= 0)
+      return res.status(404).send("No existen usuarios activos");
+
+    return res.send(users);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
 controller.deleteUser = async (req, res) => {
   const { authorization } = req.headers;
   //no olvidar que para probar este end-point, el token se pasa por el bearer sin comillas y eliminando la palabra bearer del prefijo abajo

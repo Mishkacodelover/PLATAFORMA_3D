@@ -12,6 +12,8 @@ userRouter.get("/:id", userController.getUser);
 
 userRouter.get("/last-users", userController.getLastFourUsers);
 
+userRouter.get("/all-users", userController.getAllActiveUsers);
+
 userRouter.delete("/:id", userController.deleteUser);
 
 userRouter.patch("/:id", userController.updateUser);

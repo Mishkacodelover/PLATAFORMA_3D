@@ -21,12 +21,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Search from "../Search/Search";
 import EditUser from "../EditUsers";
 import { style } from "../../const/modalStyle";
-import { falseUser } from "./falseUser";
 
 export default function HandleUserView({
   openEditUser,
   handleOpenEditUser,
   handleCloseEditUser,
+  allUser,
+  handleValue,
+  value,
+  deleteUser,
 }) {
   return (
     <>
@@ -48,47 +51,62 @@ export default function HandleUserView({
           </Grid>
 
           <List>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
+            {allUser ? (
+              allUser.map(({ email, id }) => (
+                <ListItem key={id}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PersonIcon />
+                    </Avatar>
+                  </ListItemAvatar>
 
-              <ListItemText primary={"UserEmail"} />
+                  <ListItemText primary={email} />
 
-              <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleOpenEditUser}>
-                  Editar
-                </Button>
-              </ListItemButton>
+                  <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                    <Button size="small" onClick={handleOpenEditUser}>
+                      Editar
+                    </Button>
+                  </ListItemButton>
 
-              <Modal
-                aria-labelledby="open-edirUser-form"
-                aria-describedby="open-editUser-form"
-                open={openEditUser}
-                onClose={handleCloseEditUser}
-                closeAfterTransition
-                slots={Backdrop}
-                slotsProps={{
-                  timeout: 500,
-                }}
-              >
-                <Fade in={openEditUser}>
-                  <Box sx={style}>
-                    <EditUser />
-                  </Box>
-                </Fade>
-              </Modal>
+                  <Modal
+                    aria-labelledby="open-edirUser-form"
+                    aria-describedby="open-editUser-form"
+                    open={openEditUser}
+                    onClose={handleCloseEditUser}
+                    closeAfterTransition
+                    slots={Backdrop}
+                    slotsProps={{
+                      timeout: 500,
+                    }}
+                  >
+                    <Fade in={openEditUser}>
+                      <Box sx={style}>
+                        <EditUser />
+                      </Box>
+                    </Fade>
+                  </Modal>
 
-              <ListItemIcon sx={{ justifyContent: "flex-end" }}>
-                <IconButton edge="end" aria-label="delete">
-                  <Tooltip title="Eliminar">
-                    <DeleteIcon />
-                  </Tooltip>
-                </IconButton>
-              </ListItemIcon>
-            </ListItem>
+                  <ListItemIcon sx={{ justifyContent: "flex-end" }}>
+                    <form onSubmit={(event) => deleteUser(event, value)}>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        type="submit"
+                        value={value}
+                      >
+                        <Tooltip title="Eliminar">
+                          <DeleteIcon />
+                        </Tooltip>
+                      </IconButton>
+                    </form>
+                  </ListItemIcon>
+                </ListItem>
+              ))
+            ) : (
+              <ListItem>
+                <ListItemText primary="No tienes usuarios invitados" />
+              </ListItem>
+            )}
           </List>
         </Grid>
       </Box>

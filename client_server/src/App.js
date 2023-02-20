@@ -5,7 +5,7 @@ import Registration from "./views/Registration";
 import Layout from "./components/Layout/Layout";
 import LayoutInternal from "./components/LayoutInternal/LayoutInternal.jsx";
 import AdminDashboard from "./views/AdminDashboard";
-import CreateCollection from "./views/CreateCollection";
+
 import Profile from "./views/Profile";
 import Collections from "./views/Collections";
 import Piece from "./views/Piece";
@@ -52,10 +52,7 @@ function App() {
                     <Route path="profile" element={<Profile />} />
                     <Route path="admin" element={<AdminDashboard />} />
                     <Route path="collections" element={<Collections />} />
-                    <Route
-                      path="create-collection"
-                      element={<CreateCollection />}
-                    />
+
                     <Route path="piece" element={<Piece />} />
                     <Route
                       path="grafic-resources"

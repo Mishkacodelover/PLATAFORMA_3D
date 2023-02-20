@@ -62,11 +62,16 @@ collectionQueries.getCollectionByName = async (collectionName) => {
   }
 };
 
-collectionQueries.getAllCollections = async () => {
+collectionQueries.getAllCollections = async (userId) => {
   let conn = null;
   try {
     conn = await db.createConnection();
-    return await db.query("SELECT * FROM collection", [], "select", conn);
+    return await db.query(
+      "SELECT * FROM collection where userCreated = ?",
+      userId,
+      "select",
+      conn
+    );
   } catch (e) {
     throw new Error(e);
   } finally {
