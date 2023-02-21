@@ -8,11 +8,11 @@ userRouter.post("/", userController.addUser);
 
 userRouter.post("/login", validateLoginDto, userController.loginUser);
 
-userRouter.get("/:id", userController.getUser);
-
 userRouter.get("/last-users", userController.getLastFourUsers);
 
 userRouter.get("/all-users", userController.getAllActiveUsers);
+
+userRouter.get("/:id", userController.getUser);
 
 userRouter.delete("/:id", userController.deleteUser);
 

@@ -6,6 +6,7 @@ const controller = {};
 controller.addCollections = async (req, res) => {
   const { collectionName, collectionType, initialDate, finishDate } = req.body;
   const { authorization } = req.headers;
+  console.log(req.body);
 
   if (!collectionName || !collectionType || !initialDate || !finishDate)
     return res.status(400).send("Error al recibir el body");
@@ -61,6 +62,20 @@ controller.getAllCollections = async (req, res) => {
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);
+  }
+};
+
+controller.updateCollection = async (req, res) => {
+  try {
+    if (Object.entries(req.body).length === 0)
+      return res.status(400).send("Error al recibir el body");
+
+    await dao.updateCollection(req.body, req.params.id);
+    const data = await dao.getCollectionById(req.params.id);
+
+    return res.send(data[0]);
+  } catch (e) {
+    console.log(e.message);
   }
 };
 

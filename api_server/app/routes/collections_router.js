@@ -7,6 +7,8 @@ collectionRouter.post("/", collectionController.addCollections);
 
 collectionRouter.get("/:id", collectionController.getCollection);
 
+collectionRouter.patch("/:id", collectionController.updateCollection);
+
 collectionRouter.get(
   "/all-collections/:id",
   collectionController.getAllCollections

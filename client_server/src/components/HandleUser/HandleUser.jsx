@@ -7,7 +7,7 @@ export default function HandleUser() {
   const [value, setValue] = useState({ isDelete: false });
 
   const handleValue = () => setValue({ isDelete: true });
-  // const handleOpenEditUser = () => setOpenEditUser(true);
+  const handleOpenEditUser = () => setOpenEditUser(true);
   const handleCloseEditUser = () => setOpenEditUser(false);
 
   useEffect(function () {
@@ -19,7 +19,7 @@ export default function HandleUser() {
     fetchData();
   }, []);
 
-  async function deleteUser(event, value) {
+  async function deleteUser(event, allUser) {
     event.preventDefault();
     setValue(true);
     const response = await fetch(`http://localhost:8000/user/${allUser.id}`, {
@@ -27,7 +27,7 @@ export default function HandleUser() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(value),
+      body: JSON.stringify(allUser),
     });
     try {
       if (response.ok) {
@@ -48,7 +48,7 @@ export default function HandleUser() {
   return (
     <HandleUserView
       openEditUser={openEditUser}
-      // handleOpenEditUser={handleOpenEditUser}
+      handleOpenEditUser={handleOpenEditUser}
       handleCloseEditUser={handleCloseEditUser}
       allUser={allUser}
       value={value}

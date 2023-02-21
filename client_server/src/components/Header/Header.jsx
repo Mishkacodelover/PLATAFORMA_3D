@@ -17,12 +17,6 @@ import DiamondSharpIcon from "@mui/icons-material/DiamondSharp";
 import Link from "../Link/Link";
 
 const pages = ["Producto", "Precios", "Sobre nosotros"];
-const settings = [
-  { label: "Perfil", path: "/profile" },
-  { label: "Iniciar Sesión", path: "/login" },
-  { label: "Panel administrador", path: "/admin" },
-  { label: "Cerrar sesión", path: "/" },
-];
 
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -47,9 +41,6 @@ export default function Header() {
     <AppBar
       position="static"
       sx={{
-        // backgroundColor: "#282829",
-        // backgroundImage:
-        //   "linear-gradient(var(--negro_claro),var(--primario_claro))",
         backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
       }}
     >
@@ -167,13 +158,11 @@ export default function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
-                  <Link to={setting.path}>
-                    <Typography textAlign="center">{setting.label}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Link to="/login">
+                  <Typography textAlign="center">Iniciar sesión</Typography>
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

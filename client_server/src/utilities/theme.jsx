@@ -10,7 +10,7 @@ export const theme = createTheme({
       main: "hsl(184, 96%, 3%)",
     },
     secondary: {
-      light: "hsl(184, 3%, 94%)",
+      // light: "hsl(184, 3%, 94%)",
       main: "hsl(184, 96%, 6%)",
       dark: "hsl(184, 96%, 3%)",
     },
@@ -24,7 +24,7 @@ export const theme = createTheme({
   typography: {
     fontFamily: "gruppo",
     color: {
-      main: "hsl(184, 3%, 94%)",
+      main: "black",
     },
   },
 });

@@ -27,7 +27,7 @@ export default function HandleUserView({
   handleOpenEditUser,
   handleCloseEditUser,
   allUser,
-  handleValue,
+
   value,
   deleteUser,
 }) {
@@ -81,7 +81,7 @@ export default function HandleUserView({
                   >
                     <Fade in={openEditUser}>
                       <Box sx={style}>
-                        <EditUser />
+                        <EditUser id={id} />
                       </Box>
                     </Fade>
                   </Modal>

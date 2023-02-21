@@ -1,4 +1,4 @@
-import GraficResourcesView from "./GraficResourecesView";
+import GraficResourcesView from "./GraficResoucesView";
 import { useState, useEffect } from "react";
 
 export default function GraficResources() {

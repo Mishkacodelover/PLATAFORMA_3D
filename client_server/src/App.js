@@ -17,17 +17,15 @@ import PrivateRoutes from "./routes/PrivateRoutes.jsx";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext";
-import { useAuthContext } from "./contexts/AuthContext.jsx";
 import { UserContextProvider } from "./contexts/UserContext";
 
 import Home from "./views/Home";
 
 function App() {
-  const { authorization } = useAuthContext();
-  // const admin = authorization.role === 1;
-  // const designer = authorization.role === 2;
-  // const operator = authorization.role === 3;
-  // const workshop = authorization.role === 4;
+  const admin = 1;
+  const designer = 2;
+  const operator = 3;
+  const workshop = 4;
 
   return (
     <>
@@ -36,21 +34,24 @@ function App() {
           <UserContextProvider>
             <BrowserRouter>
               <Routes>
-                <Route element={<Layout />}>
-                  <Route path="/" element={<Home />} />
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Home />} />
                   <Route element={<PublicRoutes />}>
                     <Route path="login" element={<Login />} />
                   </Route>
 
                   <Route path="registration" element={<Registration />} />
                 </Route>
-
-                <Route
-                  element={<PrivateRoutes allowedRoles={authorization.role} />}
-                >
-                  <Route element={<LayoutInternal />}>
+                <Route path="/u/" element={<LayoutInternal />}>
+                  <Route
+                    element={
+                      <PrivateRoutes
+                        allowedRoles={[admin, designer, operator, workshop]}
+                      />
+                    }
+                  >
                     <Route path="profile" element={<Profile />} />
-                    <Route path="admin" element={<AdminDashboard />} />
+
                     <Route path="collections" element={<Collections />} />
 
                     <Route path="piece" element={<Piece />} />
@@ -59,6 +60,10 @@ function App() {
                       element={<GraficResources />}
                     />
                     <Route path="patterns" element={<Patterns />} />
+
+                    <Route element={<PrivateRoutes allowedRoles={[admin]} />}>
+                      <Route path="admin" element={<AdminDashboard />} />
+                    </Route>
                   </Route>
                 </Route>
               </Routes>

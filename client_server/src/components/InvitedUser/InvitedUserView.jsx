@@ -16,24 +16,26 @@ export default function InvitedUserView({ lastUser, setLastUser }) {
     <>
       <Box sx={{ p: "24px" }}>
         <Typography>Invitaciones pendientes de aceptar:</Typography>
-        {lastUser ? (
-          <List>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={lastUser.email} />
+        <List>
+          {lastUser ? (
+            lastUser.map(({ email }) => (
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar>
+                    <PersonIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={lastUser.email} />
 
-              <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small">Cancelar invitación</Button>
-              </ListItemButton>
-            </ListItem>
-          </List>
-        ) : (
-          <Typography>No hay invitaciones pendientes</Typography>
-        )}
+                <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                  <Button size="small">Cancelar invitación</Button>
+                </ListItemButton>
+              </ListItem>
+            ))
+          ) : (
+            <Typography>No hay invitaciones pendientes</Typography>
+          )}
+        </List>
       </Box>
     </>
   );

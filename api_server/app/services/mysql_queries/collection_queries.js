@@ -1,4 +1,5 @@
 import db from "../mysql.js";
+import utils from "../../utils/utils.js";
 
 const collectionQueries = {};
 
@@ -70,6 +71,32 @@ collectionQueries.getAllCollections = async (userId) => {
       "SELECT * FROM collection where userCreated = ?",
       userId,
       "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+collectionQueries.updateCollection = async (collectionData, id) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+
+    let collectionObj = {
+      collectionName: collectionData.collectionName,
+      collectionType: collectionData.collectionType,
+      initialDate: collectionData.initialDate,
+      finishDate: collectionData.initialDate,
+    };
+
+    collectionObj = await utils.removeUndefinedKeys(collectionObj);
+    return await db.query(
+      "UPDATE collection SET ? WHERE id = ?",
+      [collectionObj, id],
+      "update",
       conn
     );
   } catch (e) {

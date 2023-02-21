@@ -2,11 +2,13 @@ import { useFormik } from "formik";
 import { RegistrationFormSchema } from "./RegistrationForm_schema";
 import { initialValues } from "./utils/form";
 import { TextField, Grid, Button } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import { REGISTRATION } from "../../utilities/settings";
 import Checkbox from "../Checkbox/Checkbox";
 
 export default function RegistrationForm() {
+  const navigate = useNavigate();
+
   async function register(values) {
     try {
       const response = await fetch(REGISTRATION, {
@@ -18,6 +20,7 @@ export default function RegistrationForm() {
       });
 
       if (response.ok) {
+        navigate("/login");
         console.log(response);
       } else {
         console.log("error en el registro");

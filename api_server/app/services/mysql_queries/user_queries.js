@@ -85,7 +85,7 @@ userQueries.addUser = async (userData) => {
       email: userData.email,
       password: md5(userData.password),
       userType: userData.userType,
-      role: userData.role,
+      role: userData.role || 1,
     };
 
     return await db.query("INSERT INTO user SET ?", userObj, "insert", conn);

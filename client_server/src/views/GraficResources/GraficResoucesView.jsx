@@ -13,8 +13,8 @@ export default function GraficResourcesView({ resource }) {
           resource.map(({ path, name }) => (
             <ImageListItem key={name}>
               <img
-                src={`http:/localhost:8000/${path}`}
-                srcSet={`http:/localhost:8000/${path}`}
+                src={`http://localhost:8000/${path}`}
+                //srcSet={`http:/localhost:8000/${path}`}
                 alt={name}
                 loading="lazy"
               />

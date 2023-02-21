@@ -13,8 +13,8 @@ export default function CreateCollectionView({
   handleCollection,
   addCollectionData,
 }) {
-  const [value, setValue] = useState(dayjs("2022-04-07"));
-  const [finalValue, setFinalValue] = useState(dayjs("2022-04-07"));
+  const [initialDate, setInitialDate] = useState(dayjs("2022-04-07"));
+  const [finalDate, setFinalDate] = useState(dayjs("2022-04-07"));
 
   return (
     <>
@@ -52,12 +52,12 @@ export default function CreateCollectionView({
             <Grid item md={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  openTo="year"
-                  views={["year", "month", "day"]}
+                  openTo="day"
+                  views={["date", "month", "year"]}
                   label="Fecha de inicio"
-                  value={value}
+                  value={initialDate}
                   onChange={(newValue) => {
-                    setValue(newValue);
+                    setInitialDate(newValue);
                   }}
                   renderInput={(params) => (
                     <TextField
@@ -72,12 +72,12 @@ export default function CreateCollectionView({
             <Grid item md={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  openTo="year"
-                  views={["year", "month", "day"]}
+                  openTo="day"
+                  views={["date", "month", "year"]}
                   label="Fecha de fin"
-                  value={finalValue}
+                  value={finalDate}
                   onChange={(newValue) => {
-                    setFinalValue(newValue);
+                    setFinalDate(newValue);
                   }}
                   renderInput={(params) => (
                     <TextField

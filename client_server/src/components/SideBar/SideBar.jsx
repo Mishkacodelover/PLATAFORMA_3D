@@ -20,26 +20,28 @@ export default function SideBar() {
     <Paper sx={{ maxWidth: "1000%", height: "100%" }}>
       <MenuList>
         {navigate.map((page) => (
-          <MenuItem key={page.value} sx={{ height: "88px" }}>
-            <ListItemIcon sx={{ paddingRight: "16px" }}>
-              <Avatar sx={{ bgcolor: grey[800] }}>{page.icon}</Avatar>
-            </ListItemIcon>
-            <Typography variant="inherit" color="white">
-              <Link to={page.path}>{page.value}</Link>
-            </Typography>
-          </MenuItem>
+          <Link to={page.path} key={page.value}>
+            <MenuItem sx={{ height: "88px" }}>
+              <ListItemIcon sx={{ paddingRight: "16px" }}>
+                <Avatar sx={{ bgcolor: grey[800] }}>{page.icon}</Avatar>
+              </ListItemIcon>
+              <Typography variant="inherit" color="black">
+                {page.value}
+              </Typography>
+            </MenuItem>
+          </Link>
         ))}
         {authorization.role === 1 ? (
-          <MenuItem sx={{ height: "88px" }}>
-            <ListItemIcon sx={{ paddingRight: "16px" }}>
-              <Avatar sx={{ bgcolor: grey[800] }}>
-                <AdminPanelSettingsIcon />
-              </Avatar>
-            </ListItemIcon>
-            <Typography variant="inherit">
-              <Link to="/admin">Panel de administrador</Link>
-            </Typography>
-          </MenuItem>
+          <Link to="/u/admin">
+            <MenuItem sx={{ height: "88px" }}>
+              <ListItemIcon sx={{ paddingRight: "16px" }}>
+                <Avatar sx={{ bgcolor: grey[800] }}>
+                  <AdminPanelSettingsIcon />
+                </Avatar>
+              </ListItemIcon>
+              <Typography variant="inherit">Panel de administrador</Typography>
+            </MenuItem>
+          </Link>
         ) : (
           <MenuItem sx={{ height: "88px" }} />
         )}

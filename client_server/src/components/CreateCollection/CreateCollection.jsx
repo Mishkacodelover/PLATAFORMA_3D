@@ -1,18 +1,21 @@
 import CreateCollectionView from "./CreateCollectionView";
 import { useState } from "react";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 const obj = [
   {
     collectionName: "",
     collectionType: "",
-    initialDate: "",
-    finishDate: "",
-    userCreated: "",
+    // initialDate: "",
+    // finishDate: "",
   },
 ];
 
 export default function CreateCollection() {
   const [addCollection, setAddCollection] = useState(obj);
+
+  const { authorization } = useAuthContext();
+  const userId = { userCreated: authorization.id };
 
   function handleCollection(event) {
     setAddCollection({
@@ -28,16 +31,11 @@ export default function CreateCollection() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(addCollection),
+      body: JSON.stringify(addCollection, userId),
     });
     try {
       if (response.ok) {
         setAddCollection(obj);
-
-        // const fiscData = await response.json();
-        // if (fiscData) {
-        //   setFiscalData(fiscData);
-        // }
       } else {
         console.log("error al editar valor");
       }

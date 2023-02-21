@@ -33,6 +33,9 @@ dao.getCollection = async (id) => await collectionQueries.getCollectionById(id);
 dao.getAllCollections = async (userId) =>
   await collectionQueries.getAllCollections(userId);
 
+dao.updateCollection = async (collectionData, id) =>
+  await collectionQueries.updateCollection(collectionData, id);
+
 dao.addImage = async (imageData) => await imagesQueries.addImage(imageData);
 
 dao.getImageById = async (id) => await imagesQueries.getImageById(id);

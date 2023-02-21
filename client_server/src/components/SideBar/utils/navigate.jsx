@@ -7,28 +7,28 @@ import ThreeDRotationIcon from "@mui/icons-material/ThreeDRotation";
 export const navigate = [
   {
     value: "Mi perfil",
-    path: "/profile",
+    path: "/u/profile",
     icon: <PersonIcon />,
   },
 
   {
     value: "Colecciones",
-    path: "/collections",
+    path: "/u/collections",
     icon: <CollectionsBookmarkIcon />,
   },
   {
     value: "Prendas",
-    path: "/piece",
+    path: "/u/piece",
     icon: <CheckroomIcon />,
   },
   {
     value: "Recursos gráficos",
-    path: "/grafic-resources",
+    path: "/u/grafic-resources",
     icon: <ImageSearchIcon />,
   },
   {
     value: "Modelo 3D",
-    path: "/patterns",
+    path: "/u/patterns",
     icon: <ThreeDRotationIcon />,
   },
 ];
