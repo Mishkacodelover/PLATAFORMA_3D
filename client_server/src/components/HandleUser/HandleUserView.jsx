@@ -15,6 +15,11 @@ import {
   Modal,
   Fade,
   Backdrop,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  DialogContentText,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -27,9 +32,15 @@ export default function HandleUserView({
   handleOpenEditUser,
   handleCloseEditUser,
   allUser,
+  setAllUser,
 
   value,
   deleteUser,
+  handleClickOpen,
+  handleClose,
+  open,
+  setUserEditing,
+  userEditing,
 }) {
   return (
     <>
@@ -52,18 +63,18 @@ export default function HandleUserView({
 
           <List sx={{ maxHeight: "216px", overflow: "auto" }}>
             {allUser ? (
-              allUser.map(({ email, id }) => (
-                <ListItem key={id}>
+              allUser.map((user) => (
+                <ListItem key={user.id}>
                   <ListItemAvatar>
                     <Avatar>
                       <PersonIcon />
                     </Avatar>
                   </ListItemAvatar>
 
-                  <ListItemText primary={email} />
+                  <ListItemText primary={user.email} />
 
                   <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                    <Button size="small" onClick={handleOpenEditUser}>
+                    <Button onClick={() => handleOpenEditUser(user.id)}>
                       Editar
                     </Button>
                   </ListItemButton>
@@ -81,22 +92,46 @@ export default function HandleUserView({
                   >
                     <Fade in={openEditUser}>
                       <Box sx={style}>
-                        <EditUser id={id} />
+                        <EditUser
+                          allUser={allUser}
+                          setAllUser={setAllUser}
+                          setUserEditing={setUserEditing}
+                          user={userEditing}
+                          handleCloseEditUser={handleCloseEditUser}
+                        />
                       </Box>
                     </Fade>
                   </Modal>
 
                   <ListItemIcon sx={{ justifyContent: "flex-end" }}>
-                    <IconButton
-                      type="submit"
-                      value={value}
-                      onClick={deleteUser}
-                    >
+                    <IconButton onClick={() => handleClickOpen(user.id)}>
                       <Tooltip title="Eliminar">
                         <DeleteIcon />
                       </Tooltip>
                     </IconButton>
                   </ListItemIcon>
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"¿Está seguro de que quiere eliminar al usuario"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        Al aceptar, el usuario seleccionado será eliminado de la
+                        lista.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Cancelar</Button>
+                      <Button onClick={() => deleteUser(user.id)} autoFocus>
+                        Aceptar
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
                 </ListItem>
               ))
             ) : (

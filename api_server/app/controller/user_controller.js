@@ -128,6 +128,17 @@ controller.deleteUser = async (req, res) => {
   }
 };
 
+controller.logicDeleteUser = async (req, res) => {
+  try {
+    await dao.deleteUser(req.params.id);
+    const user = await getUserById(req.params.id);
+
+    return res.send(user[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 controller.updateUser = async (req, res) => {
   try {
     if (Object.entries(req.body).length === 0)

@@ -1,6 +1,8 @@
 import ProfileImageView from "./ProfileImageView";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function ProfileImage() {
+  const { authorization } = useAuthContext();
   const formData = new FormData();
 
   function onFileChange(e) {
@@ -10,11 +12,14 @@ export default function ProfileImage() {
     }
   }
 
-  async function uploadImage() {
+  async function uploadImage(e) {
+    e.preventDefault();
+    formData.append("usuario", authorization.id);
+
     try {
       const response = await fetch("http://localhost:8000/images/upload", {
         method: "POST",
-        headers: { "Content-Type": "multipart/form-data" },
+        // headers: { "Content-Type": "multipart/form-data" },
 
         body: formData,
       });

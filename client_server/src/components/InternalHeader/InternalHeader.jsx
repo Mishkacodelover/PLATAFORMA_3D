@@ -1,33 +1,28 @@
-import { Grid, Typography, Avatar } from "@mui/material";
-import { grey } from "@mui/material/colors";
-// import { useUserContext } from "../../contexts/UserContext";
+import InternalHeaderView from "./InernalHeaderView";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useState, useEffect } from "react";
 
-export default function InternalHeader({ text }) {
-  // const { user } = useUserContext();
+export default function InternalHeader() {
+  const { authorization } = useAuthContext();
+  const [user, setUser] = useState(null);
+
+  useEffect(
+    function () {
+      async function fetchData() {
+        const response = await fetch(
+          `http://localhost:8000/user/${authorization.id}`
+        );
+        const data = await response.json();
+        setUser(data);
+      }
+      fetchData();
+    },
+    [authorization.id]
+  );
+
   return (
     <>
-      <Grid
-        container
-        direction={"row"}
-        spacing={2}
-        sx={{
-          alignItems: "center",
-          maxWdth: "100%",
-          p: "16px",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Grid item sx={{ paddingRight: "724px" }}>
-          <Typography>{text}</Typography>
-        </Grid>
-
-        <Grid item>
-          <Typography>Bienvenido </Typography>
-        </Grid>
-        <Grid item>
-          <Avatar sx={{ bgcolor: grey[800] }}>H</Avatar>
-        </Grid>
-      </Grid>
+      <InternalHeaderView user={user} />
     </>
   );
 }

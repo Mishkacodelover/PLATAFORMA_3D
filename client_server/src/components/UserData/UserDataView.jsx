@@ -16,14 +16,12 @@ import SendIcon from "@mui/icons-material/Send";
 export default function UserDataView({
   userData,
   name,
-  setName,
+
   input,
   handleInput,
   update,
   email,
-  setEmail,
   surname,
-  setSurname,
   handleName,
   handleSurname,
   handleEmail,

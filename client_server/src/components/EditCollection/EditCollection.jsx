@@ -38,6 +38,10 @@ export default function EditCollection({ id }) {
       if (response.ok) {
         setEditCollection(obj);
         console.log(response);
+        //  const collectionEdited = await response.json();
+        // if (collectionEdited) {
+        //   setAllUser(userEdited);
+        // }
       } else {
         console.log("error al editar valor");
       }

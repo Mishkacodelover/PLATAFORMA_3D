@@ -126,9 +126,9 @@ export default function FiscalDataView({
                 <TextField
                   select
                   size="small"
-                  name="name"
+                  name="suscription"
                   variant="standard"
-                  value={inputData.name}
+                  value={inputData.suscription}
                   onChange={handleInputData}
                 >
                   {suscriptions.map((option) => (

@@ -30,15 +30,19 @@ export default function ProfileImageView({ onFileChange, uploadImage }) {
           </Grid>
         </Grid>
         <Grid item>
-          <Button variant="contained" component="label" onClick={uploadImage}>
-            Sube tu foto
+          <Button variant="contained" component="label">
+            Elige una foto
+          </Button>
+          <form onSubmit={uploadImage}>
             <input
               accept="image/*"
               multiple
               type="file"
+              value={undefined}
               onChange={onFileChange}
             />
-          </Button>
+            <button type="submit">subir</button>
+          </form>
         </Grid>
       </Grid>
     </Box>

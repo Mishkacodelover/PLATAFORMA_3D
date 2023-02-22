@@ -96,7 +96,7 @@ export default function CreateCollectionView({
 
             <Grid item md={12}>
               <Button type="submit" fullWidth>
-                Crear colección
+                Crear
               </Button>
             </Grid>
           </form>

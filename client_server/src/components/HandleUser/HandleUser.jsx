@@ -4,10 +4,25 @@ import { useState, useEffect } from "react";
 export default function HandleUser() {
   const [openEditUser, setOpenEditUser] = useState(false);
   const [allUser, setAllUser] = useState(null);
-  const [value, setValue] = useState({ isDelete: true });
+  const [value, setValue] = useState({ isDelete: false });
+  const [userEditing, setUserEditing] = useState(null);
 
-  // const handleValue = () => setValue({ isDelete: true });
-  const handleOpenEditUser = () => setOpenEditUser(true);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = (id) => {
+    setOpen(true);
+    setUserEditing(allUser.find((item) => item.id === id));
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpenEditUser = (id) => {
+    setOpenEditUser(true);
+    setUserEditing(allUser.find((item) => item.id === id));
+  };
+
   const handleCloseEditUser = () => setOpenEditUser(false);
 
   useEffect(function () {
@@ -19,11 +34,9 @@ export default function HandleUser() {
     fetchData();
   }, []);
 
-  async function deleteUser(event, value) {
-    event.preventDefault();
-    // setValue(true);
-    const response = await fetch(`http://localhost:8000/user/${allUser.id}`, {
-      method: "PATCH",
+  async function deleteUser(id) {
+    const response = await fetch(`http://localhost:8000/user/${id}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
@@ -32,11 +45,12 @@ export default function HandleUser() {
     try {
       if (response.ok) {
         console.log(response);
+        handleClose();
 
-        const userEdited = await response.json();
-        if (userEdited) {
-          setAllUser(userEdited);
-        }
+        // const userEdited = await response.json();
+        // if (userEdited) {
+        //   setAllUser(userEdited);
+        // }
       } else {
         console.log("error al eliminar usuario");
       }
@@ -51,8 +65,14 @@ export default function HandleUser() {
       handleOpenEditUser={handleOpenEditUser}
       handleCloseEditUser={handleCloseEditUser}
       allUser={allUser}
+      setAllUser={setAllUser}
       value={value}
       deleteUser={deleteUser}
+      userEditing={userEditing}
+      setUserEditing={setUserEditing}
+      open={open}
+      handleClose={handleClose}
+      handleClickOpen={handleClickOpen}
     />
   );
 }

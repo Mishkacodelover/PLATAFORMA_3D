@@ -12,7 +12,7 @@ imagesQueries.addImage = async (imageData) => {
       name: imageData.name,
       path: imageData.path,
 
-      // product_id: imageData.productId,
+      userCreated: imageData.userCreated,
     };
 
     return await db.query(

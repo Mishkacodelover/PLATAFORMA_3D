@@ -1,42 +1,41 @@
 import EditUserView from "./EditUserView";
 
-import { useState } from "react";
-
-const obj = {
-  name: "",
-  surname: "",
-  email: "",
-  password: "",
-  role: "",
-};
-
-export default function EditUser({ id }) {
-  const [inputData, setInputData] = useState(obj);
-
+export default function EditUser({
+  user,
+  setUserEditing,
+  handleCloseEditUser,
+  allUser,
+  setAllUser,
+}) {
   function handleInputData(event) {
-    setInputData({
-      ...inputData,
+    setUserEditing({
+      ...user,
       [event.target.name]: event.target.value,
     });
   }
 
-  async function updateUser(event, inputData) {
+  async function updateUser(event, user) {
     event.preventDefault();
-    const response = await fetch(`http://localhost:8000/user/${id}`, {
+    const response = await fetch(`http://localhost:8000/user/${user.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(inputData),
+      body: JSON.stringify(user),
     });
     try {
       if (response.ok) {
-        setInputData(obj);
+        handleCloseEditUser();
 
-        // const userEdited = await response.json();
-        // if (userEdited) {
-        //   setAllUser(userEdited);
-        // }
+        const editList = await response.json();
+        if (editList) {
+          const userIndexToUpdate = allUser.findIndex(
+            (userToEdit) => userToEdit.id === user.id
+          );
+          const newUserList = [...allUser];
+          newUserList[userIndexToUpdate] = editList;
+          setAllUser(newUserList);
+        }
       } else {
         console.log("error al editar valor");
       }
@@ -48,7 +47,7 @@ export default function EditUser({ id }) {
   return (
     <>
       <EditUserView
-        inputData={inputData}
+        inputData={user}
         handleInputData={handleInputData}
         updateUser={updateUser}
       />

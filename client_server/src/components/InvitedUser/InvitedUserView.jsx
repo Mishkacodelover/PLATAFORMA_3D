@@ -11,24 +11,33 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 
-export default function InvitedUserView({ lastUser, setLastUser }) {
+export default function InvitedUserView({
+  lastUser,
+  setLastUser,
+  updateInvitedUser,
+}) {
   return (
     <>
       <Box sx={{ p: "24px" }}>
         <Typography>Invitaciones pendientes de aceptar:</Typography>
         <List>
           {lastUser ? (
-            lastUser.map(({ email }) => (
+            lastUser.map((user) => (
               <ListItem>
                 <ListItemAvatar>
                   <Avatar>
                     <PersonIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={lastUser.email} />
+                <ListItemText primary={user.email} />
 
                 <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                  <Button size="small">Cancelar invitación</Button>
+                  <Button
+                    size="small"
+                    onClick={() => updateInvitedUser(user.id)}
+                  >
+                    Cancelar invitación
+                  </Button>
                 </ListItemButton>
               </ListItem>
             ))

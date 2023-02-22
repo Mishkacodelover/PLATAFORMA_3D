@@ -14,7 +14,7 @@ dao.getAllActiveUsers = async () => await userQueries.getAllActiveUsers();
 
 dao.addUser = async (userData) => await userQueries.addUser(userData);
 
-dao.deleteUser = async (id) => await userQueries.deleteUser(id);
+dao.deleteUser = async (id) => await userQueries.logicDeleteUser(id);
 
 dao.updateUser = async (id, userData) =>
   await userQueries.updateUser(id, userData);

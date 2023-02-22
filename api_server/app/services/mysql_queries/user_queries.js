@@ -108,6 +108,23 @@ userQueries.deleteUser = async (id) => {
   }
 };
 
+userQueries.logicDeleteUser = async (id) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "UPDATE user set isDelete = 1 WHERE id = ?",
+      id,
+      "update",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 userQueries.updateUser = async (id, userData) => {
   let conn = null;
   try {

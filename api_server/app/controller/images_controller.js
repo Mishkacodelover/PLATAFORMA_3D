@@ -8,13 +8,12 @@ const controller = {};
 controller.uploadImage = async (req, res) => {
   try {
     if (req.files === null) return;
-    if (!req.files || Object.keys(req.files).length === 0) {
+    console.log(req.files);
+    if (!req.files) {
       return res.status(400).send("No se ha cargado ningún archivo");
     }
-
-    const images = !req.files.imagen.length
-      ? [req.files.imagen]
-      : req.files.imagen;
+    if (!req.query) return res.status(400).send("Sin id del usuario");
+    const images = !req.files.file.length ? [req.files.file] : req.files.file;
 
     images.forEach(async (image) => {
       let uploadPath = __dirname + "/public/images/products/" + image.name;
@@ -25,6 +24,7 @@ controller.uploadImage = async (req, res) => {
       await dao.addImage({
         name: image.name,
         path: BBDDPath,
+        userCreated: req.query.userCreated,
       });
     });
 
