@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 export default function HandleUser() {
   const [openEditUser, setOpenEditUser] = useState(false);
   const [allUser, setAllUser] = useState(null);
-  const [value, setValue] = useState({ isDelete: false });
+  const [value, setValue] = useState({ isDelete: true });
 
-  const handleValue = () => setValue({ isDelete: true });
+  // const handleValue = () => setValue({ isDelete: true });
   const handleOpenEditUser = () => setOpenEditUser(true);
   const handleCloseEditUser = () => setOpenEditUser(false);
 
@@ -19,15 +19,15 @@ export default function HandleUser() {
     fetchData();
   }, []);
 
-  async function deleteUser(event, allUser) {
+  async function deleteUser(event, value) {
     event.preventDefault();
-    setValue(true);
+    // setValue(true);
     const response = await fetch(`http://localhost:8000/user/${allUser.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(allUser),
+      body: JSON.stringify(value),
     });
     try {
       if (response.ok) {
@@ -52,7 +52,6 @@ export default function HandleUser() {
       handleCloseEditUser={handleCloseEditUser}
       allUser={allUser}
       value={value}
-      handleValue={handleValue}
       deleteUser={deleteUser}
     />
   );

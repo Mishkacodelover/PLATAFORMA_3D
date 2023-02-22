@@ -32,13 +32,13 @@ fiscalDataQueries.addFiscalData = async (fiscalData, userId) => {
   }
 };
 
-fiscalDataQueries.getFiscalDataByUserId = async (userId) => {
+fiscalDataQueries.getFiscalDataSuscription = async () => {
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM fiscalData WHERE user = ?",
-      userId,
+      "SELECT fiscaldata.companyName,fiscaldata.vatNumber,fiscaldata.fiscalAdress,fiscaldata.user,fiscaldata.suscription,suscription.name,suscription.price FROM fiscaldata join suscription on fiscaldata.suscription= suscription.id",
+      [],
       "select",
       conn
     );
@@ -77,6 +77,23 @@ fiscalDataQueries.getFiscalDataByVatNumber = async (vatNumber) => {
     return await db.query(
       "SELECT * FROM fiscalData WHERE vatNumber = ?",
       dataObj,
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+fiscalDataQueries.getFiscalDataByUserId = async (userId) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT * FROM fiscalData WHERE user = ?",
+      userId,
       "select",
       conn
     );

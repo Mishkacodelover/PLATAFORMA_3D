@@ -6,8 +6,14 @@ fiscalDataRouter.get(
   "/vat-number",
   fiscalDataController.getFiscalDataByVatNumber
 );
+
 fiscalDataRouter.get(
-  "suscription/:id",
+  "/all-suscription",
+  fiscalDataController.getFiscalDataSuscription
+);
+
+fiscalDataRouter.get(
+  "/suscription/:id",
   fiscalDataController.getFiscalDataSuscriptionByUserId
 );
 

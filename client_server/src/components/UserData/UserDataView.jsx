@@ -24,6 +24,9 @@ export default function UserDataView({
   setEmail,
   surname,
   setSurname,
+  handleName,
+  handleSurname,
+  handleEmail,
 }) {
   return (
     <>
@@ -54,7 +57,7 @@ export default function UserDataView({
               )}
 
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={() => setName(true)}>
+                <Button size="small" onClick={handleName}>
                   Editar
                 </Button>
               </ListItemButton>
@@ -81,7 +84,7 @@ export default function UserDataView({
                 </form>
               )}
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={() => setSurname(true)}>
+                <Button size="small" onClick={handleSurname}>
                   Editar
                 </Button>
               </ListItemButton>
@@ -107,7 +110,7 @@ export default function UserDataView({
                 </form>
               )}
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={() => setEmail(true)}>
+                <Button size="small" onClick={handleEmail}>
                   Editar
                 </Button>
               </ListItemButton>

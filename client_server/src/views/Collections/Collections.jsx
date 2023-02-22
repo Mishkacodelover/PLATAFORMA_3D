@@ -6,6 +6,10 @@ export default function Collections() {
   const { authorization } = useAuthContext();
   const [collection, setCollection] = useState(null);
   const [createCollection, setCreateCollection] = useState(false);
+  const [openEditCollection, setOpenEditCollection] = useState(false);
+
+  const handleOpenEditCollection = () => setOpenEditCollection(true);
+  const handleCloseEditCollection = () => setOpenEditCollection(false);
 
   const handleCollection = function () {
     if (createCollection === false) {
@@ -22,6 +26,7 @@ export default function Collections() {
           `http://localhost:8000/collections/all-collections/${authorization.id}`
         );
         const data = await response.json();
+
         setCollection(data);
       }
       fetchData();
@@ -34,6 +39,9 @@ export default function Collections() {
       collection={collection}
       createCollection={createCollection}
       handleCollection={handleCollection}
+      openEditCollection={openEditCollection}
+      handleCloseEditCollection={handleCloseEditCollection}
+      handleOpenEditCollection={handleOpenEditCollection}
     />
   );
 }

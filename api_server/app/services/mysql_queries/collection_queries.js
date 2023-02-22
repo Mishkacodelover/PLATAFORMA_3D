@@ -3,7 +3,7 @@ import utils from "../../utils/utils.js";
 
 const collectionQueries = {};
 
-collectionQueries.addCollection = async (collectionData, userId) => {
+collectionQueries.addCollection = async (collectionData) => {
   let conn = null;
   try {
     conn = await db.createConnection();
@@ -13,7 +13,7 @@ collectionQueries.addCollection = async (collectionData, userId) => {
       collectionType: collectionData.collectionType,
       initialDate: collectionData.initialDate,
       finishDate: collectionData.initialDate,
-      userCreated: userId,
+      userCreated: collectionData.userCreated,
     };
 
     return await db.query(

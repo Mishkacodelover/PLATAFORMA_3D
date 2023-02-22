@@ -1,11 +1,25 @@
-import { Box, Grid, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Modal,
+  Fade,
+  Backdrop,
+} from "@mui/material";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import CreateCollection from "../../components/CreateCollection";
+import EditCollection from "../../components/EditCollection";
+import dayjs from "dayjs";
+import { style } from "../../const/modalStyle";
 
 export default function CollectionView({
   collection,
   createCollection,
   handleCollection,
+  openEditCollection,
+  handleCloseEditCollection,
+  handleOpenEditCollection,
 }) {
   return (
     <>
@@ -24,7 +38,13 @@ export default function CollectionView({
 
           {collection ? (
             collection.map(
-              ({ collectionName, collectionType, initialDate, finishDate }) => (
+              ({
+                collectionName,
+                collectionType,
+                initialDate,
+                finishDate,
+                id,
+              }) => (
                 <Grid
                   container
                   direction="row"
@@ -45,18 +65,39 @@ export default function CollectionView({
 
                     <Grid item md={6}>
                       <Typography>
-                        Fecha de inicio de la colección: {initialDate}
+                        Fecha de inicio de la colección:{" "}
+                        {dayjs(initialDate).format("DD/MM/YYYY")}
                       </Typography>
                     </Grid>
                     <Grid item md={6}>
                       <Typography>
-                        Fecha de fin de la colección: {finishDate}
+                        Fecha de fin de la colección:{" "}
+                        {dayjs(finishDate).format("DD/MM/YYYY")}
                       </Typography>
                     </Grid>
                   </Grid>
                   <Grid item md={1}>
-                    <Button size="small">Editar</Button>
-                    <Button size="small">Ver</Button>
+                    <Button size="small" onClick={handleOpenEditCollection}>
+                      Editar
+                    </Button>
+                    <Modal
+                      aria-labelledby="open-edirUser-form"
+                      aria-describedby="open-editUser-form"
+                      open={openEditCollection}
+                      onClose={handleCloseEditCollection}
+                      closeAfterTransition
+                      slots={Backdrop}
+                      slotsProps={{
+                        timeout: 500,
+                      }}
+                    >
+                      <Fade in={openEditCollection}>
+                        <Box sx={style}>
+                          <EditCollection id={id} />
+                        </Box>
+                      </Fade>
+                    </Modal>
+                    <Button size="small">Eliminar</Button>
                   </Grid>
                 </Grid>
               )

@@ -1,25 +1,14 @@
 import dao from "../services/dao.js";
-import { jwtVerify } from "jose";
 
 const controller = {};
 
 controller.addCollections = async (req, res) => {
   const { collectionName, collectionType, initialDate, finishDate } = req.body;
-  const { authorization } = req.headers;
+
   console.log(req.body);
 
   if (!collectionName || !collectionType || !initialDate || !finishDate)
     return res.status(400).send("Error al recibir el body");
-
-  if (!authorization) return res.sendStatus(401);
-  const encoder = new TextEncoder();
-
-  const { payload } = await jwtVerify(
-    authorization,
-    encoder.encode(process.env.JWT_SECRET)
-  );
-  if (!payload.id)
-    return res.status(409).send("no se encuetra el id del usuario");
 
   try {
     const collection = await dao.getCollectionByName(collectionName);
@@ -27,7 +16,7 @@ controller.addCollections = async (req, res) => {
     if (collection.length > 0)
       return res.status(409).send("esta colección ya existe");
 
-    const addCollection = await dao.addCollection(req.body, payload.id);
+    const addCollection = await dao.addCollection(req.body);
     if (addCollection)
       return res.send(
         `Colección ${collectionName} con id: ${addCollection} registrada`

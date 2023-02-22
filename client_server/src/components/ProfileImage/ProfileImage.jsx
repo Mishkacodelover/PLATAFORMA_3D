@@ -1,41 +1,35 @@
-import * as React from "react";
-
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-
-import { Box, Stack, Button, Grid, Typography } from "@mui/material";
+import ProfileImageView from "./ProfileImageView";
 
 export default function ProfileImage() {
+  const formData = new FormData();
+
+  function onFileChange(e) {
+    console.log(e.target.files[0]);
+    if (e.target && e.target.files[0]) {
+      formData.append("file", e.target.files[0]);
+    }
+  }
+
+  async function uploadImage() {
+    try {
+      const response = await fetch("http://localhost:8000/images/upload", {
+        method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
+
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log(response);
+      } else {
+        console.log("error en el registro");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
-    <Box sx={{ p: "24px" }}>
-      <Grid
-        container
-        direction="column"
-        alignItems={"center"}
-        spacing={6}
-        justifyContent="center"
-      >
-        <Grid
-          item
-          container
-          alignItems={"center"}
-          justifyContent="center"
-          spacing={2}
-        >
-          <Grid item>
-            <Typography>Sube tu foto o elige un avatar</Typography>
-          </Grid>
-          <Grid item>
-            <PhotoCamera color="primary" />
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" component="label">
-            Sube tu foto
-            <input hidden accept="image/*" multiple type="file" />
-          </Button>
-        </Grid>
-      </Grid>
-    </Box>
+    <ProfileImageView onFileChange={onFileChange} uploadImage={uploadImage} />
   );
 }

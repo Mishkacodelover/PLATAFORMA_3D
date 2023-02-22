@@ -3,7 +3,7 @@ import UserData from "../../components/UserData";
 import CompleteData from "../../components/CompleteData";
 
 import ProfileAvatar from "../../components/ProfileAvatars/ProfileAvatar";
-import ProfileImage from "../../components/ProfileImage/ProfileImage";
+import ProfileImage from "../../components/ProfileImage";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import WhiteWomanImg from "../../assets/images/mujer_claro.jpg";
 

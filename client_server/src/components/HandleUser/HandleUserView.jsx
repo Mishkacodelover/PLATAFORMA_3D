@@ -46,11 +46,11 @@ export default function HandleUserView({
               Mis Usuarios
             </Typography>
           </Grid>
-          <Grid item md={12}>
+          <Grid item md={12} sx={{ paddingBottom: "24px" }}>
             <Search />
           </Grid>
 
-          <List>
+          <List sx={{ maxHeight: "216px", overflow: "auto" }}>
             {allUser ? (
               allUser.map(({ email, id }) => (
                 <ListItem key={id}>
@@ -87,18 +87,15 @@ export default function HandleUserView({
                   </Modal>
 
                   <ListItemIcon sx={{ justifyContent: "flex-end" }}>
-                    <form onSubmit={(event) => deleteUser(event, value)}>
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        type="submit"
-                        value={value}
-                      >
-                        <Tooltip title="Eliminar">
-                          <DeleteIcon />
-                        </Tooltip>
-                      </IconButton>
-                    </form>
+                    <IconButton
+                      type="submit"
+                      value={value}
+                      onClick={deleteUser}
+                    >
+                      <Tooltip title="Eliminar">
+                        <DeleteIcon />
+                      </Tooltip>
+                    </IconButton>
                   </ListItemIcon>
                 </ListItem>
               ))

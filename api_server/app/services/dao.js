@@ -19,8 +19,8 @@ dao.deleteUser = async (id) => await userQueries.deleteUser(id);
 dao.updateUser = async (id, userData) =>
   await userQueries.updateUser(id, userData);
 
-dao.addCollection = async (collectionData, userId) =>
-  await collectionQueries.addCollection(collectionData, userId);
+dao.addCollection = async (collectionData) =>
+  await collectionQueries.addCollection(collectionData);
 
 dao.getCollectionById = async (id) =>
   await collectionQueries.getCollectionById(id);
@@ -44,6 +44,9 @@ dao.getAllImages = async () => await imagesQueries.getAllImages();
 
 dao.addFiscalData = async (fiscalData, userId) =>
   await fiscalDataQueries.addFiscalData(fiscalData, userId);
+
+dao.getFiscalDataSuscription = async () =>
+  await fiscalDataQueries.getFiscalDataSuscription();
 
 dao.getFiscalDataByVatNumber = async (vatNumber) =>
   await fiscalDataQueries.getFiscalDataByVatNumber(vatNumber);

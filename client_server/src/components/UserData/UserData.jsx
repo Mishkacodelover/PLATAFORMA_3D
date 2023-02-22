@@ -2,7 +2,6 @@ import UserDataView from "./UserDataView";
 
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
-// import { useUserContext } from "../../contexts/UserContext";
 
 const userObj = {
   name: "",
@@ -12,7 +11,7 @@ const userObj = {
 
 export default function UserData() {
   const { authorization } = useAuthContext();
-  // const { user } = useUserContext();
+
   const [userData, setUserData] = useState(null);
   const [name, setName] = useState(false);
   const [surname, setSurname] = useState(false);
@@ -24,6 +23,30 @@ export default function UserData() {
       ...input,
       [event.target.name]: event.target.value,
     });
+  }
+
+  function handleName() {
+    if (name === true) {
+      setName(false);
+    } else if (name === false) {
+      setName(true);
+    }
+  }
+
+  function handleSurname() {
+    if (surname === true) {
+      setSurname(false);
+    } else if (surname === false) {
+      setSurname(true);
+    }
+  }
+
+  function handleEmail() {
+    if (email === true) {
+      setEmail(false);
+    } else if (email === false) {
+      setEmail(true);
+    }
   }
 
   useEffect(
@@ -81,15 +104,15 @@ export default function UserData() {
       <UserDataView
         userData={userData}
         name={name}
-        setName={setName}
         input={input}
         setInput={setInput}
         update={update}
         handleInput={handleInput}
         email={email}
-        setEmail={setEmail}
         surname={surname}
-        setSurname={setSurname}
+        handleName={handleName}
+        handleSurname={handleSurname}
+        handleEmail={handleEmail}
       />
     </>
   );

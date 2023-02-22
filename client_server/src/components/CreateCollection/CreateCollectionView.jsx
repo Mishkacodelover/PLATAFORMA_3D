@@ -3,19 +3,15 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
 
 import { typeCollection } from "./utils/typeCollection";
-import { useState } from "react";
 
 export default function CreateCollectionView({
   addCollection,
   handleCollection,
   addCollectionData,
+  setAddCollection,
 }) {
-  const [initialDate, setInitialDate] = useState(dayjs("2022-04-07"));
-  const [finalDate, setFinalDate] = useState(dayjs("2022-04-07"));
-
   return (
     <>
       <Box>
@@ -52,12 +48,16 @@ export default function CreateCollectionView({
             <Grid item md={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  openTo="day"
-                  views={["date", "month", "year"]}
+                  openTo="year"
+                  views={["year", "month", "day"]}
                   label="Fecha de inicio"
-                  value={initialDate}
+                  name="initialDate"
+                  value={addCollection.initialDate}
                   onChange={(newValue) => {
-                    setInitialDate(newValue);
+                    setAddCollection({
+                      ...addCollection,
+                      initialDate: newValue,
+                    });
                   }}
                   renderInput={(params) => (
                     <TextField
@@ -72,12 +72,16 @@ export default function CreateCollectionView({
             <Grid item md={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  openTo="day"
-                  views={["date", "month", "year"]}
+                  openTo="year"
+                  views={["year", "month", "day"]}
                   label="Fecha de fin"
-                  value={finalDate}
+                  value={addCollection.finalDate}
+                  name="finishDate"
                   onChange={(newValue) => {
-                    setFinalDate(newValue);
+                    setAddCollection({
+                      ...addCollection,
+                      finishDate: newValue,
+                    });
                   }}
                   renderInput={(params) => (
                     <TextField

@@ -18,15 +18,20 @@ import { suscriptions } from "./utils/suscOption";
 export default function FiscalDataView({
   fiscalData,
   companyName,
-  setCompanyName,
+
   inputData,
   handleInputData,
   updateFiscalData,
   vatNumber,
   fiscalAdress,
-  setVatNumber,
-  setFiscalAdress,
+
   addFiscalData,
+  suscription,
+
+  handleCompanyName,
+  handleVatNumber,
+  handleFiscalAdress,
+  handleSuscription,
 }) {
   return (
     <>
@@ -39,7 +44,7 @@ export default function FiscalDataView({
               />
 
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={() => setCompanyName(true)}>
+                <Button size="small" onClick={handleCompanyName}>
                   Editar
                 </Button>
               </ListItemButton>
@@ -63,7 +68,7 @@ export default function FiscalDataView({
                 primary={`CIF/NIF de empresa:  ${fiscalData.vatNumber}`}
               />
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={() => setVatNumber(true)}>
+                <Button size="small" onClick={handleVatNumber}>
                   Editar
                 </Button>
               </ListItemButton>
@@ -88,7 +93,7 @@ export default function FiscalDataView({
                 primary={`Dirección fiscal:  ${fiscalData.fiscalAdress}`}
               />
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={() => setFiscalAdress(true)}>
+                <Button size="small" onClick={handleFiscalAdress}>
                   Editar
                 </Button>
               </ListItemButton>
@@ -102,6 +107,36 @@ export default function FiscalDataView({
                   value={inputData.fiscalAdress}
                   onChange={handleInputData}
                 />
+                <IconButton type="submit">
+                  <SendIcon />
+                </IconButton>
+              </form>
+            )}
+            <ListItem>
+              <ListItemText primary={`Suscripción:  ${fiscalData.name}`} />
+
+              <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                <Button size="small" onClick={handleSuscription}>
+                  Editar
+                </Button>
+              </ListItemButton>
+            </ListItem>
+            {suscription && (
+              <form onSubmit={(event) => updateFiscalData(event, inputData)}>
+                <TextField
+                  select
+                  size="small"
+                  name="name"
+                  variant="standard"
+                  value={inputData.name}
+                  onChange={handleInputData}
+                >
+                  {suscriptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
                 <IconButton type="submit">
                   <SendIcon />
                 </IconButton>

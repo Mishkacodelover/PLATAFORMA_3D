@@ -32,6 +32,11 @@ export default function EditUser({ id }) {
     try {
       if (response.ok) {
         setInputData(obj);
+
+        // const userEdited = await response.json();
+        // if (userEdited) {
+        //   setAllUser(userEdited);
+        // }
       } else {
         console.log("error al editar valor");
       }

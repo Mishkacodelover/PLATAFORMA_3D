@@ -3,23 +3,26 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
+import { typeCollection } from "../CreateCollection/utils/typeCollection";
 
-export default function EditCollectionView() {
-  const [initialDate, setInitialDate] = useState(dayjs("2022-04-07"));
-  const [finalDate, setFinalDate] = useState(dayjs("2022-04-07"));
+export default function EditCollectionView({
+  collectionEdited,
+  updateCollection,
+  editCollection,
+  setEditCollection,
+}) {
   return (
     <Box>
       <Grid container direction="row" spacing={2} alignItems="center">
-        <form onSubmit={(event) => addCollectionData(event, addCollection)}>
+        <form onSubmit={(event) => updateCollection(event, editCollection)}>
           <Grid item md={12}>
             <TextField
               fullWidth
               variant="standard"
               label="Nombre de la colección"
               name="collectionName"
-              value={addCollection.collectionName}
-              onChange={handleCollection}
+              value={editCollection.collectionName}
+              onChange={collectionEdited}
             />
           </Grid>
           <Grid item md={12}>
@@ -30,8 +33,8 @@ export default function EditCollectionView() {
               variant="standard"
               fullWidth
               size="small"
-              value={addCollection.collectionType}
-              onChange={handleCollection}
+              value={editCollection.collectionType}
+              onChange={collectionEdited}
             >
               {typeCollection.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -43,12 +46,16 @@ export default function EditCollectionView() {
           <Grid item md={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                openTo="day"
-                views={["date", "month", "year"]}
+                openTo="year"
+                views={["year", "month", "day"]}
                 label="Fecha de inicio"
-                value={initialDate}
+                name="initialDate"
+                value={editCollection.initialDate}
                 onChange={(newValue) => {
-                  setInitialDate(newValue);
+                  setEditCollection({
+                    ...editCollection,
+                    initialDate: newValue,
+                  });
                 }}
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} variant="standard" />
@@ -59,12 +66,16 @@ export default function EditCollectionView() {
           <Grid item md={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                openTo="day"
-                views={["date", "month", "year"]}
+                openTo="year"
+                views={["year", "month", "day"]}
                 label="Fecha de fin"
-                value={finalDate}
+                value={editCollection.finishDate}
+                name="finishDate"
                 onChange={(newValue) => {
-                  setFinalDate(newValue);
+                  setEditCollection({
+                    ...editCollection,
+                    finishDate: newValue,
+                  });
                 }}
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} variant="standard" />
@@ -75,7 +86,7 @@ export default function EditCollectionView() {
 
           <Grid item md={12}>
             <Button type="submit" fullWidth>
-              Crear colección
+              Editar
             </Button>
           </Grid>
         </form>

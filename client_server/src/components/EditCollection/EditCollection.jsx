@@ -1,23 +1,42 @@
 import EditCollectionView from "./EditCollectionView";
-import { useAuthContext } from "../../contexts/AuthContext";
 
-export default function EditCollection() {
-  const { authorization } = useAuthContext();
+import dayjs from "dayjs";
+import { useState } from "react";
 
-  async function setCollection(event, values) {
+const obj = {
+  collectionName: "",
+  collectionType: "",
+  initialDate: dayjs("2022-04-07"),
+  finishDate: dayjs("2022-04-07"),
+};
+
+export default function EditCollection({ id }) {
+  const [editCollection, setEditCollection] = useState(obj);
+
+  function collectionEdited(event) {
+    setEditCollection({
+      ...editCollection,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  async function updateCollection(event, editCollection) {
     event.preventDefault();
-    const response = await fetch(
-      `http://localhost:8000/collections/${authorization.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      }
-    );
+    const newCollection = {
+      ...editCollection,
+      initialDate: dayjs(editCollection.initalDate).format("YYYY/MM/DD"),
+      finishDate: dayjs(editCollection.finishDate).format("YYYY/MM/DD"),
+    };
+    const response = await fetch(`http://localhost:8000/collections/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCollection),
+    });
     try {
       if (response.ok) {
+        setEditCollection(obj);
         console.log(response);
       } else {
         console.log("error al editar valor");
@@ -29,7 +48,12 @@ export default function EditCollection() {
 
   return (
     <>
-      <EditCollectionView setCollection={setCollection} />
+      <EditCollectionView
+        collectionEdited={collectionEdited}
+        updateCollection={updateCollection}
+        editCollection={editCollection}
+        setEditCollection={setEditCollection}
+      />
     </>
   );
 }

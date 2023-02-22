@@ -25,11 +25,11 @@ controller.addFiscalData = async (req, res) => {
   }
 };
 
-controller.getFiscalDataByUserId = async (req, res) => {
+controller.getFiscalDataSuscription = async (req, res) => {
   try {
-    const data = await dao.getFiscalDataByUserId(req.params.id);
+    const data = await dao.getFiscalDataSuscription();
 
-    if (data.length <= 0) return res.status(404).send("los  datos  no existen");
+    if (data.length <= 0) return res.status(404).send("no hay datos");
 
     return res.send(data[0]);
   } catch (e) {
@@ -43,6 +43,19 @@ controller.getFiscalDataSuscriptionByUserId = async (req, res) => {
     const data = await dao.getFiscalDataSuscriptionByUserId(req.params.id);
 
     if (data.length <= 0) return res.status(404).send("no existe");
+
+    return res.send(data[0]);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
+controller.getFiscalDataByUserId = async (req, res) => {
+  try {
+    const data = await dao.getFiscalDataByUserId(req.params.id);
+
+    if (data.length <= 0) return res.status(404).send("los  datos  no existen");
 
     return res.send(data[0]);
   } catch (e) {
