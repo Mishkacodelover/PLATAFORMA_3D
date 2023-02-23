@@ -21,6 +21,23 @@ userQueries.getUserbyEmail = async (email) => {
   }
 };
 
+userQueries.getInvitedUserbyEmail = async (email) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT * FROM invitedusers WHERE email = ?",
+      email,
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 userQueries.getUserById = async (id) => {
   let conn = null;
   try {
@@ -89,6 +106,35 @@ userQueries.addUser = async (userData) => {
     };
 
     return await db.query("INSERT INTO user SET ?", userObj, "insert", conn);
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+userQueries.addInvitedUser = async (userData) => {
+  let conn = null;
+
+  try {
+    conn = await db.createConnection();
+
+    let userObj = {
+      userCreated: userData.userCreated,
+      name: userData.name,
+      surname: userData.surname,
+      email: userData.email,
+      password: md5(userData.password),
+      userType: userData.userType,
+      role: userData.role,
+    };
+
+    return await db.query(
+      "INSERT INTO invitedusers SET ?",
+      userObj,
+      "insert",
+      conn
+    );
   } catch (e) {
     throw new Error(e);
   } finally {

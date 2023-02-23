@@ -6,7 +6,15 @@ const userRouter = express.Router();
 
 userRouter.post("/", userController.addUser);
 
+userRouter.post("/invited", userController.addInvitedUser);
+
 userRouter.post("/login", validateLoginDto, userController.loginUser);
+
+userRouter.post(
+  "/invited/login",
+  validateLoginDto,
+  userController.loginInvitedUser
+);
 
 userRouter.get("/last-users", userController.getLastFourUsers);
 

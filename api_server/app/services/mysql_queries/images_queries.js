@@ -28,6 +28,26 @@ imagesQueries.addImage = async (imageData) => {
   }
 };
 
+imagesQueries.addAvatar = async (imageData) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+
+    let imageObj = {
+      name: imageData.name,
+      path: imageData.path,
+
+      userCreated: imageData.userCreated,
+    };
+
+    return await db.query("INSERT INTO avatar SET ?", imageObj, "insert", conn);
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 imagesQueries.getImageById = async (id) => {
   let conn = null;
   try {

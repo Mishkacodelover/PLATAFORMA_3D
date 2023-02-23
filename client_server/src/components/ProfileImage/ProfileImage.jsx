@@ -9,20 +9,20 @@ export default function ProfileImage() {
     console.log(e.target.files[0]);
     if (e.target && e.target.files[0]) {
       formData.append("file", e.target.files[0]);
+      formData.append("userCreated", authorization.id);
     }
   }
 
   async function uploadImage(e) {
     e.preventDefault();
-    formData.append("usuario", authorization.id);
-
     try {
-      const response = await fetch("http://localhost:8000/images/upload", {
-        method: "POST",
-        // headers: { "Content-Type": "multipart/form-data" },
-
-        body: formData,
-      });
+      const response = await fetch(
+        "http://localhost:8000/images/upload/avatar",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         console.log(response);

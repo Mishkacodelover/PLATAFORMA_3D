@@ -6,6 +6,9 @@ const dao = {};
 
 dao.getUserbyEmail = async (email) => await userQueries.getUserbyEmail(email);
 
+dao.getInvitedUserbyEmail = async (email) =>
+  await userQueries.getInvitedUserbyEmail(email);
+
 dao.getUserById = async (id) => await userQueries.getUserById(id);
 
 dao.getLastFourUsers = async () => await userQueries.getLastFourUsers();
@@ -13,6 +16,9 @@ dao.getLastFourUsers = async () => await userQueries.getLastFourUsers();
 dao.getAllActiveUsers = async () => await userQueries.getAllActiveUsers();
 
 dao.addUser = async (userData) => await userQueries.addUser(userData);
+
+dao.addInvitedUser = async (userData) =>
+  await userQueries.addInvitedUser(userData);
 
 dao.deleteUser = async (id) => await userQueries.logicDeleteUser(id);
 
@@ -37,6 +43,8 @@ dao.updateCollection = async (collectionData, id) =>
   await collectionQueries.updateCollection(collectionData, id);
 
 dao.addImage = async (imageData) => await imagesQueries.addImage(imageData);
+
+dao.addAvatar = async (imageData) => await imagesQueries.addAvatar(imageData);
 
 dao.getImageById = async (id) => await imagesQueries.getImageById(id);
 

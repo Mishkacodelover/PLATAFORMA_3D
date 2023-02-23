@@ -4,16 +4,23 @@ import { memberValues } from "./utils/memberValues";
 import { initialValues } from "./utils/inviteMemberValues";
 import { InviteMemberSchema } from "./inviteMemberSchema";
 import { REGISTRATION } from "../../utilities/settings";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function InviteMember() {
+  const { authorization } = useAuthContext();
+
   async function registerMember(values) {
+    const invitedUser = {
+      ...values,
+      userCreated: authorization.id,
+    };
     try {
-      const response = await fetch(REGISTRATION, {
+      const response = await fetch("http://localhost:8000/user/invited", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(invitedUser),
       });
 
       if (response.ok) {

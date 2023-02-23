@@ -17,6 +17,16 @@ import DiamondSharpIcon from "@mui/icons-material/DiamondSharp";
 import Link from "../Link/Link";
 
 const pages = ["Producto", "Precios", "Sobre nosotros"];
+const settings = [
+  {
+    label: "Acceso a empresas",
+    path: "/login",
+  },
+  {
+    label: "Acceso a invitados",
+    path: "/login-invited",
+  },
+];
 
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -158,11 +168,13 @@ export default function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="/login">
-                  <Typography textAlign="center">Iniciar sesión</Typography>
-                </Link>
-              </MenuItem>
+              {settings.map((setting) => (
+                <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                  <Link to={setting.path}>
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </Link>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
         </Toolbar>

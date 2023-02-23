@@ -24,6 +24,26 @@ controller.addUser = async (req, res) => {
   }
 };
 
+controller.addInvitedUser = async (req, res) => {
+  const { email, password, name, surname } = req.body;
+  console.log(req.body);
+
+  if (!email || !password || !name || !surname)
+    return res.status(400).send("Error al recibir el body");
+
+  try {
+    const user = await dao.getInvitedUserbyEmail(email);
+
+    if (user.length > 0) return res.status(409).send("usuario ya registrado");
+
+    const addUser = await dao.addInvitedUser(req.body);
+    if (addUser)
+      return res.send(`Usuario ${email} con id: ${addUser} registrado`);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 controller.loginUser = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
@@ -32,6 +52,43 @@ controller.loginUser = async (req, res) => {
     return res.status(400).send("Error al recibir el body");
   try {
     let user = await dao.getUserbyEmail(email);
+
+    if (user.length <= 0)
+      return res.status(404).send("el usuario no está registrado");
+
+    const clienPassword = md5(password);
+
+    [user] = user;
+
+    if (user.password != clienPassword)
+      return res.status(401).send("password incorrecta");
+    const jwtConstructor = new SignJWT({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    });
+    const encoder = new TextEncoder();
+
+    const jwt = await jwtConstructor
+      .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+      .setIssuedAt()
+      .setExpirationTime("24h")
+      .sign(encoder.encode(process.env.JWT_SECRET));
+
+    return res.send({ jwt });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+controller.loginInvitedUser = async (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body);
+
+  if (!email || !password)
+    return res.status(400).send("Error al recibir el body");
+  try {
+    let user = await dao.getInvitedUserbyEmail(email);
 
     if (user.length <= 0)
       return res.status(404).send("el usuario no está registrado");
