@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext({
   login: () => {},
+  loginInvited: () => {},
   logout: () => {},
   authorization: {
     email: null,
@@ -21,11 +22,34 @@ export function AuthContextProvider({ children }) {
       email: null,
       role: null,
       id: null,
+      name: null,
     }
   );
 
   async function login(values) {
     const response = await fetch(LOGIN, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    try {
+      const token = await response.json();
+      const data = jwtDecode(token.jwt);
+      setAuthorization({ ...data, token: token.jwt });
+      window.localStorage.setItem(
+        MY_AUTH_APP,
+        JSON.stringify({ ...data, token: token.jwt })
+      );
+    } catch (error) {
+      alert("Por favor introduzca los datos correctos");
+      console.log("error");
+    }
+  }
+
+  async function loginInvited(values) {
+    const response = await fetch("http://localhost:8000/user/invited/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,12 +76,14 @@ export function AuthContextProvider({ children }) {
       email: null,
       role: null,
       id: null,
+      name: null,
     });
   }
 
   const value = {
     authorization,
     login,
+    loginInvited,
     logout,
   };
 

@@ -12,7 +12,7 @@ controller.uploadImage = async (req, res) => {
     if (!req.files) {
       return res.status(400).send("No se ha cargado ningún archivo");
     }
-    if (!req.query) return res.status(400).send("Sin id del usuario");
+
     const images = !req.files.file.length ? [req.files.file] : req.files.file;
 
     images.forEach(async (image) => {
@@ -24,7 +24,7 @@ controller.uploadImage = async (req, res) => {
       await dao.addImage({
         name: image.name,
         path: BBDDPath,
-        userCreated: req.query.userCreated,
+        userCreated: req.body.userCreated,
       });
     });
 
@@ -42,7 +42,6 @@ controller.uploadAvatar = async (req, res) => {
     if (!req.files) {
       return res.status(400).send("No se ha cargado ningún archivo");
     }
-    if (!req.query) return res.status(400).send("Sin id del usuario");
 
     const images = !req.files.file.length ? [req.files.file] : req.files.file;
 
@@ -55,7 +54,7 @@ controller.uploadAvatar = async (req, res) => {
       await dao.addAvatar({
         name: image.name,
         path: BBDDPath,
-        userCreated: req.query.userCreated,
+        userCreated: req.body.userCreated,
       });
     });
 
@@ -69,6 +68,19 @@ controller.uploadAvatar = async (req, res) => {
 controller.getImage = async (req, res) => {
   try {
     const image = await dao.getImageById(req.params.id);
+
+    if (image.length <= 0) return res.status(404).send("La imagen no existe");
+
+    return res.sendFile(image[0].path, { root: __dirname });
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
+controller.getAvatarByUserId = async (req, res) => {
+  try {
+    const image = await dao.getAvatarByUserId(req.params.id);
 
     if (image.length <= 0) return res.status(404).send("La imagen no existe");
 

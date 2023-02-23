@@ -1,49 +1,27 @@
 import { Grid, TextField, MenuItem, Button } from "@mui/material";
-import { useFormik } from "formik";
+// import { useFormik } from "formik";
 import { memberValues } from "./utils/memberValues";
-import { initialValues } from "./utils/inviteMemberValues";
-import { InviteMemberSchema } from "./inviteMemberSchema";
-import { REGISTRATION } from "../../utilities/settings";
-import { useAuthContext } from "../../contexts/AuthContext";
+// import { initialValues } from "./utils/inviteMemberValues";
+// import { InviteMemberSchema } from "./inviteMemberSchema";
 
-export default function InviteMember() {
-  const { authorization } = useAuthContext();
+export default function InviteMember({
+  handleSubmit,
+  values,
+  handleChange,
+  errors,
+  isSubmitting,
+}) {
+  // const onSubmit = (values, actions) => {
+  //   registerMember(values);
+  //   actions.resetForm();
+  // };
 
-  async function registerMember(values) {
-    const invitedUser = {
-      ...values,
-      userCreated: authorization.id,
-    };
-    try {
-      const response = await fetch("http://localhost:8000/user/invited", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(invitedUser),
-      });
-
-      if (response.ok) {
-        console.log(response);
-      } else {
-        console.log("error en el registro");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const onSubmit = (values, actions) => {
-    registerMember(values);
-    actions.resetForm();
-  };
-
-  const { values, errors, isSubmitting, handleChange, handleSubmit } =
-    useFormik({
-      initialValues,
-      validationSchema: InviteMemberSchema,
-      onSubmit,
-    });
+  // const { values, errors, isSubmitting, handleChange, handleSubmit } =
+  //   useFormik({
+  //     initialValues,
+  //     validationSchema: InviteMemberSchema,
+  //     onSubmit,
+  //   });
 
   return (
     <>

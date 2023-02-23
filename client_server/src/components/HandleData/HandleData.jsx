@@ -1,25 +1,36 @@
 import HandleDataView from "./HandleDataView";
 import { useState } from "react";
 
-export default function HandleData() {
+export default function HandleData({
+  registerMember,
+  handleCloseRegister,
+  handleOpenRegister,
+  openRegister,
+  values,
+  handleChange,
+  errors,
+  isSubmitting,
+  handleSubmit,
+}) {
   const [checked, setChecked] = useState(true);
 
-  const [openRegister, setOpenRegister] = useState(false);
-
-  const handleCloseRegister = () => setOpenRegister(false);
-  const handleOpenRegister = () => setOpenRegister(true);
-
-  const handleChange = (event) => {
+  const handleCheck = (event) => {
     setChecked(event.target.checked);
   };
 
   return (
     <HandleDataView
       checked={checked}
-      handleChange={handleChange}
+      handleCheck={handleCheck}
       handleOpenRegister={handleOpenRegister}
       openRegister={openRegister}
       handleCloseRegister={handleCloseRegister}
+      registerMember={registerMember}
+      values={values}
+      handleChange={handleChange}
+      errors={errors}
+      isSubmitting={isSubmitting}
+      handleSubmit={handleSubmit}
     />
   );
 }

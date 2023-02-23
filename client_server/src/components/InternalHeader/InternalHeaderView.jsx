@@ -1,7 +1,9 @@
 import { Grid, Typography, Avatar } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function InternalHeaderView({ text, user }) {
+  const { authorization } = useAuthContext();
   return (
     <>
       <Grid
@@ -20,7 +22,7 @@ export default function InternalHeaderView({ text, user }) {
         </Grid>
 
         <Grid item>
-          <Typography>Bienvenido </Typography>
+          <Typography>Bienvenid@ {authorization.name} </Typography>
         </Grid>
         <Grid item>
           <Avatar sx={{ bgcolor: grey[800] }}>H</Avatar>

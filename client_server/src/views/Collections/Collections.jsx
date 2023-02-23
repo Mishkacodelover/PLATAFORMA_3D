@@ -7,8 +7,11 @@ export default function Collections() {
   const [collection, setCollection] = useState(null);
   const [createCollection, setCreateCollection] = useState(false);
   const [openEditCollection, setOpenEditCollection] = useState(false);
+  const [value, setValue] = useState({ isDelete: false });
 
-  const handleOpenEditCollection = () => setOpenEditCollection(true);
+  const handleOpenEditCollection = function () {
+    setOpenEditCollection(true);
+  };
   const handleCloseEditCollection = () => setOpenEditCollection(false);
 
   const handleCollection = function () {
@@ -34,9 +37,36 @@ export default function Collections() {
     [authorization.id]
   );
 
+  async function deleteCollection(id) {
+    const response = await fetch(`http://localhost:8000/user/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(value),
+    });
+    try {
+      if (response.ok) {
+        console.log(response);
+        // handleClose();
+
+        // const editList = await response.json();
+        // if (editList) {
+        //   setAllUser(editList);
+        // }
+        // setAllUser(null);
+      } else {
+        console.log("error al eliminar la colección");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <CollectionView
       collection={collection}
+      setCollection={setCollection}
       createCollection={createCollection}
       handleCollection={handleCollection}
       openEditCollection={openEditCollection}

@@ -33,8 +33,6 @@ export default function HandleUserView({
   handleCloseEditUser,
   allUser,
   setAllUser,
-
-  value,
   deleteUser,
   handleClickOpen,
   handleClose,

@@ -14,7 +14,6 @@ export default function InvitedUser() {
   }, []);
 
   async function updateInvitedUser(user) {
-    // event.preventDefault();
     const response = await fetch(`http://localhost:8000/user/${user.id}`, {
       method: "PATCH",
       headers: {

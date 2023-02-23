@@ -10,7 +10,7 @@ const obj = {
   finishDate: dayjs("2022-04-07"),
 };
 
-export default function CreateCollection() {
+export default function CreateCollection({ collection, setCollection }) {
   const [addCollection, setAddCollection] = useState(obj);
 
   const { authorization } = useAuthContext();
@@ -25,9 +25,9 @@ export default function CreateCollection() {
 
   async function addCollectionData(event, addCollection) {
     event.preventDefault();
-    const collection = {
+    const collectionAdd = {
       ...addCollection,
-      initialDate: dayjs(addCollection.initalDate).format("YYYY/MM/DD"),
+      initialDate: dayjs(addCollection.initialDate).format("YYYY/MM/DD"),
       finishDate: dayjs(addCollection.finishDate).format("YYYY/MM/DD"),
       userCreated: userId.userCreated,
     };
@@ -36,12 +36,19 @@ export default function CreateCollection() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(collection),
+      body: JSON.stringify(collectionAdd),
     });
     try {
       if (response.ok) {
         setAddCollection(obj);
+        const newCollection = await response.json();
+        if (newCollection) {
+          const newList = [...collection];
+          newList.push(newCollection);
+          setCollection(newList);
+        }
       } else {
+        alert("El nombre de la colección ya existe");
         console.log("error al editar valor");
       }
     } catch (error) {

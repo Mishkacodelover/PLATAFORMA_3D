@@ -75,7 +75,7 @@ export default function CreateCollectionView({
                   openTo="year"
                   views={["year", "month", "day"]}
                   label="Fecha de fin"
-                  value={addCollection.finalDate}
+                  value={addCollection.finishDate}
                   name="finishDate"
                   onChange={(newValue) => {
                     setAddCollection({

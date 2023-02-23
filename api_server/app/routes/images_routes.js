@@ -9,6 +9,8 @@ imagesRouter.post("/upload/avatar", imagesController.uploadAvatar);
 
 imagesRouter.get("/image/:id", imagesController.getImage);
 
+imagesRouter.get("/avatar/:id", imagesController.getAvatarByUserId);
+
 imagesRouter.get("/all-images", imagesController.getAllImages);
 
 export default imagesRouter;

@@ -15,11 +15,16 @@ import { style } from "../../const/modalStyle";
 
 export default function HandleDataView({
   checked,
-  handleChange,
+  handleCheck,
 
   handleOpenRegister,
   openRegister,
   handleCloseRegister,
+  handleSubmit,
+  values,
+  handleChange,
+  errors,
+  isSubmitting,
 }) {
   return (
     <>
@@ -48,7 +53,7 @@ export default function HandleDataView({
             </Typography>
             <Switch
               checked={checked}
-              onChange={handleChange}
+              onChange={handleCheck}
               inputProps={{ "aria-label": "controlled" }}
             />
           </Grid>
@@ -68,15 +73,18 @@ export default function HandleDataView({
             >
               <Fade in={openRegister}>
                 <Box sx={style}>
-                  <InviteMember />
+                  <InviteMember
+                    handleSubmit={handleSubmit}
+                    values={values}
+                    handleChange={handleChange}
+                    errors={errors}
+                    isSubmitting={isSubmitting}
+                  />
                 </Box>
               </Fade>
             </Modal>
           </Grid>
 
-          <Grid item>
-            <Button>Notificaciones</Button>
-          </Grid>
           <Box>{checked && <FiscalData />}</Box>
         </Grid>
       </Box>

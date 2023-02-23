@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./views/Login";
+import LoginInvited from "./views/LoginInvited";
 import Registration from "./views/Registration";
 import Layout from "./components/Layout/Layout";
 import LayoutInternal from "./components/LayoutInternal/LayoutInternal.jsx";
@@ -17,7 +18,6 @@ import PrivateRoutes from "./routes/PrivateRoutes.jsx";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext";
-import { UserContextProvider } from "./contexts/UserContext";
 
 import Home from "./views/Home";
 
@@ -31,44 +31,43 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthContextProvider>
-          <UserContextProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route element={<PublicRoutes />}>
-                    <Route path="login" element={<Login />} />
-                  </Route>
-
-                  <Route path="registration" element={<Registration />} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route element={<PublicRoutes />}>
+                  <Route path="login" element={<Login />} />
+                  <Route path="login-invited" element={<LoginInvited />} />
                 </Route>
-                <Route path="/u/" element={<LayoutInternal />}>
-                  <Route
-                    element={
-                      <PrivateRoutes
-                        allowedRoles={[admin, designer, operator, workshop]}
-                      />
-                    }
-                  >
-                    <Route path="profile" element={<Profile />} />
 
-                    <Route path="collections" element={<Collections />} />
-
-                    <Route path="piece" element={<Piece />} />
-                    <Route
-                      path="grafic-resources"
-                      element={<GraficResources />}
+                <Route path="registration" element={<Registration />} />
+              </Route>
+              <Route path="/u/" element={<LayoutInternal />}>
+                <Route
+                  element={
+                    <PrivateRoutes
+                      allowedRoles={[admin, designer, operator, workshop]}
                     />
-                    <Route path="patterns" element={<Patterns />} />
+                  }
+                >
+                  <Route path="profile" element={<Profile />} />
 
-                    <Route element={<PrivateRoutes allowedRoles={[admin]} />}>
-                      <Route path="admin" element={<AdminDashboard />} />
-                    </Route>
+                  <Route path="collections" element={<Collections />} />
+
+                  <Route path="piece" element={<Piece />} />
+                  <Route
+                    path="grafic-resources"
+                    element={<GraficResources />}
+                  />
+                  <Route path="patterns" element={<Patterns />} />
+
+                  <Route element={<PrivateRoutes allowedRoles={[admin]} />}>
+                    <Route path="admin" element={<AdminDashboard />} />
                   </Route>
                 </Route>
-              </Routes>
-            </BrowserRouter>
-          </UserContextProvider>
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </AuthContextProvider>
       </ThemeProvider>
     </>

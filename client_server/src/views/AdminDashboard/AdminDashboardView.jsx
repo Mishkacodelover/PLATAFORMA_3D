@@ -3,9 +3,18 @@ import { Box, Grid } from "@mui/material";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import HandleUser from "../../components/HandleUser";
 import HandleData from "../../components/HandleData/HandleData";
-import InvitedUser from "../../components/InvitedUser";
 
-export default function AdminDashboardView() {
+export default function AdminDashboardView({
+  registerMember,
+  handleCloseRegister,
+  handleOpenRegister,
+  openRegister,
+  values,
+  handleChange,
+  errors,
+  isSubmitting,
+  handleSubmit,
+}) {
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
@@ -19,13 +28,20 @@ export default function AdminDashboardView() {
           }}
         >
           <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
-            <HandleData />
+            <HandleData
+              registerMember={registerMember}
+              handleCloseRegister={handleCloseRegister}
+              handleOpenRegister={handleOpenRegister}
+              openRegister={openRegister}
+              values={values}
+              handleChange={handleChange}
+              errors={errors}
+              isSubmitting={isSubmitting}
+              handleSubmit={handleSubmit}
+            />
           </Grid>
           <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
-            <HandleUser />
-          </Grid>
-          <Grid item xs={10} md={12} sx={{ border: "1px solid black" }}>
-            <InvitedUser />
+            <HandleUser values={values} handleChange={handleChange} />
           </Grid>
         </Grid>
       </Grid>

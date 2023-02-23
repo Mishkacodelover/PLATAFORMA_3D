@@ -1,7 +1,7 @@
 import HandleUserView from "./HandleUserView";
 import { useState, useEffect } from "react";
 
-export default function HandleUser() {
+export default function HandleUser({ values, handleChange }) {
   const [openEditUser, setOpenEditUser] = useState(false);
   const [allUser, setAllUser] = useState(null);
   const [value, setValue] = useState({ isDelete: false });
@@ -47,10 +47,11 @@ export default function HandleUser() {
         console.log(response);
         handleClose();
 
-        // const userEdited = await response.json();
-        // if (userEdited) {
-        //   setAllUser(userEdited);
-        // }
+        const editList = await response.json();
+        if (editList) {
+          setAllUser(editList);
+        }
+        setAllUser(null);
       } else {
         console.log("error al eliminar usuario");
       }
@@ -66,7 +67,6 @@ export default function HandleUser() {
       handleCloseEditUser={handleCloseEditUser}
       allUser={allUser}
       setAllUser={setAllUser}
-      value={value}
       deleteUser={deleteUser}
       userEditing={userEditing}
       setUserEditing={setUserEditing}

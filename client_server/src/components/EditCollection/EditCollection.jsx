@@ -10,7 +10,7 @@ const obj = {
   finishDate: dayjs("2022-04-07"),
 };
 
-export default function EditCollection({ id }) {
+export default function EditCollection({ id, handleCloseEditCollection }) {
   const [editCollection, setEditCollection] = useState(obj);
 
   function collectionEdited(event) {
@@ -20,13 +20,14 @@ export default function EditCollection({ id }) {
     });
   }
 
-  async function updateCollection(event, editCollection) {
+  async function updateCollection(event) {
     event.preventDefault();
     const newCollection = {
       ...editCollection,
-      initialDate: dayjs(editCollection.initalDate).format("YYYY/MM/DD"),
+      initialDate: dayjs(editCollection.initialDate).format("YYYY/MM/DD"),
       finishDate: dayjs(editCollection.finishDate).format("YYYY/MM/DD"),
     };
+
     const response = await fetch(`http://localhost:8000/collections/${id}`, {
       method: "PATCH",
       headers: {
@@ -37,6 +38,7 @@ export default function EditCollection({ id }) {
     try {
       if (response.ok) {
         setEditCollection(obj);
+        handleCloseEditCollection();
         console.log(response);
         //  const collectionEdited = await response.json();
         // if (collectionEdited) {

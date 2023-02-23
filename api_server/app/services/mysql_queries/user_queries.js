@@ -61,7 +61,7 @@ userQueries.getLastFourUsers = async () => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM user order by tsCreated desc limit 4",
+      "SELECT * FROM user where role != 1 order by tsCreated desc limit 4",
       [],
       "select",
       conn
@@ -78,7 +78,7 @@ userQueries.getAllActiveUsers = async () => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM user where isDelete = false",
+      "SELECT * FROM user where isDelete = 0 and role != 1",
       [],
       "select",
       conn

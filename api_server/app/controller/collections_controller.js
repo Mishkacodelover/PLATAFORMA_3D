@@ -17,10 +17,7 @@ controller.addCollections = async (req, res) => {
       return res.status(409).send("esta colección ya existe");
 
     const addCollection = await dao.addCollection(req.body);
-    if (addCollection)
-      return res.send(
-        `Colección ${collectionName} con id: ${addCollection} registrada`
-      );
+    if (addCollection) return res.send(addCollection[0]);
   } catch (e) {
     console.log(e.message);
   }
@@ -63,6 +60,17 @@ controller.updateCollection = async (req, res) => {
     const data = await dao.getCollectionById(req.params.id);
 
     return res.send(data[0]);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+controller.logicDeleteCollection = async (req, res) => {
+  try {
+    await dao.logicDeleteCollection(req.params.id);
+    const collections = await dao.getAllCollections();
+
+    return res.send(users);
   } catch (e) {
     console.log(e.message);
   }

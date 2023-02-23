@@ -20,6 +20,7 @@ export default function CollectionView({
   openEditCollection,
   handleCloseEditCollection,
   handleOpenEditCollection,
+  setCollection,
 }) {
   return (
     <>
@@ -37,71 +38,66 @@ export default function CollectionView({
           <InternalHeader text="Mis Colecciones" />
 
           {collection ? (
-            collection.map(
-              ({
-                collectionName,
-                collectionType,
-                initialDate,
-                finishDate,
-                id,
-              }) => (
-                <Grid
-                  container
-                  direction="row"
-                  alignItems={"center"}
-                  sx={{ border: "1px solid black", p: "16px" }}
-                >
-                  <Grid item md={11} container direction="row">
-                    <Grid item md={6}>
-                      <Typography>
-                        Nombre de la colección: {collectionName}
-                      </Typography>
-                    </Grid>
-                    <Grid item md={6}>
-                      <Typography>
-                        Tipo de colección: {collectionType}
-                      </Typography>
-                    </Grid>
-
-                    <Grid item md={6}>
-                      <Typography>
-                        Fecha de inicio de la colección:{" "}
-                        {dayjs(initialDate).format("DD/MM/YYYY")}
-                      </Typography>
-                    </Grid>
-                    <Grid item md={6}>
-                      <Typography>
-                        Fecha de fin de la colección:{" "}
-                        {dayjs(finishDate).format("DD/MM/YYYY")}
-                      </Typography>
-                    </Grid>
+            collection.map((col) => (
+              <Grid
+                container
+                direction="row"
+                alignItems={"center"}
+                sx={{ border: "1px solid black", p: "16px" }}
+              >
+                <Grid item md={11} container direction="row">
+                  <Grid item md={6}>
+                    <Typography>
+                      Nombre de la colección: {col.collectionName}
+                    </Typography>
                   </Grid>
-                  <Grid item md={1}>
-                    <Button size="small" onClick={handleOpenEditCollection}>
-                      Editar
-                    </Button>
-                    <Modal
-                      aria-labelledby="open-edirUser-form"
-                      aria-describedby="open-editUser-form"
-                      open={openEditCollection}
-                      onClose={handleCloseEditCollection}
-                      closeAfterTransition
-                      slots={Backdrop}
-                      slotsProps={{
-                        timeout: 500,
-                      }}
-                    >
-                      <Fade in={openEditCollection}>
-                        <Box sx={style}>
-                          <EditCollection id={id} />
-                        </Box>
-                      </Fade>
-                    </Modal>
-                    <Button size="small">Eliminar</Button>
+                  <Grid item md={6}>
+                    <Typography>
+                      Tipo de colección: {col.collectionType}
+                    </Typography>
+                  </Grid>
+
+                  <Grid item md={6}>
+                    <Typography>
+                      Fecha de inicio de la colección:{" "}
+                      {dayjs(col.initialDate).format("DD/MM/YYYY")}
+                    </Typography>
+                  </Grid>
+                  <Grid item md={6}>
+                    <Typography>
+                      Fecha de fin de la colección:{" "}
+                      {dayjs(col.finishDate).format("DD/MM/YYYY")}
+                    </Typography>
                   </Grid>
                 </Grid>
-              )
-            )
+                <Grid item md={1}>
+                  <Button size="small" onClick={handleOpenEditCollection}>
+                    Editar
+                  </Button>
+                  <Modal
+                    aria-labelledby="open-edirUser-form"
+                    aria-describedby="open-editUser-form"
+                    open={openEditCollection}
+                    onClose={handleCloseEditCollection}
+                    closeAfterTransition
+                    slots={Backdrop}
+                    slotsProps={{
+                      timeout: 500,
+                    }}
+                  >
+                    <Fade in={openEditCollection}>
+                      <Box sx={style}>
+                        <EditCollection
+                          id={col.id}
+                          handleCloseEditCollection={handleCloseEditCollection}
+                        />
+                      </Box>
+                    </Fade>
+                  </Modal>
+                  <Button size="small">Eliminar</Button>
+                </Grid>
+              </Grid>
+            ))
           ) : (
             <Grid item md={6}>
               <Typography>Todavía no tienes colecciones de ropa</Typography>
@@ -112,7 +108,10 @@ export default function CollectionView({
           </Grid>
           {createCollection && (
             <Grid item>
-              <CreateCollection />
+              <CreateCollection
+                collection={collection}
+                setCollection={setCollection}
+              />
             </Grid>
           )}
         </Grid>

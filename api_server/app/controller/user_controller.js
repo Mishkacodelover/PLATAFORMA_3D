@@ -17,8 +17,7 @@ controller.addUser = async (req, res) => {
     if (user.length > 0) return res.status(409).send("usuario ya registrado");
 
     const addUser = await dao.addUser(req.body);
-    if (addUser)
-      return res.send(`Usuario ${email} con id: ${addUser} registrado`);
+    if (addUser) return res.send(addUser[0]);
   } catch (e) {
     console.log(e.message);
   }
@@ -37,8 +36,7 @@ controller.addInvitedUser = async (req, res) => {
     if (user.length > 0) return res.status(409).send("usuario ya registrado");
 
     const addUser = await dao.addInvitedUser(req.body);
-    if (addUser)
-      return res.send(`Usuario ${email} con id: ${addUser} registrado`);
+    if (addUser) return res.send(addUser[0]);
   } catch (e) {
     console.log(e.message);
   }
@@ -66,6 +64,7 @@ controller.loginUser = async (req, res) => {
       id: user.id,
       email: user.email,
       role: user.role,
+      name: user.name,
     });
     const encoder = new TextEncoder();
 
@@ -188,9 +187,9 @@ controller.deleteUser = async (req, res) => {
 controller.logicDeleteUser = async (req, res) => {
   try {
     await dao.deleteUser(req.params.id);
-    const user = await getUserById(req.params.id);
+    const users = await dao.getAllActiveUsers();
 
-    return res.send(user[0]);
+    return res.send(users);
   } catch (e) {
     console.log(e.message);
   }
