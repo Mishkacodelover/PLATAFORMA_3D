@@ -69,7 +69,6 @@ export default function InviteMember({
 
           <Grid item xs={8} md={12}>
             <TextField
-              fullWidth
               type="password"
               label="Contraseña"
               name="password"
