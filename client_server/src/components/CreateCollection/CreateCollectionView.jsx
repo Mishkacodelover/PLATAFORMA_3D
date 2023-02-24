@@ -15,7 +15,7 @@ export default function CreateCollectionView({
   return (
     <>
       <Box>
-        <Grid container direction="row" spacing={2} alignItems="center">
+        <Grid alignItems="center" sx={{ maxWidth: "100%" }}>
           <form onSubmit={(event) => addCollectionData(event, addCollection)}>
             <Grid item md={12}>
               <TextField
@@ -48,8 +48,8 @@ export default function CreateCollectionView({
             <Grid item md={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  openTo="year"
-                  views={["year", "month", "day"]}
+                  openTo="day"
+                  views={["day"]}
                   label="Fecha de inicio"
                   name="initialDate"
                   value={addCollection.initialDate}
@@ -72,8 +72,8 @@ export default function CreateCollectionView({
             <Grid item md={12}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  openTo="year"
-                  views={["year", "month", "day"]}
+                  openTo="day"
+                  views={["day"]}
                   label="Fecha de fin"
                   value={addCollection.finishDate}
                   name="finishDate"

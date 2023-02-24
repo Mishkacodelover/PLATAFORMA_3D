@@ -6,8 +6,8 @@ import dayjs from "dayjs";
 const obj = {
   collectionName: "",
   collectionType: "",
-  initialDate: dayjs("2022-04-07"),
-  finishDate: dayjs("2022-04-07"),
+  initialDate: dayjs("DD/MM/YYYY"),
+  finishDate: dayjs("DD/MM/YYYY"),
 };
 
 export default function CreateCollection({ collection, setCollection }) {

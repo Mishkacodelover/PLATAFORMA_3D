@@ -73,15 +73,18 @@ export default function AdminDashboard() {
     });
   }
 
-  async function updateUser(event, user) {
+  async function updateUser(event, userEditing) {
     event.preventDefault();
-    const response = await fetch(`http://localhost:8000/user/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+    const response = await fetch(
+      `http://localhost:8000/user/${userEditing.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userEditing),
+      }
+    );
     try {
       if (response.ok) {
         handleCloseEditUser();
@@ -90,7 +93,7 @@ export default function AdminDashboard() {
         if (editList) {
           setAllUser(editList);
           const userIndexToUpdate = allUser.findIndex(
-            (userToEdit) => userToEdit.id === user.id
+            (userToEdit) => userToEdit.id === userEditing.id
           );
           const newUserList = [...allUser];
           newUserList[userIndexToUpdate] = editList;
