@@ -14,6 +14,17 @@ export default function AdminDashboardView({
   errors,
   isSubmitting,
   handleSubmit,
+  allUser,
+  deleteUser,
+  handleOpenEditUser,
+  handleCloseEditUser,
+  handleInputData,
+  handleClickOpen,
+  handleClose,
+  open,
+  openEditUser,
+  userEditing,
+  updateUser,
 }) {
   return (
     <Box>
@@ -41,7 +52,19 @@ export default function AdminDashboardView({
             />
           </Grid>
           <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
-            <HandleUser values={values} handleChange={handleChange} />
+            <HandleUser
+              allUser={allUser}
+              deleteUser={deleteUser}
+              handleOpenEditUser={handleOpenEditUser}
+              handleCloseEditUser={handleCloseEditUser}
+              handleClose={handleClose}
+              handleClickOpen={handleClickOpen}
+              handleInputData={handleInputData}
+              open={open}
+              openEditUser={openEditUser}
+              updateUser={updateUser}
+              userEditing={userEditing}
+            />
           </Grid>
         </Grid>
       </Grid>

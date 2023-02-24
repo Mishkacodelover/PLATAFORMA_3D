@@ -50,18 +50,24 @@ export default function FiscalDataView({
               </ListItemButton>
             </ListItem>
             {companyName && (
-              <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                <TextField
-                  size="small"
-                  label="nombre de la empresa"
-                  name="companyName"
-                  value={inputData.companyName}
-                  onChange={handleInputData}
-                />
-                <IconButton type="submit">
-                  <SendIcon />
-                </IconButton>
-              </form>
+              <ListItem>
+                <form onSubmit={(event) => updateFiscalData(event, inputData)}>
+                  <Grid container>
+                    <TextField
+                      size="small"
+                      label="Nombre de la empresa"
+                      name="companyName"
+                      value={inputData.companyName}
+                      onChange={handleInputData}
+                    />
+                    <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                      <Button size="small" type="submit">
+                        Cambiar
+                      </Button>
+                    </ListItemButton>
+                  </Grid>
+                </form>
+              </ListItem>
             )}
             <ListItem>
               <ListItemText
@@ -75,18 +81,24 @@ export default function FiscalDataView({
             </ListItem>
 
             {vatNumber && (
-              <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                <TextField
-                  size="small"
-                  label="CIF/NIF de la empresa"
-                  name="vatNumber"
-                  value={inputData.vatNumber}
-                  onChange={handleInputData}
-                />
-                <IconButton type="submit">
-                  <SendIcon />
-                </IconButton>
-              </form>
+              <ListItem>
+                <form onSubmit={(event) => updateFiscalData(event, inputData)}>
+                  <Grid container>
+                    <TextField
+                      size="small"
+                      label="CIF/NIF de la empresa"
+                      name="vatNumber"
+                      value={inputData.vatNumber}
+                      onChange={handleInputData}
+                    />
+                    <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                      <Button size="small" type="submit">
+                        Cambiar
+                      </Button>
+                    </ListItemButton>
+                  </Grid>
+                </form>
+              </ListItem>
             )}
             <ListItem>
               <ListItemText
@@ -99,18 +111,24 @@ export default function FiscalDataView({
               </ListItemButton>
             </ListItem>
             {fiscalAdress && (
-              <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                <TextField
-                  size="small"
-                  label="Dirección fiscal"
-                  name="fiscalAdress"
-                  value={inputData.fiscalAdress}
-                  onChange={handleInputData}
-                />
-                <IconButton type="submit">
-                  <SendIcon />
-                </IconButton>
-              </form>
+              <ListItem>
+                <form onSubmit={(event) => updateFiscalData(event, inputData)}>
+                  <Grid container>
+                    <TextField
+                      size="small"
+                      label="Dirección fiscal"
+                      name="fiscalAdress"
+                      value={inputData.fiscalAdress}
+                      onChange={handleInputData}
+                    />
+                    <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                      <Button size="small" type="submit">
+                        Cambiar
+                      </Button>
+                    </ListItemButton>
+                  </Grid>
+                </form>
+              </ListItem>
             )}
             <ListItem>
               <ListItemText primary={`Suscripción:  ${fiscalData.name}`} />
@@ -122,42 +140,47 @@ export default function FiscalDataView({
               </ListItemButton>
             </ListItem>
             {suscription && (
-              <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                <TextField
-                  select
-                  size="small"
-                  name="suscription"
-                  variant="standard"
-                  value={inputData.suscription}
-                  onChange={handleInputData}
-                >
-                  {suscriptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <IconButton type="submit">
-                  <SendIcon />
-                </IconButton>
-              </form>
+              <ListItem>
+                <form onSubmit={(event) => updateFiscalData(event, inputData)}>
+                  <Grid container>
+                    <TextField
+                      select
+                      size="small"
+                      name="suscription"
+                      variant="standard"
+                      value={inputData.suscription}
+                      onChange={handleInputData}
+                    >
+                      {suscriptions.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    <ListItemButton sx={{ justifyContent: "flex-end" }}>
+                      <Button size="small" type="submit">
+                        Cambiar
+                      </Button>
+                    </ListItemButton>
+                  </Grid>
+                </form>
+              </ListItem>
             )}
           </List>
         ) : (
           <>
             {
               <Grid
-                container
-                direction="column"
-                spacing={2}
                 alignItems="center"
                 justifyContent={"left"}
+                maxWidth="100%"
+                sx={{ justifyContent: "space-between" }}
               >
-                <Typography>
+                <Typography sx={{ paddingBottom: "16px" }}>
                   Aún no has registrado tus datos fiscales
                 </Typography>
                 <form onSubmit={(event) => addFiscalData(event, inputData)}>
-                  <Grid item md={10}>
+                  <Grid item md={12}>
                     <TextField
                       fullWidth
                       variant="standard"
@@ -167,7 +190,7 @@ export default function FiscalDataView({
                       onChange={handleInputData}
                     />
                   </Grid>
-                  <Grid item md={10}>
+                  <Grid item md={12}>
                     <TextField
                       fullWidth
                       variant="standard"
@@ -177,7 +200,7 @@ export default function FiscalDataView({
                       onChange={handleInputData}
                     />
                   </Grid>
-                  <Grid item md={10}>
+                  <Grid item md={12}>
                     <TextField
                       fullWidth
                       variant="standard"
@@ -187,7 +210,7 @@ export default function FiscalDataView({
                       onChange={handleInputData}
                     />
                   </Grid>
-                  <Grid item md={10}>
+                  <Grid item md={12}>
                     <TextField
                       select
                       label="Suscripción"
@@ -206,7 +229,7 @@ export default function FiscalDataView({
                       ))}
                     </TextField>
                   </Grid>
-                  <Grid item md={10}>
+                  <Grid item md={12} sx={{ paddingTop: "16px" }}>
                     <Button type="submit" fullWidth>
                       Registrar datos
                     </Button>

@@ -11,7 +11,7 @@ export default function SearchView({
   return (
     <Paper
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 460 }}
     >
       <IconButton sx={{ p: "10px" }} aria-label="menu">
         <PersonIcon />

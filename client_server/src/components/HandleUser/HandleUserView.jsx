@@ -28,17 +28,17 @@ import EditUser from "../EditUsers";
 import { style } from "../../const/modalStyle";
 
 export default function HandleUserView({
-  openEditUser,
+  allUser,
+  deleteUser,
   handleOpenEditUser,
   handleCloseEditUser,
-  allUser,
-  setAllUser,
-  deleteUser,
+  handleInputData,
   handleClickOpen,
   handleClose,
   open,
-  setUserEditing,
+  openEditUser,
   userEditing,
+  updateUser,
 }) {
   return (
     <>
@@ -48,18 +48,18 @@ export default function HandleUserView({
           direction="column"
           alignItems={"flex-start"}
           spacing={2}
-          maxWidth="100%"
+          width="100%"
         >
           <Grid item md={12}>
             <Typography sx={{ textTransform: "uppercase", fontSize: "14px" }}>
               Mis Usuarios
             </Typography>
           </Grid>
-          <Grid item md={12} sx={{ paddingBottom: "24px" }}>
+          <Grid item md={12} sx={{ paddingBottom: "24px", width: "100%" }}>
             <Search />
           </Grid>
 
-          <List sx={{ maxHeight: "216px", overflow: "auto" }}>
+          <List sx={{ maxHeight: "216px", overflow: "auto", width: "100%" }}>
             {allUser ? (
               allUser.map((user) => (
                 <ListItem key={user.id}>
@@ -91,11 +91,9 @@ export default function HandleUserView({
                     <Fade in={openEditUser}>
                       <Box sx={style}>
                         <EditUser
-                          allUser={allUser}
-                          setAllUser={setAllUser}
-                          setUserEditing={setUserEditing}
+                          handleInputData={handleInputData}
+                          updateUser={updateUser}
                           user={userEditing}
-                          handleCloseEditUser={handleCloseEditUser}
                         />
                       </Box>
                     </Fade>
