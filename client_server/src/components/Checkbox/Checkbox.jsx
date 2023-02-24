@@ -2,7 +2,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { FormControlLabel } from "@mui/material";
 
-export default function ControlledCheckbox() {
+export default function ControlledCheckbox({ text }) {
   const [checked, setChecked] = useState(true);
 
   const handleChange = (event) => {
@@ -19,7 +19,7 @@ export default function ControlledCheckbox() {
             inputProps={{ "aria-label": "controlled" }}
           />
         }
-        label="Acepto las políticas de privacidad"
+        label={text}
       />
     </>
   );

@@ -12,16 +12,24 @@ export default function SocialMedia() {
     <>
       <Grid container>
         <Link href="https://www.linkedin.com" target="_blank" underline="none">
-          <LinkedInIcon color="var(--blanco)" fontSize="large" />
+          <LinkedInIcon
+            sx={{ color: "common.white", fontSize: "40px", p: "8px" }}
+          />
         </Link>
         <Link href="https://www.facebook.com" target="_blank" underline="none">
-          <FacebookIcon color="white" fontSize="large" />
+          <FacebookIcon
+            sx={{ color: "common.white", fontSize: "40px", p: "8px" }}
+          />
         </Link>
         <Link href="https://www.youtube.com" target="_blank" underline="none">
-          <YouTubeIcon color="white" fontSize="large" />
+          <YouTubeIcon
+            sx={{ color: "common.white", fontSize: "40px", p: "8px" }}
+          />
         </Link>
         <Link href="https://instagram.com" target="_blank" underline="none">
-          <InstagramIcon color="white" fontSize="large" />
+          <InstagramIcon
+            sx={{ color: "common.white", fontSize: "40px", p: "8px" }}
+          />
         </Link>
       </Grid>
     </>

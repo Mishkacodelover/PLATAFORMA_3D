@@ -1,38 +1,41 @@
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 
-// import Maniqui from "../../assets/images/maniquiclaro.jpg";
-// import LoginBlack from "../../assets/images/negroclarologin.jpg";
-
-import LoginWhite from "../../assets/images/dibujoBlancoyNegroclaro.jpg";
+import LoginWhite from "../../assets/images/otros/landing_foto.png";
 import LoginForm from "../../components/LoginForm";
 
 export default function LoginView() {
   return (
     <>
-      <Box maxWidth="100%">
-        <Box
+      <Box
+        sx={{
+          maxWidth: "100%",
+          maxHeight: "100%",
+          minHeight: "560px",
+          backgroundImage: `url(${LoginWhite})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <Grid
+          container
+          direction="column"
+          spacing={2}
+          alignItems={"flex-start"}
           sx={{
-            width: "100%",
-            maxHeight: "100%",
-            minHeight: "560px",
-            backgroundImage: `url(${LoginWhite})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            paddingTop: "84px",
+            maxWidth: "100%",
+            paddingLeft: "100px",
           }}
         >
-          <Grid
-            container
-            direction="column"
-            alignItems={"flex-start"}
-            sx={{
-              paddingTop: "184px",
-              width: "100%",
-              paddingLeft: "144px",
-            }}
-          >
+          <Grid item md={12}>
+            <Typography variant="h1" sx={{ color: "secondary.dark" }}>
+              Te da la bienvenida...
+            </Typography>
+          </Grid>
+          <Grid item md={12}>
             <LoginForm />
           </Grid>
-        </Box>
+        </Grid>
       </Box>
     </>
   );

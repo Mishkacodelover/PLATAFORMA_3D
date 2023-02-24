@@ -4,11 +4,14 @@ body {
 }
 
 :root {
-  --primario: hsl(184, 84%, 28%);
-  --primario_oscuro: hsl(184, 91%, 19%);
-  --primario_claro: hsl(184, 90%, 50%);
-  --negro_claro: hsl(184, 96%, 6%);
-  --negro: hsl(184, 96%, 3%);
-  --blanco: hsl(184, 3%, 94%);
+  --primario: hsl(284, 100%, 41%);
+  --primario_oscuro: hsl(267, 100%, 49%);
+  --primario_claro: hsl(284, 24%, 68%);
+
+  --negro: hsl(266, 94%, 4%);
+  --blanco: hsl(284, 0%, 91%);
   --error: hsl(348, 84%, 28%);
+  --azul: hsl(206, 100%, 43%);
+  --azul_oscuro: hsl(206, 94%, 34%);
+  ---azul_marino: hsl(206, 92%, 15%);
 }

@@ -114,7 +114,7 @@ export default function RegistrationForm() {
             />
           </Grid>
           <Grid item sx={12} md={12}>
-            <Checkbox />
+            <Checkbox text="Acepto las políticas de privacidad" />
           </Grid>
 
           <Grid item xs={10} md={12}>
