@@ -1,24 +1,10 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+
 import { Button, Grid } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import Link from "../Link/Link";
 import logo from "../../assets/images/otros/logometa.png";
-
-const pages = ["Producto", "Precios", "Sobre nosotros"];
-const settings = [
-  {
-    label: "Acceso a empresas",
-    path: "/login",
-  },
-  {
-    label: "Acceso a invitados",
-    path: "/login-invited",
-  },
-];
 
 export default function Header() {
   return (
@@ -26,7 +12,9 @@ export default function Header() {
       <AppBar position="static" sx={{ backgroundColor: "common.white" }}>
         <Grid container direction="row" alignItems={"center"}>
           <Grid item sx={{ justifyContent: "left", marginLeft: "24px" }} md={8}>
-            <img src={logo} alt="logo" width="440px" />
+            <Link to="/">
+              <img src={logo} alt="logo" width="440px" />
+            </Link>
           </Grid>
 
           <Grid item sx={{ justifyContent: "flex-end" }}>

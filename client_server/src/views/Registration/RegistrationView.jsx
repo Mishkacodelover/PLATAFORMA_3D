@@ -1,9 +1,7 @@
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
-// import Maniqui from "../../assets/images/maniquiclaro.jpg";
-// import LoginBlack from "../../assets/images/negroclarologin.jpg";
-import LoginWhite from "../../assets/images/dibujoBlancoyNegroclaro.jpg";
-import { Grid, Box } from "@mui/material";
+import LoginWhite from "../../assets/images/otros/landing_foto.png";
+import { Grid, Box, Typography } from "@mui/material";
 
 export default function RegistrationView() {
   return (
@@ -25,11 +23,21 @@ export default function RegistrationView() {
           direction="column"
           alignItems={"flex-start"}
           sx={{
-            paddingTop: "136px",
+            paddingTop: "68px",
             width: "100%",
             paddingLeft: "126px",
           }}
         >
+          <Typography
+            variant="h5"
+            sx={{
+              color: "common.black",
+              textAlign: "center",
+              paddingBottom: "68px",
+            }}
+          >
+            Suscripción plan Basic de nuestra platafomra gratis durante 7 días
+          </Typography>
           <RegistrationForm />
         </Grid>
       </Box>

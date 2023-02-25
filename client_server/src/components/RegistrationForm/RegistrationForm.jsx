@@ -46,7 +46,7 @@ export default function RegistrationForm() {
     <>
       <form onSubmit={handleSubmit} autoComplete="off">
         <Grid container direciont="column" spacing={2} maxWidth={"100%"}>
-          <Grid item xs={10} md={6}>
+          <Grid item xs={12} md={6}>
             <TextField
               type="text"
               label="Nombre"
@@ -59,7 +59,7 @@ export default function RegistrationForm() {
               helperText={errors.name}
             />
           </Grid>
-          <Grid item xs={10} md={6}>
+          <Grid item xs={12} md={6}>
             <TextField
               type="text"
               label="Apellidos"
@@ -73,7 +73,7 @@ export default function RegistrationForm() {
             />
           </Grid>
 
-          <Grid item xs={10} md={6}>
+          <Grid item xs={12} md={6}>
             <TextField
               type="password"
               label="Contraseña"
@@ -87,7 +87,7 @@ export default function RegistrationForm() {
             />
           </Grid>
 
-          <Grid item xs={10} md={6}>
+          <Grid item xs={12} md={6}>
             <TextField
               type="password"
               label="Confirma tu contraseña"
@@ -100,7 +100,7 @@ export default function RegistrationForm() {
               helperText={errors.confirmPassword}
             />
           </Grid>
-          <Grid item xs={10} md={12}>
+          <Grid item xs={12} md={12}>
             <TextField
               type="email"
               label="Email"
@@ -113,20 +113,19 @@ export default function RegistrationForm() {
               helperText={errors.email}
             />
           </Grid>
-          <Grid item sx={12} md={12}>
+          <Grid item sx={9} md={12}>
             <Checkbox text="Acepto las políticas de privacidad" />
           </Grid>
 
-          <Grid item xs={10} md={12}>
+          <Grid item xs={12} md={12}>
             <Button
               disabled={isSubmitting}
               fullWidth
               type="submit"
               variant="contained"
               sx={{
-                backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
-                // backgroundColor: "primary.main",
-                color: "var(--blanco)",
+                backgroundColor: "primary.dark",
+                color: "common.white",
                 p: "16px 24px",
               }}
             >

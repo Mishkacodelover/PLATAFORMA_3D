@@ -9,7 +9,7 @@ export default function Footer() {
       maxWidth="100%"
       sx={{
         backgroundImage: "linear-gradient(var(--primario),var(--azul))",
-        height: "164px",
+        minHeight: { md: "188px", xs: "100%" },
       }}
     >
       <Grid container direction={"column"}>
@@ -19,7 +19,7 @@ export default function Footer() {
           item
           sx={{
             paddingTop: "32px",
-            paddingBottom: "32px",
+            paddingBottom: "36px",
             alignItems: "center",
             justifyContent: "space-evenly",
           }}
@@ -51,8 +51,10 @@ export default function Footer() {
           </Grid>
         </Grid>
         <Grid container direction={"row"} sx={{ textAlign: "center" }}>
-          <Grid item md={12}>
-            <Typography>2023 All Rights reserved</Typography>
+          <Grid item md={12} xs={10}>
+            <Typography textAlign={"center"}>
+              2023 All Rights reserved
+            </Typography>
           </Grid>
         </Grid>
       </Grid>

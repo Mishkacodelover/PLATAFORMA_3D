@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { LoginInvitedSchema } from "./LoginInvitedSchema";
 import { initialValues } from "./utils/inicialValues";
 import { TextField, Button, Grid, Typography } from "@mui/material";
+import Checkbox from "../Checkbox/Checkbox";
 
 import Link from "../Link/Link";
 import { useAuthContext } from "../../contexts/AuthContext";
@@ -60,21 +61,31 @@ export default function LoginFormInvitedView() {
               type="submit"
               variant="contained"
               sx={{
-                backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
-                // backgroundColor: "primary.main",
-                color: "var(--blanco)",
-                p: "16px 24px",
+                backgroundColor: "primary.dark",
+                color: "common.white",
+
+                marginTop: "24px",
+                p: "8px 24px",
               }}
             >
               Iniciar sesión
             </Button>
           </Grid>
+          <Grid
+            item
+            sx={10}
+            md={12}
+            container
+            direction="row"
+            alignItems={"center"}
+          >
+            <Checkbox text="Recuérdame" />
+            <Link to="">
+              <Typography>¿Has olvidado tu contraseña?</Typography>
+            </Link>
+          </Grid>
         </Grid>
       </form>
-      <Typography>¿No estás registrado?</Typography>
-      <Link to="/registration">
-        <Typography>Crear cuenta</Typography>
-      </Link>
     </>
   );
 }
