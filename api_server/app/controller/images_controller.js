@@ -28,7 +28,7 @@ controller.uploadResource = async (req, res) => {
       });
     });
 
-    return res.send("Imagen subida!");
+    return res.send(images[0]);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);
@@ -57,8 +57,7 @@ controller.uploadAvatar = async (req, res) => {
         userCreated: req.body.userCreated,
       });
     });
-
-    return res.send("Imagen subida!");
+    return res.send(images[0]);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);

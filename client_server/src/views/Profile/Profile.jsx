@@ -27,11 +27,9 @@ export default function Profile() {
       );
 
       if (response.ok) {
-        onFileChange(e);
         const newAvatar = await response.json();
-        if (newAvatar) {
-          setAvatar(newAvatar);
-        }
+        const name = newAvatar.find((item) => item.name === avatar.name);
+        setAvatar(name);
       } else {
         console.log("error en el registro");
       }

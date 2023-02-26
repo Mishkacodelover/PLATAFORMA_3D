@@ -27,9 +27,15 @@ export default function GraficResources() {
 
       if (response.ok) {
         setAlert(true);
-        const newImage = await response.json();
-        if (newImage) {
-          setResource(newImage);
+        const editList = await response.json();
+        if (editList) {
+          setResource(editList);
+          const userIndexToUpdate = resource.findIndex(
+            (userToEdit) => userToEdit.id === resource.id
+          );
+          const newUserList = [...resource];
+          newUserList[userIndexToUpdate] = editList;
+          setResource(newUserList);
         }
       } else {
         console.log("error en el registro");
