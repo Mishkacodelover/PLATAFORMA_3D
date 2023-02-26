@@ -1,49 +1,91 @@
 import * as React from "react";
 
-import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  InputBase,
+  Typography,
+  Avatar,
+} from "@mui/material";
 
-export default function ProfileImageView({ onFileChange, uploadImage }) {
+export default function ProfileImageView({
+  onFileChange,
+  uploadImage,
+  avatar,
+}) {
   return (
     <Box sx={{ p: "24px" }}>
       <Grid
         container
-        direction="column"
         alignItems={"center"}
-        spacing={6}
         justifyContent="center"
+        sx={{ paddingTop: "34px" }}
       >
         <Grid
-          item
           container
+          directin="row"
           alignItems={"center"}
-          justifyContent="center"
-          spacing={2}
+          sx={{
+            p: "16px",
+            backgroundColor: "primary.main",
+          }}
         >
+          <Typography color="common.white" variant="h6">
+            Elige una foto de perfil
+          </Typography>
+          <PhotoCamera
+            sx={{ fontSize: "24px", color: "common.white", marginLeft: "16px" }}
+          />
           <Grid item>
-            <Typography>Sube tu foto o elige un avatar</Typography>
-          </Grid>
-          <Grid item>
-            <PhotoCamera color="primary" />
+            {avatar ? (
+              <Avatar sx={{ marginLeft: "24px" }}>
+                <img
+                  src={`http://localhost:8000/${avatar.path}`}
+                  alt={avatar.name}
+                  width="40px"
+                />
+              </Avatar>
+            ) : (
+              <Avatar sx={{ marginLeft: "24px" }}>
+                <PersonOutlineIcon
+                  sx={{ color: "common.white", fontSize: "24px" }}
+                />
+              </Avatar>
+            )}
           </Grid>
         </Grid>
-        <Grid item>
-          <Button variant="contained" component="label">
-            Elige una foto
-          </Button>
+        <Box
+          sx={{
+            padding: "18px 16px 16px 16px",
+            backgroundColor: "primary.main",
+          }}
+        >
           <form onSubmit={uploadImage}>
-            <input
+            <InputBase
               accept="image/*"
               multiple
               type="file"
               value={undefined}
               onChange={onFileChange}
+              sx={{
+                backgroundColor: "primary.main",
+                color: "common.white",
+                borderRadius: "4px",
+              }}
             />
-            <button type="submit">subir</button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ backgroundColor: "secondary.light", marginTop: "16px" }}
+            >
+              Subir imagen
+            </Button>
           </form>
-        </Grid>
+        </Box>
       </Grid>
     </Box>
   );

@@ -11,21 +11,42 @@ import { Avatar } from "@mui/material";
 
 import LogoutIcon from "@mui/icons-material/Logout";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import { grey } from "@mui/material/colors";
+
 import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function SideBar() {
   const { logout, authorization } = useAuthContext();
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
+
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
+
   return (
-    <Paper sx={{ maxWidth: "1000%", height: "100%" }}>
+    <Paper
+      variant="outlined"
+      square={true}
+      sx={{
+        maxWidth: "100%",
+        height: "100%",
+        backgroundImage:
+          "radial-gradient(var(--primario_oscuro),var(--primario))",
+
+        // backgroundColor: "primary.main"
+      }}
+    >
       <MenuList>
         {navigate.map((page) => (
           <Link to={page.path} key={page.value}>
             <MenuItem sx={{ height: "88px" }}>
               <ListItemIcon sx={{ paddingRight: "16px" }}>
-                <Avatar sx={{ bgcolor: grey[800] }}>{page.icon}</Avatar>
+                <Avatar sx={{ bgcolor: "primary.main" }}>{page.icon}</Avatar>
               </ListItemIcon>
-              <Typography variant="inherit" color="black">
+              <Typography variant="h6" color="common.white">
                 {page.value}
               </Typography>
             </MenuItem>
@@ -35,11 +56,15 @@ export default function SideBar() {
           <Link to="/u/admin">
             <MenuItem sx={{ height: "88px" }}>
               <ListItemIcon sx={{ paddingRight: "16px" }}>
-                <Avatar sx={{ bgcolor: grey[800] }}>
-                  <AdminPanelSettingsIcon />
+                <Avatar sx={{ bgcolor: "primary.main" }}>
+                  <AdminPanelSettingsIcon
+                    sx={{ fontSize: "24px", color: "common.white" }}
+                  />
                 </Avatar>
               </ListItemIcon>
-              <Typography variant="inherit">Panel de administrador</Typography>
+              <Typography variant="h6" color="common.white">
+                Panel administrador
+              </Typography>
             </MenuItem>
           </Link>
         ) : (
@@ -48,13 +73,51 @@ export default function SideBar() {
 
         <MenuItem sx={{ height: "88px" }} onClick={logout}>
           <ListItemIcon sx={{ paddingRight: "16px" }}>
-            <Avatar sx={{ bgcolor: grey[800] }}>
-              <LogoutIcon />
+            <Avatar sx={{ bgcolor: "primary.main" }}>
+              <LogoutIcon sx={{ fontSize: "24px", color: "common.white" }} />
             </Avatar>
           </ListItemIcon>
-          <Typography variant="inherit">Cerrar sesión</Typography>
+          <Typography variant="h6" color="common.white">
+            Cerrar sesión
+          </Typography>
         </MenuItem>
       </MenuList>
+      {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box> */}
     </Paper>
   );
 }

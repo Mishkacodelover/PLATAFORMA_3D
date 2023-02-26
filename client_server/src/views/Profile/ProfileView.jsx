@@ -1,42 +1,40 @@
 import { Box, Grid } from "@mui/material";
 import UserData from "../../components/UserData";
-import CompleteData from "../../components/CompleteData";
 
-import ProfileAvatar from "../../components/ProfileAvatars/ProfileAvatar";
+import Welcome from "../../components/Welcome/Welcome";
 import ProfileImage from "../../components/ProfileImage";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
-import WhiteWomanImg from "../../assets/images/mujer_claro.jpg";
 
-export default function ProfileView() {
+import WelcomeVideo from "../../components/WelcomeVideo/WelcomeVideo";
+
+export default function ProfileView({ onFileChange, uploadImage, avatar }) {
   return (
-    <Box
-      sx={{
-        backgroundImage: `url(${WhiteWomanImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
         <InternalHeader />
         <Grid
           container
           sx={{
-            border: "1px solid black",
             maxWidth: "100%",
             maxHeight: "100%",
           }}
         >
-          <Grid item xs={10} md={7} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={7}>
+            <Welcome />
+          </Grid>
+          <Grid item xs={10} md={5}>
+            <WelcomeVideo />
+          </Grid>
+
+          <Grid item xs={10} md={7}>
             <UserData />
           </Grid>
-          <Grid item xs={10} md={5} sx={{ border: "1px solid black" }}>
-            <CompleteData />
-          </Grid>
-          <Grid item xs={10} md={7} sx={{ border: "1px solid black" }}>
-            <ProfileAvatar />
-          </Grid>
-          <Grid item xs={10} md={5} sx={{ border: "1px solid black" }}>
-            <ProfileImage />
+          <Grid item xs={10} md={5}>
+            <ProfileImage
+              onFileChange={onFileChange}
+              uploadImage={uploadImage}
+              avatar={avatar}
+            />
           </Grid>
         </Grid>
       </Grid>

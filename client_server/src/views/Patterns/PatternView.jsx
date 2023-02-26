@@ -1,62 +1,108 @@
-import { Box, Grid, Button } from "@mui/material";
+import { Box, Grid, Button, Typography, InputBase, Alert } from "@mui/material";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import imagenUno from "../../assets/images/vestidos/vestido_cinco.jpg";
-import imagenDos from "../../assets/images/vestidos/vestido_cuatro.jpg";
-import imagenTres from "../../assets/images/vestidos/vestido_seis.jpg";
-import imagenCuatro from "../../assets/images/vestidos/vestido_dos.jpg";
-import imagenCinco from "../../assets/images/vestidos/vestido_uno.jpg";
-import imagenSeis from "../../assets/images/vestidos/vestido_siete.jpg";
+import fotoMentira from "../../assets/images/otros/foto_mentira.jpeg";
+
 import "@splidejs/react-splide/css";
 
-export default function PatternView() {
+export default function PatternView({
+  pattern,
+  onFileChange,
+  uploadPattern,
+  alert,
+}) {
   return (
-    <Box>
-      <Grid>
+    <Box sx={{ p: "24px" }}>
+      <Grid container maxWidth={"100%"}>
         <InternalHeader text="Modelos 3d" />
+        {alert && <Alert severity="success">¡Patrón añadido con éxito!</Alert>}
 
         <Splide
           options={{
             rewind: true,
-            gap: "5rem",
+            gap: "1rem",
             perPage: 3,
-            maxWidth: "100%",
-            height: "426px",
+            width: "100%",
+            height: "432px",
           }}
           aria-label="My Favorite Images"
         >
-          <SplideSlide>
-            <img src={imagenUno} alt=" 1" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src={imagenDos} alt="2" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src={imagenTres} alt="3" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src={imagenCuatro} alt="4" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src={imagenCinco} alt="5" />
-          </SplideSlide>
-          <SplideSlide>
-            <img src={imagenSeis} alt="6" />
-          </SplideSlide>
+          {pattern ? (
+            pattern.map((item) => (
+              <SplideSlide key={item.id}>
+                <img
+                  src={`http://localhost:8000/${item.pathPattern}`}
+                  alt={item.patternName}
+                  width="328px"
+                />
+              </SplideSlide>
+            ))
+          ) : (
+            <>
+              <SplideSlide>
+                <img src={fotoMentira} alt=" 1" width="348px" />
+              </SplideSlide>
+              <SplideSlide>
+                <img src={fotoMentira} alt="2" width="348px" />
+              </SplideSlide>
+              <SplideSlide>
+                <img src={fotoMentira} alt="3" width="348px" />
+              </SplideSlide>
+            </>
+          )}
         </Splide>
 
         <Grid
-          item
+          container
+          maxWidth={"100%"}
+          direction={"row"}
+          spacing={2}
           sx={{
-            justifyContent: "center",
-            paddingTop: "24px",
-            alignItems: "center",
+            marginTop: "8px",
+            padding: "16px",
+            alignContent: "center",
           }}
         >
-          <Button variant="contained" component="label">
-            Añadir recurso gráfico
-            <input hidden accept="image/*" multiple type="file" />
-          </Button>
+          <Grid item md={5} xs={12}>
+            <Typography
+              color="secondary.dark"
+              variant="h6"
+              textAlign={"center"}
+            >
+              Sube los patrones de diseño 3d que necesites
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            md={7}
+            xs={12}
+            sx={{
+              paddingBottom: "16px",
+              backgroundImage:
+                "radial-gradient(var(--primario_oscuro),var(--primario))",
+            }}
+          >
+            <form onSubmit={uploadPattern}>
+              <InputBase
+                accept="image/*"
+                multiple
+                type="file"
+                value={undefined}
+                onChange={onFileChange}
+                sx={{
+                  color: "common.white",
+                  borderRadius: "4px",
+                }}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ backgroundColor: "secondary.light" }}
+              >
+                Añadir recurso gráfico
+              </Button>
+            </form>
+          </Grid>
         </Grid>
       </Grid>
     </Box>

@@ -5,7 +5,7 @@ const __dirname = currentDir().__dirname;
 
 const controller = {};
 
-controller.uploadImage = async (req, res) => {
+controller.uploadResource = async (req, res) => {
   try {
     if (req.files === null) return;
     console.log(req.files);
@@ -21,7 +21,7 @@ controller.uploadImage = async (req, res) => {
       image.mv(uploadPath, (err) => {
         if (err) return res.status(500).send(err);
       });
-      await dao.addImage({
+      await dao.addResource({
         name: image.name,
         path: BBDDPath,
         userCreated: req.body.userCreated,
@@ -80,20 +80,21 @@ controller.getImage = async (req, res) => {
 
 controller.getAvatarByUserId = async (req, res) => {
   try {
-    const image = await dao.getAvatarByUserId(req.params.id);
+    const avatar = await dao.getAvatarByUserId(req.params.id);
 
-    if (image.length <= 0) return res.status(404).send("La imagen no existe");
+    if (avatar.length <= 0)
+      return res.status(404).send("El avatar del usuario no existe");
 
-    return res.sendFile(image[0].path, { root: __dirname });
+    return res.send(avatar[0]);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);
   }
 };
 
-controller.getAllImages = async (req, res) => {
+controller.getAllResources = async (req, res) => {
   try {
-    const resources = await dao.getAllImages();
+    const resources = await dao.getAllResources(req.params.id);
 
     if (resources.length <= 0)
       return res.status(404).send("No existen recursos gráficos");

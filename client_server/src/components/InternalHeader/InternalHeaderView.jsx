@@ -1,5 +1,6 @@
 import { Grid, Typography, Avatar } from "@mui/material";
-import { grey } from "@mui/material/colors";
+
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 export default function InternalHeaderView({ text, user }) {
@@ -22,10 +23,16 @@ export default function InternalHeaderView({ text, user }) {
         </Grid>
 
         <Grid item>
-          <Typography>Bienvenid@ {authorization.name} </Typography>
+          <Typography variant="h5" color="secondary.dark">
+            Bienvenid@ {authorization.name}{" "}
+          </Typography>
         </Grid>
         <Grid item>
-          <Avatar sx={{ bgcolor: grey[800] }}>H</Avatar>
+          <Avatar sx={{ bgcolor: "primary.main" }}>
+            <PersonOutlineIcon
+              sx={{ color: "common.white", fontSize: "24px" }}
+            />
+          </Avatar>
         </Grid>
       </Grid>
     </>

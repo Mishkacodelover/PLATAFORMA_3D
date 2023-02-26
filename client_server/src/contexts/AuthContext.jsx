@@ -10,6 +10,7 @@ const AuthContext = createContext({
     email: null,
     role: null,
     id: null,
+    name: null,
   },
 });
 const MY_AUTH_APP = "MY_AUTH_APP";

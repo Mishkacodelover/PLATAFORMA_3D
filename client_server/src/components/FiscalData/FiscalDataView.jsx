@@ -5,14 +5,12 @@ import {
   ListItem,
   ListItemText,
   TextField,
-  IconButton,
   ListItemButton,
   Button,
   Grid,
   MenuItem,
 } from "@mui/material";
 
-import SendIcon from "@mui/icons-material/Send";
 import { suscriptions } from "./utils/suscOption";
 
 export default function FiscalDataView({
@@ -38,13 +36,23 @@ export default function FiscalDataView({
       <Box sx={{ p: "24px" }}>
         {fiscalData ? (
           <List>
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "secondary.light",
+              }}
+            >
               <ListItemText
                 primary={`Nombre de empresa:  ${fiscalData.companyName}`}
+                sx={{ color: "common.white" }}
               />
 
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleCompanyName}>
+                <Button
+                  size="small"
+                  onClick={handleCompanyName}
+                  variant="contained"
+                  sx={{ backgroundColor: "primary.dark" }}
+                >
                   Editar
                 </Button>
               </ListItemButton>
@@ -52,7 +60,7 @@ export default function FiscalDataView({
             {companyName && (
               <ListItem>
                 <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                  <Grid container>
+                  <Grid container alignItems={"center"}>
                     <TextField
                       size="small"
                       label="Nombre de la empresa"
@@ -61,7 +69,12 @@ export default function FiscalDataView({
                       onChange={handleInputData}
                     />
                     <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                      <Button size="small" type="submit">
+                      <Button
+                        size="small"
+                        type="submit"
+                        variant="outlined"
+                        sx={{ border: "2px solid" }}
+                      >
                         Cambiar
                       </Button>
                     </ListItemButton>
@@ -69,12 +82,24 @@ export default function FiscalDataView({
                 </form>
               </ListItem>
             )}
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "primary.dark",
+              }}
+            >
               <ListItemText
                 primary={`CIF/NIF de empresa:  ${fiscalData.vatNumber}`}
+                sx={{ color: "common.white" }}
               />
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleVatNumber}>
+                <Button
+                  size="small"
+                  onClick={handleVatNumber}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "secondary.light",
+                  }}
+                >
                   Editar
                 </Button>
               </ListItemButton>
@@ -83,7 +108,7 @@ export default function FiscalDataView({
             {vatNumber && (
               <ListItem>
                 <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                  <Grid container>
+                  <Grid container alignItems={"center"}>
                     <TextField
                       size="small"
                       label="CIF/NIF de la empresa"
@@ -92,7 +117,12 @@ export default function FiscalDataView({
                       onChange={handleInputData}
                     />
                     <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                      <Button size="small" type="submit">
+                      <Button
+                        size="small"
+                        type="submit"
+                        variant="outlined"
+                        sx={{ border: "2px solid" }}
+                      >
                         Cambiar
                       </Button>
                     </ListItemButton>
@@ -100,12 +130,24 @@ export default function FiscalDataView({
                 </form>
               </ListItem>
             )}
-            <ListItem>
+            <ListItem
+              sx={{
+                backgroundColor: "secondary.light",
+              }}
+            >
               <ListItemText
                 primary={`Dirección fiscal:  ${fiscalData.fiscalAdress}`}
+                sx={{ color: "common.white" }}
               />
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleFiscalAdress}>
+                <Button
+                  size="small"
+                  onClick={handleFiscalAdress}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "primary.dark",
+                  }}
+                >
                   Editar
                 </Button>
               </ListItemButton>
@@ -113,7 +155,7 @@ export default function FiscalDataView({
             {fiscalAdress && (
               <ListItem>
                 <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                  <Grid container>
+                  <Grid container alignItems={"center"}>
                     <TextField
                       size="small"
                       label="Dirección fiscal"
@@ -122,7 +164,12 @@ export default function FiscalDataView({
                       onChange={handleInputData}
                     />
                     <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                      <Button size="small" type="submit">
+                      <Button
+                        size="small"
+                        type="submit"
+                        variant="outlined"
+                        sx={{ border: "2px solid" }}
+                      >
                         Cambiar
                       </Button>
                     </ListItemButton>
@@ -130,11 +177,25 @@ export default function FiscalDataView({
                 </form>
               </ListItem>
             )}
-            <ListItem>
-              <ListItemText primary={`Suscripción:  ${fiscalData.name}`} />
+            <ListItem
+              sx={{
+                backgroundColor: "primary.dark",
+              }}
+            >
+              <ListItemText
+                primary={`Suscripción:  ${fiscalData.name}`}
+                sx={{ color: "common.white" }}
+              />
 
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleSuscription}>
+                <Button
+                  size="small"
+                  onClick={handleSuscription}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "secondary.light",
+                  }}
+                >
                   Editar
                 </Button>
               </ListItemButton>
@@ -142,7 +203,7 @@ export default function FiscalDataView({
             {suscription && (
               <ListItem>
                 <form onSubmit={(event) => updateFiscalData(event, inputData)}>
-                  <Grid container>
+                  <Grid container alignItems={"center"}>
                     <TextField
                       select
                       size="small"
@@ -158,7 +219,12 @@ export default function FiscalDataView({
                       ))}
                     </TextField>
                     <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                      <Button size="small" type="submit">
+                      <Button
+                        size="small"
+                        type="submit"
+                        variant="outlined"
+                        sx={{ border: "2px solid" }}
+                      >
                         Cambiar
                       </Button>
                     </ListItemButton>
@@ -176,7 +242,10 @@ export default function FiscalDataView({
                 maxWidth="100%"
                 sx={{ justifyContent: "space-between" }}
               >
-                <Typography sx={{ paddingBottom: "16px" }}>
+                <Typography
+                  variant="h6"
+                  sx={{ paddingBottom: "16px", color: "common.black" }}
+                >
                   Aún no has registrado tus datos fiscales
                 </Typography>
                 <form onSubmit={(event) => addFiscalData(event, inputData)}>
@@ -230,7 +299,12 @@ export default function FiscalDataView({
                     </TextField>
                   </Grid>
                   <Grid item md={12} sx={{ paddingTop: "16px" }}>
-                    <Button type="submit" fullWidth>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ backgroundColor: "primary.main" }}
+                    >
                       Registrar datos
                     </Button>
                   </Grid>

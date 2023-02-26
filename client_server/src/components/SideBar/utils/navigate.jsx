@@ -8,27 +8,33 @@ export const navigate = [
   {
     value: "Mi perfil",
     path: "/u/profile",
-    icon: <PersonIcon />,
+    icon: <PersonIcon sx={{ fontSize: "24px", color: "common.white" }} />,
   },
 
   {
     value: "Colecciones",
     path: "/u/collections",
-    icon: <CollectionsBookmarkIcon />,
+    icon: (
+      <CollectionsBookmarkIcon
+        sx={{ fontSize: "24px", color: "common.white" }}
+      />
+    ),
   },
   {
     value: "Prendas",
     path: "/u/piece",
-    icon: <CheckroomIcon />,
+    icon: <CheckroomIcon sx={{ fontSize: "24px", color: "common.white" }} />,
   },
   {
     value: "Recursos gráficos",
     path: "/u/grafic-resources",
-    icon: <ImageSearchIcon />,
+    icon: <ImageSearchIcon sx={{ fontSize: "24px", color: "common.white" }} />,
   },
   {
     value: "Modelo 3D",
     path: "/u/patterns",
-    icon: <ThreeDRotationIcon />,
+    icon: (
+      <ThreeDRotationIcon sx={{ fontSize: "24px", color: "common.white" }} />
+    ),
   },
 ];

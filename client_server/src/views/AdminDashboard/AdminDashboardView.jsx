@@ -32,13 +32,14 @@ export default function AdminDashboardView({
         <InternalHeader text="Panel de administador" />
         <Grid
           container
+          alignItems="flex-start"
           sx={{
-            border: "1px solid black",
             maxWidth: "100%",
             maxHeight: "100%",
+            paddingTop: "28px",
           }}
         >
-          <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={6}>
             <HandleData
               registerMember={registerMember}
               handleCloseRegister={handleCloseRegister}
@@ -51,7 +52,7 @@ export default function AdminDashboardView({
               handleSubmit={handleSubmit}
             />
           </Grid>
-          <Grid item xs={10} md={6} sx={{ border: "1px solid black" }}>
+          <Grid item xs={10} md={6}>
             <HandleUser
               allUser={allUser}
               deleteUser={deleteUser}

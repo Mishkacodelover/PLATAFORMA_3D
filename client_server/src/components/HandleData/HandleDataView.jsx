@@ -32,7 +32,7 @@ export default function HandleDataView({
         <Grid
           container
           direction={"column"}
-          spacing={1}
+          spacing={2}
           sx={{ maxWidth: "100%", justifyItems: "left" }}
         >
           <Grid
@@ -40,13 +40,16 @@ export default function HandleDataView({
             container
             direction={"row"}
             alignItems="center"
-            spacing={2}
+            spacing={1}
+            // sx={{ paddingTop: "16px" }}
           >
             <Typography
+              variant="h6"
+              color="secondary.dark"
               sx={{
                 textTransform: "uppercase",
-                fontSize: "14px",
-                paddingLeft: "22px",
+
+                paddingLeft: "36px",
               }}
             >
               Datos fiscales y suscripción
@@ -58,7 +61,13 @@ export default function HandleDataView({
             />
           </Grid>
           <Grid item>
-            <Button onClick={handleOpenRegister}>Invitar usuarios</Button>
+            <Button
+              onClick={handleOpenRegister}
+              variant="contained"
+              sx={{ backgroundColor: "primary.main", marginLeft: "24px" }}
+            >
+              Invitar usuarios
+            </Button>
 
             <Modal
               aria-labelledby="open-registration-form"
@@ -85,7 +94,46 @@ export default function HandleDataView({
             </Modal>
           </Grid>
 
-          <Box>{checked && <FiscalData />}</Box>
+          <Box sx={{ paddingTop: "36px" }}>
+            {checked ? (
+              checked && <FiscalData />
+            ) : (
+              <>
+                <Typography
+                  variant="h5"
+                  textAlign="center"
+                  color="secondary.dark"
+                  sx={{ p: "8px", marginTop: "44px" }}
+                >
+                  Gestiona tus datos fiscales y de suscripción
+                </Typography>
+                <Typography
+                  variant="h5"
+                  textAlign="center"
+                  color="secondary.dark"
+                  sx={{ p: "8px" }}
+                >
+                  Invita a los miembros del equipo que necesites
+                </Typography>
+                <Typography
+                  variant="h6"
+                  textAlign="center"
+                  color="secondary.dark"
+                  sx={{ p: "8px" }}
+                >
+                  Asigna roles, según el tipo de trabajo que realicen
+                </Typography>
+                <Typography
+                  variant="h6"
+                  textAlign="center"
+                  color="secondary.dark"
+                  sx={{ p: "8px" }}
+                >
+                  Edita y elimina datos personales
+                </Typography>
+              </>
+            )}
+          </Box>
         </Grid>
       </Box>
     </>

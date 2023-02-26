@@ -1,9 +1,8 @@
 import db from "../mysql.js";
-import moment from "moment/moment.js";
 
 const imagesQueries = {};
 
-imagesQueries.addImage = async (imageData) => {
+imagesQueries.addResource = async (imageData) => {
   let conn = null;
   try {
     conn = await db.createConnection();
@@ -65,11 +64,16 @@ imagesQueries.getImageById = async (id) => {
   }
 };
 
-imagesQueries.getAllImages = async () => {
+imagesQueries.getAllResources = async (id) => {
   let conn = null;
   try {
     conn = await db.createConnection();
-    return await db.query("SELECT * FROM resource", [], "select", conn);
+    return await db.query(
+      "SELECT * FROM resource where userCreated = ?",
+      id,
+      "select",
+      conn
+    );
   } catch (e) {
     throw new Error(e);
   } finally {

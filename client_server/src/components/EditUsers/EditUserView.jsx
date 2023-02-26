@@ -76,7 +76,18 @@ export default function EditUserView({
           </Grid>
 
           <Grid item xs={8} md={12} sx={{ paddingTop: "8px" }}>
-            <Button fullWidth type="submit">
+            <Button
+              fullWidth
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundImage:
+                  "linear-gradient(var(--azul) ,var(--primario))",
+
+                color: "common.white",
+                p: "8px 24px",
+              }}
+            >
               Editar
             </Button>
           </Grid>

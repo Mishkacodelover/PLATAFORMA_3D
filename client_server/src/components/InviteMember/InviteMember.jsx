@@ -1,8 +1,6 @@
 import { Grid, TextField, MenuItem, Button } from "@mui/material";
-// import { useFormik } from "formik";
+
 import { memberValues } from "./utils/memberValues";
-// import { initialValues } from "./utils/inviteMemberValues";
-// import { InviteMemberSchema } from "./inviteMemberSchema";
 
 export default function InviteMember({
   handleSubmit,
@@ -11,18 +9,6 @@ export default function InviteMember({
   errors,
   isSubmitting,
 }) {
-  // const onSubmit = (values, actions) => {
-  //   registerMember(values);
-  //   actions.resetForm();
-  // };
-
-  // const { values, errors, isSubmitting, handleChange, handleSubmit } =
-  //   useFormik({
-  //     initialValues,
-  //     validationSchema: InviteMemberSchema,
-  //     onSubmit,
-  //   });
-
   return (
     <>
       <Grid container direction={"column"} spacing={2}>
@@ -102,17 +88,18 @@ export default function InviteMember({
             </TextField>
           </Grid>
 
-          <Grid item xs={8} md={12} sx={{ paddingTop: "8px" }}>
+          <Grid item xs={8} md={12} sx={{ paddingTop: "16px" }}>
             <Button
               disabled={isSubmitting}
               fullWidth
               type="submit"
               variant="contained"
               sx={{
-                backgroundImage: "linear-gradient(#0A0A0A ,#282829)",
+                backgroundImage:
+                  "linear-gradient(var(--azul) ,var(--primario))",
 
-                color: "var(--blanco)",
-                p: "16px 24px",
+                color: "common.white",
+                p: "8px 24px",
               }}
             >
               Invitar miembro

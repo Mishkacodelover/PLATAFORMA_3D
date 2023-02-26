@@ -11,10 +11,15 @@ export default function SearchView({
   return (
     <Paper
       component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 460 }}
+      sx={{
+        p: "2px 4px",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+      }}
     >
       <IconButton sx={{ p: "10px" }} aria-label="menu">
-        <PersonIcon />
+        <PersonIcon sx={{ fontSize: "24px", color: "primary.dark" }} />
       </IconButton>
       <InputBase
         size="small"
@@ -30,7 +35,7 @@ export default function SearchView({
         aria-label="search"
         onClick={handleSubmit}
       >
-        <SearchIcon />
+        <SearchIcon sx={{ fontSize: "24px", color: "primary.dark" }} />
       </IconButton>
     </Paper>
   );

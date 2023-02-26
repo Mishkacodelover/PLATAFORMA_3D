@@ -51,28 +51,50 @@ export default function HandleUserView({
           width="100%"
         >
           <Grid item md={12}>
-            <Typography sx={{ textTransform: "uppercase", fontSize: "14px" }}>
+            <Typography
+              sx={{ textTransform: "uppercase" }}
+              variant="h6"
+              color="secondary.dark"
+            >
               Mis Usuarios
             </Typography>
           </Grid>
-          <Grid item md={12} sx={{ paddingBottom: "24px", width: "100%" }}>
+          <Grid item md={12} sx={{ paddingBottom: "36px", width: "100%" }}>
             <Search />
           </Grid>
 
-          <List sx={{ maxHeight: "216px", overflow: "auto", width: "100%" }}>
+          <List
+            sx={{
+              maxHeight: "216px",
+              overflow: "auto",
+              width: "100%",
+              paddingTop: "24px",
+            }}
+          >
             {allUser ? (
               allUser.map((user) => (
-                <ListItem key={user.id}>
+                <ListItem
+                  key={user.id}
+                  sx={{
+                    boxShadow: "2px 2px 2px 1px var(--primario_oscuro)",
+                  }}
+                >
                   <ListItemAvatar>
-                    <Avatar>
-                      <PersonIcon />
+                    <Avatar sx={{ backgroundColor: "primary.main" }}>
+                      <PersonIcon
+                        sx={{ color: "primary.light", fontSize: "24px" }}
+                      />
                     </Avatar>
                   </ListItemAvatar>
 
                   <ListItemText primary={user.email} />
 
                   <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                    <Button onClick={() => handleOpenEditUser(user.id)}>
+                    <Button
+                      onClick={() => handleOpenEditUser(user.id)}
+                      variant="outlined"
+                      sx={{ border: "2px solid" }}
+                    >
                       Editar
                     </Button>
                   </ListItemButton>
@@ -102,7 +124,9 @@ export default function HandleUserView({
                   <ListItemIcon sx={{ justifyContent: "flex-end" }}>
                     <IconButton onClick={() => handleClickOpen(user.id)}>
                       <Tooltip title="Eliminar">
-                        <DeleteIcon />
+                        <DeleteIcon
+                          sx={{ fontSize: "24px", color: "secondary.light" }}
+                        />
                       </Tooltip>
                     </IconButton>
                   </ListItemIcon>

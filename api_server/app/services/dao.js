@@ -2,6 +2,7 @@ import userQueries from "./mysql_queries/user_queries.js";
 import imagesQueries from "./mysql_queries/images_queries.js";
 import collectionQueries from "./mysql_queries/collection_queries.js";
 import fiscalDataQueries from "./mysql_queries/fiscalData_queries.js";
+import patternQueries from "./mysql_queries/pattern_queries.js";
 const dao = {};
 
 dao.getUserbyEmail = async (email) => await userQueries.getUserbyEmail(email);
@@ -45,7 +46,8 @@ dao.getAllCollections = async (userId) =>
 dao.updateCollection = async (collectionData, id) =>
   await collectionQueries.updateCollection(collectionData, id);
 
-dao.addImage = async (imageData) => await imagesQueries.addImage(imageData);
+dao.addResource = async (imageData) =>
+  await imagesQueries.addResource(imageData);
 
 dao.addAvatar = async (imageData) => await imagesQueries.addAvatar(imageData);
 
@@ -53,7 +55,12 @@ dao.getImageById = async (id) => await imagesQueries.getImageById(id);
 
 dao.getAvatarByUserId = async (id) => await imagesQueries.getAvatarByUserId(id);
 
-dao.getAllImages = async () => await imagesQueries.getAllImages();
+dao.getAllResources = async (id) => await imagesQueries.getAllResources(id);
+
+dao.getAllPatterns = async (id) => await patternQueries.getAllPatterns(id);
+
+dao.addPattern = async (imageData) =>
+  await patternQueries.addPattern(imageData);
 
 dao.addFiscalData = async (fiscalData, userId) =>
   await fiscalDataQueries.addFiscalData(fiscalData, userId);

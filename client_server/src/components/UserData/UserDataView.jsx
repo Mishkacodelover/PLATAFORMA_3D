@@ -11,7 +11,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import SendIcon from "@mui/icons-material/Send";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 export default function UserDataView({
   userData,
@@ -29,86 +29,150 @@ export default function UserDataView({
   return (
     <>
       <Box sx={{ p: "24px" }}>
-        <Typography>Estos son tus datos de usuario:</Typography>
+        <Typography
+          variant="h6"
+          color="secondary.dark"
+          sx={{ paddingLeft: "16px" }}
+        >
+          Estos son tus datos de usuario:
+        </Typography>
 
         {userData ? (
           <List>
-            <ListItem>
-              <ListItemText primary={`Nombre:  ${userData.name}`} />
+            <ListItem
+              sx={{
+                backgroundColor: "secondary.light",
+              }}
+            >
+              <ListItemText
+                primary={`Nombre:  ${userData.name}`}
+                sx={{ color: "common.white" }}
+              />
 
               {name && (
                 <form onSubmit={(event) => update(event, input)}>
                   <TextField
                     size="small"
-                    label="escribe tu nombre"
+                    label="Escribe tu nombre"
                     name="name"
                     value={input.name}
                     onChange={handleInput}
-                    sx={{ marginLeft: "24px" }}
+                    sx={{
+                      marginLeft: "16px",
+                      backgroundColor: "common.white",
+                      borderRadius: "4px",
+                    }}
                   />
-                  <Tooltip title="enviar">
+                  <Tooltip title="enviar" arrow>
                     <IconButton type="submit">
-                      <SendIcon />
+                      <TaskAltIcon
+                        sx={{ color: "common.white", fontSize: "24px" }}
+                      />
                     </IconButton>
                   </Tooltip>
                 </form>
               )}
 
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleName}>
+                <Button
+                  size="small"
+                  onClick={handleName}
+                  variant="contained"
+                  sx={{ backgroundColor: "primary.dark" }}
+                >
                   Editar
                 </Button>
               </ListItemButton>
             </ListItem>
 
-            <ListItem>
-              <ListItemText primary={`Apellidos:  ${userData.surname}`} />
+            <ListItem
+              sx={{
+                backgroundColor: "primary.dark",
+              }}
+            >
+              <ListItemText
+                primary={`Apellidos:  ${userData.surname}`}
+                sx={{ color: "common.white" }}
+              />
 
               {surname && (
                 <form onSubmit={(event) => update(event, input)}>
                   <TextField
                     size="small"
-                    label="escribe tus apellidos"
+                    label="Escribe tus apellidos"
                     name="surname"
                     value={input.surname}
                     onChange={handleInput}
-                    sx={{ marginLeft: "24px" }}
+                    sx={{
+                      marginLeft: "16px",
+                      backgroundColor: "common.white",
+                      borderRadius: "4px",
+                    }}
                   />
-                  <Tooltip title="enviar">
+                  <Tooltip title="enviar" arrow>
                     <IconButton type="submit">
-                      <SendIcon />
+                      <TaskAltIcon
+                        sx={{ color: "common.white", fontSize: "24px" }}
+                      />
                     </IconButton>
                   </Tooltip>
                 </form>
               )}
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleSurname}>
+                <Button
+                  size="small"
+                  onClick={handleSurname}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "secondary.light",
+                  }}
+                >
                   Editar
                 </Button>
               </ListItemButton>
             </ListItem>
-            <ListItem>
-              <ListItemText primary={`Email:  ${userData.email}`} />
+            <ListItem
+              sx={{
+                backgroundColor: "secondary.light",
+              }}
+            >
+              <ListItemText
+                primary={`Email:  ${userData.email}`}
+                sx={{ color: "common.white" }}
+              />
 
               {email && (
                 <form onSubmit={(event) => update(event, input)}>
                   <TextField
                     size="small"
-                    label="escribe tu email"
+                    label="Escribe tu email"
                     name="email"
                     value={input.email}
                     onChange={handleInput}
-                    sx={{ marginLeft: "24px" }}
+                    sx={{
+                      marginLeft: "16px",
+                      backgroundColor: "common.white",
+                      borderRadius: "4px",
+                    }}
                   />
-                  <Tooltip title="enviar">
+                  <Tooltip title="enviar" arrow>
                     <IconButton type="submit">
-                      <SendIcon />
+                      <TaskAltIcon
+                        sx={{ color: "common.white", fontSize: "24px" }}
+                      />
                     </IconButton>
                   </Tooltip>
                 </form>
               )}
               <ListItemButton sx={{ justifyContent: "flex-end" }}>
-                <Button size="small" onClick={handleEmail}>
+                <Button
+                  size="small"
+                  onClick={handleEmail}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "primary.dark",
+                  }}
+                >
                   Editar
                 </Button>
               </ListItemButton>

@@ -3,14 +3,14 @@ import imagesController from "../controller/images_controller.js";
 
 const imagesRouter = express.Router();
 
-imagesRouter.post("/upload", imagesController.uploadImage);
+imagesRouter.post("/upload", imagesController.uploadResource);
 
-imagesRouter.post("/upload/avatar", imagesController.uploadAvatar);
+imagesRouter.get("/all-images/:id", imagesController.getAllResources);
 
 imagesRouter.get("/image/:id", imagesController.getImage);
 
-imagesRouter.get("/avatar/:id", imagesController.getAvatarByUserId);
+imagesRouter.post("/upload/avatar", imagesController.uploadAvatar);
 
-imagesRouter.get("/all-images", imagesController.getAllImages);
+imagesRouter.get("/avatar/:id", imagesController.getAvatarByUserId);
 
 export default imagesRouter;
