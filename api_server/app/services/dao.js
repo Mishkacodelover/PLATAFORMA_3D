@@ -3,6 +3,7 @@ import imagesQueries from "./mysql_queries/images_queries.js";
 import collectionQueries from "./mysql_queries/collection_queries.js";
 import fiscalDataQueries from "./mysql_queries/fiscalData_queries.js";
 import patternQueries from "./mysql_queries/pattern_queries.js";
+import collectionUseQueries from "./mysql_queries/collectionUse_queries.js";
 const dao = {};
 
 dao.getUserbyEmail = async (email) => await userQueries.getUserbyEmail(email);
@@ -40,11 +41,23 @@ dao.getCollection = async (id) => await collectionQueries.getCollectionById(id);
 dao.getAllCollections = async (userId) =>
   await collectionQueries.getAllCollections(userId);
 
-// dao.get = async (userId) =>
-//   await collectionQueries.getAllCollections(userId);
-
 dao.updateCollection = async (collectionData, id) =>
   await collectionQueries.updateCollection(collectionData, id);
+
+dao.logicDeleteCollection = async (id) =>
+  await collectionQueries.logicDeleteCollection(id);
+
+dao.addCollectionUse = async (collectionData) =>
+  await collectionUseQueries.addCollectionUse(collectionData);
+
+dao.getUseByCollection = async (collectionId) =>
+  await collectionUseQueries.getUseByCollection(collectionId);
+
+dao.getUseNameByCollection = async (collectionId) =>
+  await collectionUseQueries.getUseNameByCollection(collectionId);
+
+dao.getUseNameCollectionByUser = async (userId) =>
+  await collectionUseQueries.getUseNameCollectionByUser(userId);
 
 dao.addResource = async (imageData) =>
   await imagesQueries.addResource(imageData);

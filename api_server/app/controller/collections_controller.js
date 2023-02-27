@@ -68,9 +68,9 @@ controller.updateCollection = async (req, res) => {
 controller.logicDeleteCollection = async (req, res) => {
   try {
     await dao.logicDeleteCollection(req.params.id);
-    const collections = await dao.getAllCollections();
+    const collections = await dao.getAllCollections(req.params.id);
 
-    return res.send(users);
+    return res.send(collections);
   } catch (e) {
     console.log(e.message);
   }

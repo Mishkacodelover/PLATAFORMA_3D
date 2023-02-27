@@ -6,14 +6,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { typeCollection } from "../CreateCollection/utils/typeCollection";
 
 export default function EditCollectionView({
-  collectionEdited,
-  updateCollection,
   editCollection,
+  collectionEdited,
   setEditCollection,
+  updateCollection,
 }) {
   return (
     <Box>
-      <Grid container direction="row" spacing={2} alignItems="center">
+      <Grid container spacing={2} alignItems="center" justifyContent={"center"}>
         <form onSubmit={(event) => updateCollection(event, editCollection)}>
           <Grid item md={12}>
             <TextField
@@ -46,8 +46,8 @@ export default function EditCollectionView({
           <Grid item md={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                openTo="year"
-                views={["year", "month", "day"]}
+                openTo="day"
+                views={["day"]}
                 label="Fecha de inicio"
                 name="initialDate"
                 value={editCollection.initialDate}
@@ -66,8 +66,8 @@ export default function EditCollectionView({
           <Grid item md={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                openTo="year"
-                views={["year", "month", "day"]}
+                openTo="dat"
+                views={["day"]}
                 label="Fecha de fin"
                 value={editCollection.finishDate}
                 name="finishDate"
@@ -85,7 +85,12 @@ export default function EditCollectionView({
           </Grid>
 
           <Grid item md={12}>
-            <Button type="submit" fullWidth>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ marginTop: "16px" }}
+            >
               Editar
             </Button>
           </Grid>

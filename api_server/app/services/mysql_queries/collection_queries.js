@@ -68,7 +68,7 @@ collectionQueries.getAllCollections = async (userId) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM collection where userCreated = ?",
+      "SELECT * FROM collection where userCreated = ? and isDelete = 0 ",
       userId,
       "select",
       conn

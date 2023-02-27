@@ -7,9 +7,9 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { typeCollection } from "./utils/typeCollection";
 
 export default function CreateCollectionView({
+  addCollectionData,
   addCollection,
   handleCollection,
-  addCollectionData,
   setAddCollection,
 }) {
   return (
@@ -64,6 +64,7 @@ export default function CreateCollectionView({
                       {...params}
                       helperText={null}
                       variant="standard"
+                      fullWidth
                     />
                   )}
                 />
@@ -77,10 +78,10 @@ export default function CreateCollectionView({
                   label="Fecha de fin"
                   value={addCollection.finishDate}
                   name="finishDate"
-                  onChange={(newValue) => {
+                  onChange={(newValu) => {
                     setAddCollection({
                       ...addCollection,
-                      finishDate: newValue,
+                      finishDate: newValu,
                     });
                   }}
                   renderInput={(params) => (
@@ -88,6 +89,7 @@ export default function CreateCollectionView({
                       {...params}
                       helperText={null}
                       variant="standard"
+                      fullWidth
                     />
                   )}
                 />
@@ -95,7 +97,12 @@ export default function CreateCollectionView({
             </Grid>
 
             <Grid item md={12}>
-              <Button type="submit" fullWidth>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ marginTop: "8px" }}
+              >
                 Crear
               </Button>
             </Grid>

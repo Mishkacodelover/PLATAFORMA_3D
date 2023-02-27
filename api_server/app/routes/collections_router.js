@@ -13,5 +13,6 @@ collectionRouter.get(
   "/all-collections/:id",
   collectionController.getAllCollections
 );
+collectionRouter.delete("/:id", collectionController.logicDeleteCollection);
 
 export default collectionRouter;
