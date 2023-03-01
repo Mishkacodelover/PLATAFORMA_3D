@@ -4,6 +4,7 @@ import collectionQueries from "./mysql_queries/collection_queries.js";
 import fiscalDataQueries from "./mysql_queries/fiscalData_queries.js";
 import patternQueries from "./mysql_queries/pattern_queries.js";
 import collectionUseQueries from "./mysql_queries/collectionUse_queries.js";
+import falsePieceQueries from "./mysql_queries/falsePiece_queries.js";
 const dao = {};
 
 dao.getUserbyEmail = async (email) => await userQueries.getUserbyEmail(email);
@@ -92,5 +93,13 @@ dao.getFiscalDataByUserId = async (id) =>
 
 dao.getFiscalDataSuscriptionByUserId = async (id) =>
   await fiscalDataQueries.getFiscalDataSuscriptionByUserId(id);
+
+dao.addFalsePiece = async (pieceData) =>
+  await falsePieceQueries.addFalsePiece(pieceData);
+
+dao.getFalsePieceByCode = async (code) =>
+  await falsePieceQueries.getFalsePieceByCode(code);
+dao.getFalsePieceImgById = async (userId) =>
+  await falsePieceQueries.getFalsePieceImgById(userId);
 
 export default dao;

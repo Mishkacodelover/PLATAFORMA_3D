@@ -6,8 +6,8 @@ import dayjs from "dayjs";
 const obj = {
   collectionName: "",
   collectionType: "",
-  initialDate: dayjs("DD/MM/YYYY"),
-  finishDate: dayjs("DD/MM/YYYY"),
+  initialDate: dayjs("01/03/2023"),
+  finishDate: dayjs("01/03/2023"),
 };
 
 const objUse = {
@@ -140,10 +140,16 @@ export default function Collections() {
         setEditCollection(obj);
         setOpenEditCollection(false);
         console.log(response);
-        //  const collectionEdited = await response.json();
-        // if (collectionEdited) {
-        //   setAllUser(userEdited);
-        // }
+        const editList = await response.json();
+        if (editList) {
+          setCollection(editList);
+          const userIndexToUpdate = collection.findIndex(
+            (userToEdit) => userToEdit.id === editCollection.id
+          );
+          const newUserList = [...collection];
+          newUserList[userIndexToUpdate] = editList;
+          setCollection(newUserList);
+        }
       } else {
         console.log("error al editar valor");
       }

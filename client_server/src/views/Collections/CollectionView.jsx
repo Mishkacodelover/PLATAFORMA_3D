@@ -12,7 +12,7 @@ import {
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import CreateCollection from "../../components/CreateCollection";
 import EditCollection from "../../components/EditCollection";
-import CollectionUse from "../../components/CollectionUse/CollectionUse";
+// import CollectionUse from "../../components/CollectionUse/CollectionUse";
 import dayjs from "dayjs";
 import { style } from "../../const/modalStyle";
 
@@ -36,12 +36,12 @@ export default function CollectionView({
   setAddCollection,
   setEditCollection,
   updateCollection,
-  use,
-  handleUse,
-  openCollectionUse,
-  handleCloseCollectionUse,
-  handleOpenCollectionUse,
-  addCollectionUse,
+  // use,
+  // handleUse,
+  // openCollectionUse,
+  // handleCloseCollectionUse,
+  // handleOpenCollectionUse,
+  // addCollectionUse,
 }) {
   return (
     <>
@@ -66,9 +66,7 @@ export default function CollectionView({
               <Grid
                 container
                 direction="row"
-                // justifyItems={"center"}
                 alignItems="flex-start"
-                spacing={1}
                 sx={{
                   p: "16px",
                   boxShadow: "2px 2px 2px 1px var(--azul_oscuro)",
@@ -88,17 +86,18 @@ export default function CollectionView({
 
                   <Grid item md={6}>
                     <Typography>
-                      Fecha de inicio de la colección:{" "}
+                      Fecha de inicio de la colección:
                       {dayjs(col.initialDate).format("DD/MM/YYYY")}
                     </Typography>
                   </Grid>
                   <Grid item md={6}>
                     <Typography>
-                      Fecha de fin de la colección:{" "}
+                      Fecha de fin de la colección:
                       {dayjs(col.finishDate).format("DD/MM/YYYY")}
                     </Typography>
                   </Grid>
-                  {col.name ? (
+                  {/* utilizar para más adelante... */}
+                  {/* {col.name ? (
                     <Grid item md={6}>
                       <Typography>Uso de la colección:{col.name}</Typography>
                     </Grid>
@@ -115,10 +114,10 @@ export default function CollectionView({
                     <Grid item md={6}>
                       <Typography>No hay ninguna descripción</Typography>
                     </Grid>
-                  )}
+                  )} */}
                 </Grid>
                 <Grid item md={3}>
-                  <Button
+                  {/* <Button
                     variant="outlined"
                     sx={{
                       border: "2px solid",
@@ -151,7 +150,7 @@ export default function CollectionView({
                         />
                       </Box>
                     </Fade>
-                  </Modal>
+                  </Modal> */}
                   <Button
                     variant="outlined"
                     sx={{

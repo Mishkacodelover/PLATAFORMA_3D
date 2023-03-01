@@ -9,6 +9,7 @@ import collectionRouter from "./routes/collections_router.js";
 import fiscalDataRouter from "./routes/fiscalData_routes.js";
 import patternRouter from "./routes/pattern_router.js";
 import collectionUseRouter from "./routes/collectionUse_router.js";
+import falsePieceRouter from "./routes/falsePiece_router.js";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import { fileURLToPath } from "url";
@@ -38,6 +39,7 @@ app.use("/collections", collectionRouter);
 app.use("/fiscalData", fiscalDataRouter);
 app.use("/pattern", patternRouter);
 app.use("/collectionUse", collectionUseRouter);
+app.use("/falsePiece", falsePieceRouter);
 
 await db.createConnection();
 
