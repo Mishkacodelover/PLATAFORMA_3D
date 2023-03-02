@@ -3,7 +3,7 @@ import { Grid, Typography, Avatar } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useAuthContext } from "../../contexts/AuthContext";
 
-export default function InternalHeaderView({ text, user }) {
+export default function InternalHeaderView({ text, user, avatar }) {
   const { authorization } = useAuthContext();
   return (
     <>
@@ -28,11 +28,21 @@ export default function InternalHeaderView({ text, user }) {
           </Typography>
         </Grid>
         <Grid item>
-          <Avatar sx={{ bgcolor: "primary.main" }}>
-            <PersonOutlineIcon
-              sx={{ color: "common.white", fontSize: "24px" }}
-            />
-          </Avatar>
+          {avatar ? (
+            <Avatar>
+              <img
+                src={`http://localhost:8000/${avatar.path}`}
+                alt={avatar.name}
+                width="48px"
+              />
+            </Avatar>
+          ) : (
+            <Avatar sx={{ bgcolor: "primary.main" }}>
+              <PersonOutlineIcon
+                sx={{ color: "common.white", fontSize: "24px" }}
+              />
+            </Avatar>
+          )}
         </Grid>
       </Grid>
     </>

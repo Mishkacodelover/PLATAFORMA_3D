@@ -5,7 +5,8 @@ import Link from "../../components/Link/Link";
 import { Box, Typography, Stack, Grid, Button } from "@mui/material";
 import Partners from "../../components/Partners/Partners";
 
-import video from "../../assets/videos/video_preview_bolso.mp4";
+import video from "../../assets/videos/mui_colors.mp4";
+
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 import "@splidejs/react-splide/css/skyblue";
@@ -169,7 +170,8 @@ export default function HomeView() {
             <Grid item md={6} xs={12} sx={{ p: "68px" }}>
               <ReactPlayer
                 url={video}
-                controls={true}
+                controls
+                playing
                 width="100%"
                 height="100%"
                 style={{ position: "static" }}

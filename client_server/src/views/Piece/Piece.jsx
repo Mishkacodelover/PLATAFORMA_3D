@@ -15,11 +15,30 @@ export default function Piece() {
   const [pattern, setPattern] = useState(null);
   const [addPiece, setAddPiece] = useState(falsePiece);
   const [collection, setCollection] = useState(null);
-  const [addPattern, setAddPatern] = useState(null);
-  const [addResource, setAddResource] = useState(null);
-  const [addCollection, setAddCollection] = useState(null);
-
+  const [avatar, setAvatar] = useState();
+  const [patternChecked, setPatternChecked] = useState(null);
+  const [resourceChecked, setResourceChecked] = useState(null);
+  const [collectionChecked, setCollectionChecked] = useState(null);
   const { authorization } = useAuthContext();
+
+  const handlePattern = (value) => () => {
+    setPatternChecked(value);
+  };
+
+  const handleResource = (value) => () => {
+    setResourceChecked(value);
+  };
+
+  const handleCollection = (value) => () => {
+    setCollectionChecked(value);
+  };
+
+  function handlePiece(event) {
+    setAddPiece({
+      ...addPiece,
+      [event.target.name]: event.target.value,
+    });
+  }
 
   useEffect(
     function () {
@@ -64,40 +83,20 @@ export default function Piece() {
     [authorization.id]
   );
 
-  function handlePiece(event) {
-    setAddPiece({
-      ...addPiece,
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  function patternAdded(id) {
-    const patt = pattern.find((item) => item.id === id);
-    setAddPatern(patt);
-  }
-
-  function resourceAdded(id) {
-    const res = resource.find((item) => item.id === id);
-    setAddResource(res);
-  }
-
-  function collectionAdded(id) {
-    const col = collection.find((item) => item.id === id);
-    setAddCollection(col);
-  }
-
   async function addFalsePiece(
     event,
-
-    addPiece
+    addPiece,
+    collectionChecked,
+    patternChecked,
+    resourceChecked
   ) {
     event.preventDefault();
 
     const newPiece = {
       ...addPiece,
-      collection: addCollection,
-      resource: addResource,
-      pattern: addPattern,
+      collection: collectionChecked,
+      resource: resourceChecked,
+      pattern: patternChecked,
       userCreated: authorization.id,
     };
 
@@ -119,17 +118,35 @@ export default function Piece() {
     }
   }
 
+  useEffect(
+    function () {
+      async function fetchData() {
+        const response = await fetch(
+          `http://localhost:8000/images/avatar/${authorization.id}`
+        );
+        const data = await response.json();
+        setAvatar(data);
+      }
+      fetchData();
+    },
+    [authorization.id]
+  );
+
   return (
     <PieceView
       addPiece={addPiece}
       addFalsePiece={addFalsePiece}
+      avatar={avatar}
       collection={collection}
       handlePiece={handlePiece}
       pattern={pattern}
       resource={resource}
-      patternAdded={patternAdded}
-      resourceAdded={resourceAdded}
-      collectionAdded={collectionAdded}
+      patternChecked={patternChecked}
+      handlePattern={handlePattern}
+      resourceChecked={resourceChecked}
+      handleResource={handleResource}
+      collectionChecked={collectionChecked}
+      handleCollection={handleCollection}
     />
   );
 }

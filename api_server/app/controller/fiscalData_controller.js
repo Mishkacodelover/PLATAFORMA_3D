@@ -84,7 +84,7 @@ controller.updateFiscalData = async (req, res) => {
       return res.status(400).send("Error al recibir el body");
 
     await dao.updateFiscalData(req.params.id, req.body);
-    const data = await dao.getFiscalDataByUserId(req.params.id);
+    const data = await dao.getFiscalDataSuscriptionByUserId(req.params.id);
 
     return res.send(data[0]);
   } catch (e) {

@@ -1,42 +1,42 @@
 export const sizes = [
   {
-    value: 1,
+    value: 36,
     label: "36",
   },
   {
-    value: 2,
+    value: 38,
     label: "38",
   },
   {
-    value: 3,
+    value: 40,
     label: "40",
   },
   {
-    value: 4,
+    value: 42,
     label: "42",
   },
   {
-    value: 5,
+    value: 44,
     label: "44",
   },
   {
-    value: 6,
+    value: 46,
     label: "46",
   },
   {
-    value: 7,
+    value: 48,
     label: "48",
   },
   {
-    value: 8,
+    value: 50,
     label: "50",
   },
   {
-    value: 9,
+    value: 52,
     label: "52",
   },
   {
-    value: 10,
+    value: 54,
     label: "54",
   },
 ];

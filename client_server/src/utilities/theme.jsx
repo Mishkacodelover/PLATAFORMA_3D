@@ -36,7 +36,7 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily: "Lora",
-    fontSize: "1rem",
+    fontSize: 16,
     fontWeightRegular: "500",
     h1: {
       fontFamily: "Oswald",

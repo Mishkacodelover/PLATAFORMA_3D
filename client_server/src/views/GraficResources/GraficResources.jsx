@@ -5,6 +5,8 @@ import { useAuthContext } from "../../contexts/AuthContext";
 export default function GraficResources() {
   const [resource, setResource] = useState(null);
   const [alert, setAlert] = useState(false);
+  const [avatar, setAvatar] = useState();
+
   const { authorization } = useAuthContext();
 
   const formData = new FormData();
@@ -27,18 +29,14 @@ export default function GraficResources() {
 
       if (response.ok) {
         setAlert(true);
-        const editList = await response.json();
-        if (editList) {
-          setResource(editList);
-          const userIndexToUpdate = resource.findIndex(
-            (userToEdit) => userToEdit.id === resource.id
-          );
-          const newUserList = [...resource];
-          newUserList[userIndexToUpdate] = editList;
-          setResource(newUserList);
+        setTimeout(() => setAlert(false), 2000);
+
+        const newResource = await response.json();
+        if (newResource) {
+          setResource(newResource);
         }
       } else {
-        console.log("error en el registro");
+        console.log("error al subir imagen");
       }
     } catch (error) {
       console.log(error);
@@ -58,12 +56,28 @@ export default function GraficResources() {
     },
     [authorization.id]
   );
+
+  useEffect(
+    function () {
+      async function fetchData() {
+        const response = await fetch(
+          `http://localhost:8000/images/avatar/${authorization.id}`
+        );
+        const data = await response.json();
+        setAvatar(data);
+      }
+      fetchData();
+    },
+    [authorization.id]
+  );
+
   return (
     <GraficResourcesView
       resource={resource}
       uploadImage={uploadImage}
       onFileChange={onFileChange}
       alert={alert}
+      avatar={avatar}
     />
   );
 }

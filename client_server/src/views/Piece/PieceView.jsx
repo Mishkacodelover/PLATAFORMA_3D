@@ -5,16 +5,23 @@ import PieceForm from "../../components/PieceForm/PieceForm";
 export default function PieceView({
   addPiece,
   addFalsePiece,
+  avatar,
   collection,
   handlePiece,
   pattern,
   resource,
+  patternChecked,
+  handlePattern,
+  resourceChecked,
+  handleResource,
+  collectionChecked,
+  handleCollection,
 }) {
   return (
     <>
       <Box>
         <Grid container>
-          <InternalHeader text=" Crea tus prendas de ropa" />
+          <InternalHeader text=" Crea tus prendas de ropa" avatar={avatar} />
           <Typography
             variant="h5"
             sx={{ paddingLeft: "36px" }}
@@ -36,6 +43,12 @@ export default function PieceView({
               addFalsePiece={addFalsePiece}
               handlePiece={handlePiece}
               collection={collection}
+              patternChecked={patternChecked}
+              handlePattern={handlePattern}
+              resourceChecked={resourceChecked}
+              handleResource={handleResource}
+              collectionChecked={collectionChecked}
+              handleCollection={handleCollection}
             />
           </Grid>
         </Grid>

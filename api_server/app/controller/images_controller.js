@@ -15,20 +15,18 @@ controller.uploadResource = async (req, res) => {
 
     const images = !req.files.file.length ? [req.files.file] : req.files.file;
 
-    images.forEach(async (image) => {
+    for await (const image of images) {
       let uploadPath = __dirname + "/public/images/products/" + image.name;
       let BBDDPath = "images/products/" + image.name;
-      image.mv(uploadPath, (err) => {
-        if (err) return res.status(500).send(err);
-      });
+      await image.mv(uploadPath);
       await dao.addResource({
         name: image.name,
         path: BBDDPath,
         userCreated: req.body.userCreated,
       });
-    });
-
-    return res.send(images[0]);
+    }
+    const resource = await dao.getAllResources(req.body.userCreated);
+    return res.send(resource);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);
@@ -38,7 +36,7 @@ controller.uploadResource = async (req, res) => {
 controller.uploadAvatar = async (req, res) => {
   try {
     if (req.files === null) return;
-    console.log(req.files);
+
     if (!req.files) {
       return res.status(400).send("No se ha cargado ningún archivo");
     }

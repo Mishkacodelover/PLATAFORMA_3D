@@ -28,6 +28,7 @@ export default function Collections() {
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [use, setUse] = useState(objUse);
   const [openCollectionUse, setOpenCollectionUse] = useState();
+  const [avatar, setAvatar] = useState();
 
   const userId = { userCreated: authorization.id };
 
@@ -96,13 +97,16 @@ export default function Collections() {
       },
       body: JSON.stringify(collectionAdd),
     });
+
     try {
       if (response.ok) {
         setAddCollection(obj);
         setAlert(true);
         setCreateCollection(false);
+        setTimeout(() => setAlert(false), 2000);
+        const newColletion = [...collection, collectionAdd];
+        setCollection(newColletion);
       } else {
-        alert("El nombre de la colección ya existe");
         console.log("error al editar valor");
       }
     } catch (error) {
@@ -140,16 +144,14 @@ export default function Collections() {
         setEditCollection(obj);
         setOpenEditCollection(false);
         console.log(response);
-        const editList = await response.json();
-        if (editList) {
-          setCollection(editList);
-          const userIndexToUpdate = collection.findIndex(
-            (userToEdit) => userToEdit.id === editCollection.id
-          );
-          const newUserList = [...collection];
-          newUserList[userIndexToUpdate] = editList;
-          setCollection(newUserList);
-        }
+
+        const newCollection = await response.json();
+        const collectionIndex = collection.findIndex(
+          (collectionToEdit) => collectionToEdit.id === newCollection.id
+        );
+        const newList = [...collection];
+        newList[collectionIndex] = newCollection;
+        setCollection(newList);
       } else {
         console.log("error al editar valor");
       }
@@ -167,13 +169,12 @@ export default function Collections() {
       body: JSON.stringify(value),
     });
     try {
-      if (response === 200) {
-        console.log(response);
+      if (response.status === 200) {
         setDeleteAlert(true);
-
-        const editList = await response.json();
-        if (editList) {
-          setCollection(editList);
+        setTimeout(() => setDeleteAlert(false), 2000);
+        const newCollection = await response.json();
+        if (newCollection) {
+          setCollection(newCollection);
         }
       } else {
         console.log("error al eliminar la colección");
@@ -223,11 +224,26 @@ export default function Collections() {
   //   [collection.id]
   // );
 
+  useEffect(
+    function () {
+      async function fetchData() {
+        const response = await fetch(
+          `http://localhost:8000/images/avatar/${authorization.id}`
+        );
+        const data = await response.json();
+        setAvatar(data);
+      }
+      fetchData();
+    },
+    [authorization.id]
+  );
+
   return (
     <CollectionView
       addCollection={addCollection}
       addCollectionData={addCollectionData}
       alert={alert}
+      avatar={avatar}
       collection={collection}
       collectionEdited={collectionEdited}
       createCollection={createCollection}

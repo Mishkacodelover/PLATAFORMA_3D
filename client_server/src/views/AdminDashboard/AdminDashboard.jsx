@@ -1,6 +1,7 @@
 import AdminDashboardView from "./AdminDashboardView";
 import { useState, useEffect } from "react";
 import { useFormik } from "formik";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { initialValues } from "../../components/InviteMember/utils/inviteMemberValues";
 import { InviteMemberSchema } from "../../components/InviteMember/inviteMemberSchema";
 
@@ -11,6 +12,8 @@ export default function AdminDashboard() {
   const [openEditUser, setOpenEditUser] = useState(false);
   const [userEditing, setUserEditing] = useState(null);
   const [open, setOpen] = useState(false);
+  const [avatar, setAvatar] = useState();
+  const { authorization } = useAuthContext();
 
   const handleCloseRegister = () => setOpenRegister(false);
   const handleOpenRegister = () => setOpenRegister(true);
@@ -142,8 +145,23 @@ export default function AdminDashboard() {
       onSubmit,
     });
 
+  useEffect(
+    function () {
+      async function fetchData() {
+        const response = await fetch(
+          `http://localhost:8000/images/avatar/${authorization.id}`
+        );
+        const data = await response.json();
+        setAvatar(data);
+      }
+      fetchData();
+    },
+    [authorization.id]
+  );
+
   return (
     <AdminDashboardView
+      avatar={avatar}
       registerMember={registerMember}
       handleCloseRegister={handleCloseRegister}
       handleOpenRegister={handleOpenRegister}

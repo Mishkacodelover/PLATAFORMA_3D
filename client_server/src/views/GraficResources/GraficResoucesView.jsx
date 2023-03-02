@@ -15,11 +15,12 @@ export default function GraficResourcesView({
   uploadImage,
   onFileChange,
   alert,
+  avatar,
 }) {
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
-        <InternalHeader />
+        <InternalHeader avatar={avatar} />
         {alert && <Alert severity="success">¡Imágen añadida con éxito!</Alert>}
         <ImageList
           sx={{ maxWidth: "100%", height: "460px" }}
@@ -28,8 +29,8 @@ export default function GraficResourcesView({
           gap={8}
         >
           {resource ? (
-            resource.map(({ path, name }) => (
-              <ImageListItem key={name}>
+            resource.map(({ path, name, id }) => (
+              <ImageListItem key={id}>
                 <img
                   src={`http://localhost:8000/${path}`}
                   //srcSet={`http:/localhost:8000/${path}`}

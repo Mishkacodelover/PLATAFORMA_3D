@@ -11,7 +11,7 @@ export default function ProfileView({ onFileChange, uploadImage, avatar }) {
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
-        <InternalHeader />
+        <InternalHeader avatar={avatar} />
         <Grid
           container
           sx={{

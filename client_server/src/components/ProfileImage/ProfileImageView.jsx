@@ -46,7 +46,7 @@ export default function ProfileImageView({
                 <img
                   src={`http://localhost:8000/${avatar.path}`}
                   alt={avatar.name}
-                  width="40px"
+                  width="48px"
                 />
               </Avatar>
             ) : (

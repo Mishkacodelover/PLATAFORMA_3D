@@ -14,19 +14,14 @@ import GraficResources from "./views/GraficResources";
 import Patterns from "./views/Patterns";
 import PublicRoutes from "./routes/PublicRoutes";
 import PrivateRoutes from "./routes/PrivateRoutes.jsx";
-
+import FinalPiece from "./views/FinalPiece/FinalPiece";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext";
-
+import { roles } from "./const/roles";
 import Home from "./views/Home";
 
 function App() {
-  const admin = 1;
-  const designer = 2;
-  const operator = 3;
-  const workshop = 4;
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -46,7 +41,12 @@ function App() {
                 <Route
                   element={
                     <PrivateRoutes
-                      allowedRoles={[admin, designer, operator, workshop]}
+                      allowedRoles={[
+                        roles.admin,
+                        roles.designer,
+                        roles.operator,
+                        roles.workshop,
+                      ]}
                     />
                   }
                 >
@@ -61,7 +61,11 @@ function App() {
                   />
                   <Route path="patterns" element={<Patterns />} />
 
-                  <Route element={<PrivateRoutes allowedRoles={[admin]} />}>
+                  <Route path="piece-all" element={<FinalPiece />} />
+
+                  <Route
+                    element={<PrivateRoutes allowedRoles={[roles.admin]} />}
+                  >
                     <Route path="admin" element={<AdminDashboard />} />
                   </Route>
                 </Route>

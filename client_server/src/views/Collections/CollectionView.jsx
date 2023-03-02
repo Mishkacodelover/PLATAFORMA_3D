@@ -12,7 +12,7 @@ import {
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import CreateCollection from "../../components/CreateCollection";
 import EditCollection from "../../components/EditCollection";
-// import CollectionUse from "../../components/CollectionUse/CollectionUse";
+
 import dayjs from "dayjs";
 import { style } from "../../const/modalStyle";
 
@@ -20,6 +20,7 @@ export default function CollectionView({
   addCollection,
   addCollectionData,
   alert,
+  avatar,
   collection,
   collectionEdited,
 
@@ -32,16 +33,10 @@ export default function CollectionView({
   handleCloseEditCollection,
   handleOpenEditCollection,
   openEditCollection,
-  setAlert,
+
   setAddCollection,
   setEditCollection,
   updateCollection,
-  // use,
-  // handleUse,
-  // openCollectionUse,
-  // handleCloseCollectionUse,
-  // handleOpenCollectionUse,
-  // addCollectionUse,
 }) {
   return (
     <>
@@ -56,10 +51,11 @@ export default function CollectionView({
             alignItems: "center",
           }}
         >
-          <InternalHeader text="Mis Colecciones" />
+          <InternalHeader text="Mis Colecciones" avatar={avatar} />
           {alert && (
             <Alert severity="success">¡Colección creada con éxito!</Alert>
           )}
+          {deleteAlert && <Alert severity="success">Colección eliminada</Alert>}
 
           {collection ? (
             collection.map((col) => (
@@ -194,9 +190,6 @@ export default function CollectionView({
                   >
                     Eliminar
                   </Button>
-                  {deleteAlert && (
-                    <Alert severity="success">Colección eliminada</Alert>
-                  )}
                 </Grid>
               </Grid>
             ))

@@ -10,11 +10,12 @@ export default function PatternView({
   onFileChange,
   uploadPattern,
   alert,
+  avatar,
 }) {
   return (
     <Box sx={{ p: "24px" }}>
       <Grid container maxWidth={"100%"}>
-        <InternalHeader text="Modelos 3d" />
+        <InternalHeader text="Modelos 3d" avatar={avatar} />
         {alert && <Alert severity="success">¡Patrón añadido con éxito!</Alert>}
 
         <Splide
