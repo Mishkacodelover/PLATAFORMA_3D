@@ -13,7 +13,7 @@ falsePieceQueries.addFalsePiece = async (pieceData) => {
       color: pieceData.color,
       fabric: pieceData.fabric,
       clotheType: pieceData.clotheType,
-      code: pieceData.code,
+      clotheName: pieceData.clotheName,
       collection: pieceData.collection,
       resource: pieceData.resource,
       pattern: pieceData.pattern,
@@ -33,13 +33,13 @@ falsePieceQueries.addFalsePiece = async (pieceData) => {
   }
 };
 
-falsePieceQueries.getFalsePieceByCode = async (code) => {
+falsePieceQueries.getFalsePieceByCode = async (name) => {
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM falsePiece WHERE code = ?",
-      code,
+      "SELECT * FROM falsePiece WHERE clotheName = ?",
+      name,
       "select",
       conn
     );
@@ -55,7 +55,7 @@ falsePieceQueries.getFalsePieceImgById = async (userId) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT  falsepiece.id as falsepieceId,falsepiece.size,falsepiece.color,falsepiece.fabric,falsepiece.clotheType,falsepiece.code as code,collection.collectionName,resource.path,resource.name,resource.id as resourceId,pattern.patternName,pattern.pathPattern,pattern.id as patternId FROM falsepiece join collection on falsepiece.collection = collection.id join resource on falsepiece.resource = resource.id join pattern on falsepiece.pattern = pattern.id where falsepiece.userCreated = ?",
+      "SELECT  falsepiece.id as falsepieceId,falsepiece.size,falsepiece.color,falsepiece.fabric,falsepiece.clotheType,falsepiece.clotheName ,collection.collectionName,resource.path,resource.name,resource.id as resourceId,pattern.patternName,pattern.pathPattern,pattern.id as patternId FROM falsepiece join collection on falsepiece.collection = collection.id join resource on falsepiece.resource = resource.id join pattern on falsepiece.pattern = pattern.id where falsepiece.userCreated = ?",
       userId,
       "select",
       conn

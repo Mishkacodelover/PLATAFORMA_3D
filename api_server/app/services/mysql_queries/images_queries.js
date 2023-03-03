@@ -69,7 +69,7 @@ imagesQueries.getAllResources = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM resource where userCreated = ?",
+      "SELECT * FROM resource where userCreated = ? and isDelete = 0",
       id,
       "select",
       conn
@@ -89,6 +89,23 @@ imagesQueries.getAvatarByUserId = async (id) => {
       "SELECT * FROM avatar WHERE userCreated = ?",
       id,
       "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+imagesQueries.logicDeleteResource = async (id) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "UPDATE resource set isDelete = 1 WHERE id = ?",
+      id,
+      "update",
       conn
     );
   } catch (e) {

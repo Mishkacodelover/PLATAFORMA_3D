@@ -103,4 +103,16 @@ controller.getAllResources = async (req, res) => {
   }
 };
 
+controller.logicDeleteResource = async (req, res) => {
+  try {
+    await dao.logicDeleteResource(req.params.id);
+
+    const resource = await dao.getAllResources(req.params.id);
+
+    return res.send(resource);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 export default controller;

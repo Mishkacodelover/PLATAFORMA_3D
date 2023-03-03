@@ -6,7 +6,11 @@ export default function GraficResources() {
   const [resource, setResource] = useState(null);
   const [alert, setAlert] = useState(false);
   const [avatar, setAvatar] = useState();
-
+  const [value] = useState({ isDelete: false });
+  const [deleteAlert, setDeleteAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [resourceDeleted, setResourceDeleted] = useState(null);
   const { authorization } = useAuthContext();
 
   const formData = new FormData();
@@ -71,6 +75,42 @@ export default function GraficResources() {
     [authorization.id]
   );
 
+  const handleClickOpen = (id) => {
+    setOpen(true);
+    setResourceDeleted(resource.find((item) => item.id === id));
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  async function deleteResource(id) {
+    const response = await fetch(`http://localhost:8000/images/image/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(value),
+    });
+    try {
+      if (response.status === 200) {
+        handleClose();
+        setDeleteAlert(true);
+        setTimeout(() => setDeleteAlert(false), 2000);
+        const newResource = await response.json();
+        if (newResource) {
+          setResource(newResource);
+        }
+      } else {
+        console.log("error al eliminar la imagen");
+        setErrorAlert(true);
+        setTimeout(() => setErrorAlert(false), 2000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <GraficResourcesView
       resource={resource}
@@ -78,6 +118,12 @@ export default function GraficResources() {
       onFileChange={onFileChange}
       alert={alert}
       avatar={avatar}
+      deleteAlert={deleteAlert}
+      deleteResource={deleteResource}
+      errorAlert={errorAlert}
+      handleClose={handleClose}
+      handleClickOpen={handleClickOpen}
+      open={open}
     />
   );
 }

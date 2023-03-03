@@ -57,6 +57,29 @@ export default function CollectionView({
           )}
           {deleteAlert && <Alert severity="success">Colección eliminada</Alert>}
 
+          <Grid item sx={{ paddingTop: "16px" }} md={10}>
+            <Button
+              onClick={handleCollectionOpen}
+              variant="contained"
+              sx={{ p: "8px 44px" }}
+            >
+              Crear colección de ropa
+            </Button>
+          </Grid>
+        </Grid>
+        {createCollection && (
+          <Stack justifyContent="center" alignItems="center">
+            <Box sx={{ width: "70%" }}>
+              <CreateCollection
+                setAddCollection={setAddCollection}
+                addCollectionData={addCollectionData}
+                addCollection={addCollection}
+                handleCollection={handleCollection}
+              />
+            </Box>
+          </Stack>
+        )}
+        <Grid sx={{ paddingTop: "24px" }}>
           {collection ? (
             collection.map((col) => (
               <Grid
@@ -92,61 +115,8 @@ export default function CollectionView({
                       {dayjs(col.finishDate).format("DD/MM/YYYY")}
                     </Typography>
                   </Grid>
-                  {/* utilizar para más adelante... */}
-                  {/* {col.name ? (
-                    <Grid item md={6}>
-                      <Typography>Uso de la colección:{col.name}</Typography>
-                    </Grid>
-                  ) : (
-                    <Grid item md={6}>
-                      <Typography> Aún no has asignado un uso</Typography>
-                    </Grid>
-                  )}
-                  {col.description ? (
-                    <Grid item md={6}>
-                      <Typography>Descripción: {col.description}</Typography>
-                    </Grid>
-                  ) : (
-                    <Grid item md={6}>
-                      <Typography>No hay ninguna descripción</Typography>
-                    </Grid>
-                  )} */}
                 </Grid>
                 <Grid item md={3}>
-                  {/* <Button
-                    variant="outlined"
-                    sx={{
-                      border: "2px solid",
-                      p: "4px 16px",
-                      color: "secondary.main",
-                      marginRight: "4px",
-                    }}
-                    size="small"
-                    onClick={() => handleOpenCollectionUse(col.id)}
-                  >
-                    Añadir uso
-                  </Button>
-                  <Modal
-                    aria-labelledby="add-collectionuse-form"
-                    aria-describedby="add-collectionuse-form"
-                    open={openCollectionUse}
-                    onClose={handleCloseCollectionUse}
-                    closeAfterTransition
-                    slots={Backdrop}
-                    slotsProps={{
-                      timeout: 500,
-                    }}
-                  >
-                    <Fade in={openCollectionUse}>
-                      <Box sx={style}>
-                        <CollectionUse
-                          use={use}
-                          handleUse={handleUse}
-                          addCollectionUse={addCollectionUse}
-                        />
-                      </Box>
-                    </Fade>
-                  </Modal> */}
                   <Button
                     variant="outlined"
                     sx={{
@@ -198,28 +168,7 @@ export default function CollectionView({
               <Typography>Todavía no tienes colecciones de ropa</Typography>
             </Grid>
           )}
-          <Grid item sx={{ paddingTop: "16px" }} md={10}>
-            <Button
-              onClick={handleCollectionOpen}
-              variant="contained"
-              sx={{ p: "8px 44px" }}
-            >
-              Crear colección de ropa
-            </Button>
-          </Grid>
         </Grid>
-        {createCollection && (
-          <Stack justifyContent="center" alignItems="center">
-            <Box sx={{ width: "70%" }}>
-              <CreateCollection
-                setAddCollection={setAddCollection}
-                addCollectionData={addCollectionData}
-                addCollection={addCollection}
-                handleCollection={handleCollection}
-              />
-            </Box>
-          </Stack>
-        )}
       </Box>
     </>
   );

@@ -17,7 +17,7 @@ export default function Header() {
             </Link>
           </Grid>
 
-          <Grid item sx={{ justifyContent: "flex-end" }}>
+          <Grid item sx={{ justifyContent: "flex-end" }} md={3}>
             <Link to="">
               <Button
                 size="large"
@@ -37,19 +37,7 @@ export default function Header() {
                   color: "secondary.dark",
                 }}
               >
-                empresas
-              </Button>
-            </Link>
-
-            <Link to="/login-invited">
-              <Button
-                size="large"
-                sx={{
-                  fontSize: "18px",
-                  color: "secondary.dark",
-                }}
-              >
-                invitados
+                Iniciar sesión
               </Button>
             </Link>
           </Grid>

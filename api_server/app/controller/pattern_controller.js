@@ -15,20 +15,18 @@ controller.uploadPattern = async (req, res) => {
 
     const images = !req.files.file.length ? [req.files.file] : req.files.file;
 
-    images.forEach(async (image) => {
+    for await (const image of images) {
       let uploadPath = __dirname + "/public/images/products/" + image.name;
       let BBDDPath = "images/products/" + image.name;
-      image.mv(uploadPath, (err) => {
-        if (err) return res.status(500).send(err);
-      });
+      await image.mv(uploadPath);
       await dao.addPattern({
         patternName: image.name,
         pathPattern: BBDDPath,
         userCreated: req.body.userCreated,
       });
-    });
-
-    return res.send("Imagen subida!");
+    }
+    const pattern = await dao.getAllPatterns(req.body.userCreated);
+    return res.send(pattern);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);

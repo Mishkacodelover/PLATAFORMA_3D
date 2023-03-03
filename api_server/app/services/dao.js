@@ -63,13 +63,16 @@ dao.getUseNameCollectionByUser = async (userId) =>
 dao.addResource = async (imageData) =>
   await imagesQueries.addResource(imageData);
 
+dao.getAllResources = async (id) => await imagesQueries.getAllResources(id);
+
+dao.logicDeleteResource = async (id) =>
+  await imagesQueries.logicDeleteResource(id);
+
 dao.addAvatar = async (imageData) => await imagesQueries.addAvatar(imageData);
 
 dao.getImageById = async (id) => await imagesQueries.getImageById(id);
 
 dao.getAvatarByUserId = async (id) => await imagesQueries.getAvatarByUserId(id);
-
-dao.getAllResources = async (id) => await imagesQueries.getAllResources(id);
 
 dao.getAllPatterns = async (id) => await patternQueries.getAllPatterns(id);
 
@@ -97,8 +100,8 @@ dao.getFiscalDataSuscriptionByUserId = async (id) =>
 dao.addFalsePiece = async (pieceData) =>
   await falsePieceQueries.addFalsePiece(pieceData);
 
-dao.getFalsePieceByCode = async (code) =>
-  await falsePieceQueries.getFalsePieceByCode(code);
+dao.getFalsePieceByCode = async (name) =>
+  await falsePieceQueries.getFalsePieceByCode(name);
 dao.getFalsePieceImgById = async (userId) =>
   await falsePieceQueries.getFalsePieceImgById(userId);
 

@@ -7,7 +7,7 @@ const falsePiece = {
   color: "",
   fabric: "",
   clotheType: "",
-  code: "",
+  clotheName: "",
 };
 
 export default function Piece() {
@@ -19,6 +19,7 @@ export default function Piece() {
   const [patternChecked, setPatternChecked] = useState(null);
   const [resourceChecked, setResourceChecked] = useState(null);
   const [collectionChecked, setCollectionChecked] = useState(null);
+  const [alert, setAlert] = useState(false);
   const { authorization } = useAuthContext();
 
   const handlePattern = (value) => () => {
@@ -109,7 +110,9 @@ export default function Piece() {
     });
     try {
       if (response.ok) {
-        setAddPiece(newPiece);
+        setAddPiece(falsePiece);
+        setAlert(true);
+        setTimeout(() => setAlert(false), 2000);
       } else {
         console.log("error añadir pieza");
       }
@@ -134,6 +137,7 @@ export default function Piece() {
 
   return (
     <PieceView
+      alert={alert}
       addPiece={addPiece}
       addFalsePiece={addFalsePiece}
       avatar={avatar}

@@ -16,7 +16,8 @@ export default function WelcomeVideo() {
       >
         <ReactPlayer
           url={video}
-          controls={true}
+          controls
+          playing
           width="100%"
           height="100%"
           style={{ position: "static" }}

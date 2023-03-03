@@ -137,7 +137,7 @@ export default function HandleUserView({
                     aria-describedby="alert-dialog-description"
                   >
                     <DialogTitle id="alert-dialog-title">
-                      {"¿Está seguro de que quiere eliminar al usuario"}
+                      {"¿Está seguro de que quiere eliminar al usuario?"}
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">

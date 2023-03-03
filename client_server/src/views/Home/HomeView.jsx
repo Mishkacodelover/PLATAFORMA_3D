@@ -5,7 +5,7 @@ import Link from "../../components/Link/Link";
 import { Box, Typography, Stack, Grid, Button } from "@mui/material";
 import Partners from "../../components/Partners/Partners";
 
-import video from "../../assets/videos/mui_colors.mp4";
+import video from "../../assets/videos/video_preview_bolso.mp4";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 
@@ -54,7 +54,6 @@ export default function HomeView() {
             </Grid>
           </Grid>
 
-          {/* <Box sx={{ paddingRight: "378px", paddingLeft: "378px" }}> */}
           <Grid
             container
             direction="row"
@@ -71,22 +70,14 @@ export default function HomeView() {
             >
               Reserva una cita
             </Button>
-            {/* <Link to="/registration">
-                <Button
-                  sx={{ p: "8px 32px", border: "2px solid" }}
-                  variant="outlined"
-                >
-                  Ponnos a prueba
-                </Button>
-              </Link> */}
           </Grid>
-          {/* </Box> */}
         </Box>
         <Box>
           <Box>
             <Splide
               options={{
                 rewind: true,
+                type: "loop",
 
                 perPage: 3,
                 maxWidth: "90%",
@@ -170,8 +161,8 @@ export default function HomeView() {
             <Grid item md={6} xs={12} sx={{ p: "68px" }}>
               <ReactPlayer
                 url={video}
-                controls
                 playing
+                loop
                 width="100%"
                 height="100%"
                 style={{ position: "static" }}

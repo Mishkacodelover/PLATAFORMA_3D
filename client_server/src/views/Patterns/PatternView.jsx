@@ -64,7 +64,7 @@ export default function PatternView({
             alignContent: "center",
           }}
         >
-          <Grid item md={5} xs={12}>
+          <Grid item md={4} xs={12}>
             <Typography
               color="secondary.dark"
               variant="h6"
@@ -75,7 +75,7 @@ export default function PatternView({
           </Grid>
           <Grid
             item
-            md={7}
+            md={8}
             xs={12}
             sx={{
               paddingBottom: "16px",
@@ -98,7 +98,7 @@ export default function PatternView({
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ backgroundColor: "secondary.light" }}
+                sx={{ backgroundColor: "secondary.light", marginLeft: "16px" }}
               >
                 Añadir recurso gráfico
               </Button>

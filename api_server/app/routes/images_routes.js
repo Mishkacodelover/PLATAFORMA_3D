@@ -9,6 +9,8 @@ imagesRouter.get("/all-images/:id", imagesController.getAllResources);
 
 imagesRouter.get("/image/:id", imagesController.getImage);
 
+imagesRouter.delete("/image/:id", imagesController.logicDeleteResource);
+
 imagesRouter.post("/upload/avatar", imagesController.uploadAvatar);
 
 imagesRouter.get("/avatar/:id", imagesController.getAvatarByUserId);

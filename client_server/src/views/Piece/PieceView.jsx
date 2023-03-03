@@ -1,10 +1,11 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, Alert } from "@mui/material";
 import InternalHeader from "../../components/InternalHeader";
 import PieceForm from "../../components/PieceForm/PieceForm";
 
 export default function PieceView({
   addPiece,
   addFalsePiece,
+  alert,
   avatar,
   collection,
   handlePiece,
@@ -22,6 +23,7 @@ export default function PieceView({
       <Box>
         <Grid container>
           <InternalHeader text=" Crea tus prendas de ropa" avatar={avatar} />
+          {alert && <Alert severity="success">¡Prenda creada!</Alert>}
           <Typography
             variant="h5"
             sx={{ paddingLeft: "36px" }}

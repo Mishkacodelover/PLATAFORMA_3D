@@ -31,6 +31,7 @@ export default function Pattern() {
 
       if (response.ok) {
         setAlert(true);
+        setTimeout(() => setAlert(false), 2000);
         const newImage = await response.json();
         if (newImage) {
           setPattern(newImage);

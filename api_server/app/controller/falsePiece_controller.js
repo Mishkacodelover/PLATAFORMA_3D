@@ -3,14 +3,14 @@ import dao from "../services/dao.js";
 const controller = {};
 
 controller.addFalsePiece = async (req, res) => {
-  const { collection, pattern, resource, code } = req.body;
+  const { collection, pattern, resource, clotheName } = req.body;
 
   console.log(req.body);
 
-  if (!collection || !pattern || !resource || !code)
+  if (!collection || !pattern || !resource || !clotheName)
     return res.status(400).send("Error al recibir el body");
 
-  const piece = await dao.getFalsePieceByCode(code);
+  const piece = await dao.getFalsePieceByCode(clotheName);
 
   if (piece.length > 0) return res.status(409).send("esta pieza ya existe");
 

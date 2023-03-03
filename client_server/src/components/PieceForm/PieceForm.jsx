@@ -2,6 +2,7 @@ import { Grid, TextField, Button, MenuItem, Typography } from "@mui/material";
 
 import { clothes } from "./utils/clothes";
 import { sizes } from "./utils/sizes";
+import { colors } from "./utils/colors";
 import Link from "../../components/Link/Link";
 import PatternList from "../../components/PatternList/PatternList";
 import ResourceList from "../../components/ResourceList/ResourceList";
@@ -47,7 +48,7 @@ export default function PieceForm({
             <Typography
               variant="h6"
               color="secondary.dark"
-              sx={{ paddingBottom: "36px" }}
+              sx={{ paddingBottom: "44px", paddingTop: "8px" }}
               textAlign="left"
             >
               Elige el tipo de prenda que vas a crear. Puedes asignar a cada
@@ -91,14 +92,20 @@ export default function PieceForm({
               </Grid>
               <Grid item xs={12} md={12}>
                 <TextField
-                  type="text"
+                  select
                   label="Color"
                   name="color"
                   variant="standard"
                   fullWidth
                   value={addPiece.color}
                   onChange={handlePiece}
-                />
+                >
+                  {colors.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
 
               <Grid item xs={12} md={12}>
@@ -116,11 +123,11 @@ export default function PieceForm({
             <Grid item xs={12} md={12}>
               <TextField
                 type="text"
-                label="Código identificador"
-                name="code"
+                label="Nombre de tu prenda"
+                name="clotheName"
                 variant="standard"
                 fullWidth
-                value={addPiece.code}
+                value={addPiece.clotheName}
                 onChange={handlePiece}
               />
             </Grid>
@@ -138,27 +145,12 @@ export default function PieceForm({
                 Crear prenda
               </Button>
             </Grid>
-            <Grid item xs={12} md={12}>
-              <Link to="/u/piece-all">
-                <Button
-                  fullWidth
-                  type="submit"
-                  variant="outlined"
-                  sx={{
-                    marginTop: "16px",
-                    border: "2px solid",
-                  }}
-                >
-                  Ver prendas
-                </Button>
-              </Link>
-            </Grid>
           </Grid>
           <Grid
             item
             md={6}
             container
-            spacing={2}
+            spacing={4}
             sx={{ justifyContent: "center" }}
           >
             <Grid item md={12}>
@@ -181,6 +173,21 @@ export default function PieceForm({
                 collectionChecked={collectionChecked}
                 handleCollection={handleCollection}
               />
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <Link to="/u/piece-all">
+                <Button
+                  fullWidth
+                  type="submit"
+                  variant="outlined"
+                  sx={{
+                    marginTop: "16px",
+                    border: "2px solid",
+                  }}
+                >
+                  Ver prendas
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </Grid>
