@@ -34,6 +34,9 @@ dao.addCollection = async (collectionData) =>
 dao.getCollectionById = async (id) =>
   await collectionQueries.getCollectionById(id);
 
+dao.getCollectionByUserId = async (userId) =>
+  await collectionQueries.getCollectionByUserId(userId);
+
 dao.getCollectionByName = async (collectionName) =>
   await collectionQueries.getCollectionByName(collectionName);
 
@@ -104,5 +107,8 @@ dao.getFalsePieceByCode = async (name) =>
   await falsePieceQueries.getFalsePieceByCode(name);
 dao.getFalsePieceImgById = async (userId) =>
   await falsePieceQueries.getFalsePieceImgById(userId);
+
+dao.getFalsePieceImgByCollection = async (id) =>
+  await falsePieceQueries.getFalsePieceImgByCollection(id);
 
 export default dao;

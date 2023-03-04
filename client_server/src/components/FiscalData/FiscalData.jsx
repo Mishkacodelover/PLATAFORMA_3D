@@ -57,16 +57,19 @@ export default function FiscalData() {
     }
   }
 
-  useEffect(function () {
-    async function fetchData() {
-      const response = await fetch(
-        `http://localhost:8000/fiscalData/suscription/${authorization.id}`
-      );
-      const data = await response.json();
-      setFiscalData(data);
-    }
-    fetchData();
-  }, []);
+  useEffect(
+    function () {
+      async function fetchData() {
+        const response = await fetch(
+          `http://localhost:8000/fiscalData/suscription/${authorization.id}`
+        );
+        const data = await response.json();
+        setFiscalData(data);
+      }
+      fetchData();
+    },
+    [authorization.id]
+  );
 
   async function addFiscalData(event, inputData) {
     event.preventDefault();

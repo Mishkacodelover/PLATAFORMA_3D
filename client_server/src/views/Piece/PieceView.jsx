@@ -6,7 +6,7 @@ export default function PieceView({
   addPiece,
   addFalsePiece,
   alert,
-  avatar,
+
   collection,
   handlePiece,
   pattern,
@@ -22,7 +22,7 @@ export default function PieceView({
     <>
       <Box>
         <Grid container>
-          <InternalHeader text=" Crea tus prendas de ropa" avatar={avatar} />
+          <InternalHeader text=" Crea tus prendas de ropa" />
           {alert && <Alert severity="success">¡Prenda creada!</Alert>}
           <Typography
             variant="h5"

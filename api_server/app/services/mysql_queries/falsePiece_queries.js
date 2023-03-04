@@ -67,4 +67,21 @@ falsePieceQueries.getFalsePieceImgById = async (userId) => {
   }
 };
 
+falsePieceQueries.getFalsePieceImgByCollection = async (id) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT  falsepiece.id as falsepieceId,falsepiece.size,falsepiece.color,falsepiece.fabric,falsepiece.clotheType,falsepiece.clotheName ,collection.collectionName,collection.id as collectionId,resource.path,resource.name,resource.id as resourceId,pattern.patternName,pattern.pathPattern,pattern.id as patternId FROM falsepiece join collection on falsepiece.collection = collection.id join resource on falsepiece.resource = resource.id join pattern on falsepiece.pattern = pattern.id where collection.id = ?",
+      id,
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 export default falsePieceQueries;

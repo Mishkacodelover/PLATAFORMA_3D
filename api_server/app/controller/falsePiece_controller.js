@@ -36,4 +36,18 @@ controller.getFalsePieceImgById = async (req, res) => {
   }
 };
 
+controller.getFalsePieceImgByCollection = async (req, res) => {
+  try {
+    const piece = await dao.getFalsePieceImgByCollection(req.params.id);
+
+    if (piece.length <= 0)
+      return res.status(404).send("no existe la pieza con los recursos");
+
+    return res.send(piece[0]);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
 export default controller;

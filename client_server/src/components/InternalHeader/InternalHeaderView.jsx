@@ -3,7 +3,7 @@ import { Grid, Typography, Avatar } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useAuthContext } from "../../contexts/AuthContext";
 
-export default function InternalHeaderView({ text, user, avatar }) {
+export default function InternalHeaderView({ text, avatar }) {
   const { authorization } = useAuthContext();
   return (
     <>

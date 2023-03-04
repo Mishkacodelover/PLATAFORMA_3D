@@ -78,10 +78,10 @@ export default function CreateCollectionView({
                   label="Fecha de fin"
                   value={addCollection.finishDate}
                   name="finishDate"
-                  onChange={(newValu) => {
+                  onChange={(newValue) => {
                     setAddCollection({
                       ...addCollection,
-                      finishDate: newValu,
+                      finishDate: newValue,
                     });
                   }}
                   renderInput={(params) => (

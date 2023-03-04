@@ -10,4 +10,9 @@ falsePieceRouter.get(
   falsePieceController.getFalsePieceImgById
 );
 
+falsePieceRouter.get(
+  "/collection/:id",
+  falsePieceController.getFalsePieceImgByCollection
+);
+
 export default falsePieceRouter;

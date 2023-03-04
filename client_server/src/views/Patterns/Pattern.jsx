@@ -5,7 +5,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 export default function Pattern() {
   const [pattern, setPattern] = useState(null);
   const [alert, setAlert] = useState(false);
-  const [avatar, setAvatar] = useState();
+
   const { authorization } = useAuthContext();
 
   const formData = new FormData();
@@ -58,23 +58,8 @@ export default function Pattern() {
     [authorization.id]
   );
 
-  useEffect(
-    function () {
-      async function fetchData() {
-        const response = await fetch(
-          `http://localhost:8000/images/avatar/${authorization.id}`
-        );
-        const data = await response.json();
-        setAvatar(data);
-      }
-      fetchData();
-    },
-    [authorization.id]
-  );
-
   return (
     <PatternView
-      avatar={avatar}
       pattern={pattern}
       onFileChange={onFileChange}
       uploadPattern={uploadPattern}

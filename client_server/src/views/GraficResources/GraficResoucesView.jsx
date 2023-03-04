@@ -34,7 +34,7 @@ export default function GraficResourcesView({
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
-        <InternalHeader avatar={avatar} />
+        <InternalHeader />
         <Box>
           {alert && (
             <Alert severity="success">¡Imágen añadida con éxito!</Alert>
@@ -47,12 +47,7 @@ export default function GraficResourcesView({
             </Alert>
           )}
         </Box>
-        <ImageList
-          sx={{ maxWidth: "100%", height: "460px" }}
-          variant="woven"
-          cols={3}
-          gap={8}
-        >
+        <ImageList sx={{ width: "100%", height: 424 }} cols={4} rowHeight={424}>
           {resource ? (
             resource.map(({ path, name, id }) => (
               <>
@@ -63,24 +58,17 @@ export default function GraficResourcesView({
                     loading="lazy"
                   />
                   <ImageListItemBar
-                    title={`Nombre: ${name}`}
+                    title={name}
                     sx={{
-                      // backgroundColor: "rgba(221, 194, 231)",
-                      // background:
-                      //   "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-                      //   "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-                      color: "primary.dark",
                       backgroundImage:
-                        "linear-gradient(var(--primario_claro),var(--blanco))",
+                        "linear-gradient(var(--primario),var(--azul_oscuro))",
                     }}
-                    // subtitle={item.author}
                     actionIcon={
                       <IconButton
                         onClick={() => handleClickOpen(id)}
                         sx={{
                           color: "common.white",
                         }}
-                        // aria-label={`info about ${item.title}`}
                       >
                         <DeleteIcon />
                       </IconButton>
@@ -106,7 +94,7 @@ export default function GraficResourcesView({
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Cancelar</Button>
-                    <Button onClick={() => deleteResource(id)} autoFocus>
+                    <Button onClick={deleteResource} autoFocus>
                       Aceptar
                     </Button>
                   </DialogActions>

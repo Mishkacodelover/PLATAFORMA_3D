@@ -5,7 +5,6 @@ import HandleUser from "../../components/HandleUser";
 import HandleData from "../../components/HandleData/HandleData";
 
 export default function AdminDashboardView({
-  avatar,
   registerMember,
   handleCloseRegister,
   handleOpenRegister,
@@ -30,7 +29,7 @@ export default function AdminDashboardView({
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
-        <InternalHeader text="Panel de administador" avatar={avatar} />
+        <InternalHeader text="Panel de administador" />
         <Grid
           container
           alignItems="flex-start"

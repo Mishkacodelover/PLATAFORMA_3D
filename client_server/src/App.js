@@ -15,9 +15,11 @@ import Patterns from "./views/Patterns";
 import PublicRoutes from "./routes/PublicRoutes";
 import PrivateRoutes from "./routes/PrivateRoutes.jsx";
 import FinalPiece from "./views/FinalPiece/FinalPiece";
+import CollectionById from "./views/CollectionById";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utilities/theme.jsx";
 import { AuthContextProvider } from "./contexts/AuthContext";
+import { AvatarContextProvider } from "./contexts/AvatarContext";
 import { roles } from "./const/roles";
 import Home from "./views/Home";
 
@@ -26,52 +28,59 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route element={<PublicRoutes />}>
-                  <Route path="login" element={<Login />} />
-                  <Route path="login-invited" element={<LoginInvited />} />
+          <AvatarContextProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route element={<PublicRoutes />}>
+                    <Route path="login" element={<Login />} />
+                    <Route path="login-invited" element={<LoginInvited />} />
+                  </Route>
+
+                  <Route path="registration" element={<Registration />} />
                 </Route>
-
-                <Route path="registration" element={<Registration />} />
-              </Route>
-              <Route path="/u/" element={<LayoutInternal />}>
-                <Route
-                  element={
-                    <PrivateRoutes
-                      allowedRoles={[
-                        roles.admin,
-                        roles.designer,
-                        roles.operator,
-                        roles.workshop,
-                      ]}
-                    />
-                  }
-                >
-                  <Route path="profile" element={<Profile />} />
-
-                  <Route path="collections" element={<Collections />} />
-
-                  <Route path="piece" element={<Piece />} />
+                <Route path="/u/" element={<LayoutInternal />}>
                   <Route
-                    path="grafic-resources"
-                    element={<GraficResources />}
-                  />
-                  <Route path="patterns" element={<Patterns />} />
-
-                  <Route path="piece-all" element={<FinalPiece />} />
-
-                  <Route
-                    element={<PrivateRoutes allowedRoles={[roles.admin]} />}
+                    element={
+                      <PrivateRoutes
+                        allowedRoles={[
+                          roles.admin,
+                          roles.designer,
+                          roles.operator,
+                          roles.workshop,
+                        ]}
+                      />
+                    }
                   >
-                    <Route path="admin" element={<AdminDashboard />} />
+                    <Route path="profile" element={<Profile />} />
+
+                    <Route path="collections" element={<Collections />} />
+
+                    <Route path="piece" element={<Piece />} />
+                    <Route
+                      path="grafic-resources"
+                      element={<GraficResources />}
+                    />
+                    <Route path="patterns" element={<Patterns />} />
+
+                    <Route path="piece-all" element={<FinalPiece />} />
+
+                    <Route
+                      path="collection-piece"
+                      element={<CollectionById />}
+                    />
+
+                    <Route
+                      element={<PrivateRoutes allowedRoles={[roles.admin]} />}
+                    >
+                      <Route path="admin" element={<AdminDashboard />} />
+                    </Route>
                   </Route>
                 </Route>
-              </Route>
-            </Routes>
-          </BrowserRouter>
+              </Routes>
+            </BrowserRouter>
+          </AvatarContextProvider>
         </AuthContextProvider>
       </ThemeProvider>
     </>

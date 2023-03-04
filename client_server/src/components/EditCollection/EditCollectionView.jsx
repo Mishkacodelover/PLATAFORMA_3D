@@ -66,15 +66,15 @@ export default function EditCollectionView({
           <Grid item md={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                openTo="dat"
+                openTo="day"
                 views={["day"]}
                 label="Fecha de fin"
                 value={editCollection.finishDate}
                 name="finishDate"
-                onChange={(newValue) => {
+                onChange={(newValu) => {
                   setEditCollection({
                     ...editCollection,
-                    finishDate: newValue,
+                    finishDate: newValu,
                   });
                 }}
                 renderInput={(params) => (

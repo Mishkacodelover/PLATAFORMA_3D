@@ -162,6 +162,7 @@ export default function HomeView() {
               <ReactPlayer
                 url={video}
                 playing
+                controls
                 loop
                 width="100%"
                 height="100%"

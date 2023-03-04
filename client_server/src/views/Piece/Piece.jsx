@@ -15,7 +15,7 @@ export default function Piece() {
   const [pattern, setPattern] = useState(null);
   const [addPiece, setAddPiece] = useState(falsePiece);
   const [collection, setCollection] = useState(null);
-  const [avatar, setAvatar] = useState();
+
   const [patternChecked, setPatternChecked] = useState(null);
   const [resourceChecked, setResourceChecked] = useState(null);
   const [collectionChecked, setCollectionChecked] = useState(null);
@@ -121,26 +121,11 @@ export default function Piece() {
     }
   }
 
-  useEffect(
-    function () {
-      async function fetchData() {
-        const response = await fetch(
-          `http://localhost:8000/images/avatar/${authorization.id}`
-        );
-        const data = await response.json();
-        setAvatar(data);
-      }
-      fetchData();
-    },
-    [authorization.id]
-  );
-
   return (
     <PieceView
       alert={alert}
       addPiece={addPiece}
       addFalsePiece={addFalsePiece}
-      avatar={avatar}
       collection={collection}
       handlePiece={handlePiece}
       pattern={pattern}

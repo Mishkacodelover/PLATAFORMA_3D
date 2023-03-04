@@ -12,7 +12,7 @@ collectionQueries.addCollection = async (collectionData) => {
       collectionName: collectionData.collectionName,
       collectionType: collectionData.collectionType,
       initialDate: collectionData.initialDate,
-      finishDate: collectionData.initialDate,
+      finishDate: collectionData.finishDate,
       userCreated: collectionData.userCreated,
     };
 
@@ -36,6 +36,23 @@ collectionQueries.getCollectionById = async (id) => {
     return await db.query(
       "SELECT * FROM collection WHERE id = ?",
       id,
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+collectionQueries.getCollectionByUserId = async (userId) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT * FROM collection WHERE userCreated = ? and isDelete = 0",
+      userId,
       "select",
       conn
     );
@@ -89,7 +106,7 @@ collectionQueries.updateCollection = async (collectionData, id) => {
       collectionName: collectionData.collectionName,
       collectionType: collectionData.collectionType,
       initialDate: collectionData.initialDate,
-      finishDate: collectionData.initialDate,
+      finishDate: collectionData.finishDate,
     };
 
     collectionObj = await utils.removeUndefinedKeys(collectionObj);

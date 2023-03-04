@@ -105,11 +105,11 @@ controller.getAllResources = async (req, res) => {
 
 controller.logicDeleteResource = async (req, res) => {
   try {
-    await dao.logicDeleteResource(req.params.id);
+    const i = await dao.logicDeleteResource(req.params.id);
 
-    const resource = await dao.getAllResources(req.params.id);
+    // const resource = await dao.getAllResources(req.params.id);
 
-    return res.send(resource);
+    return res.send(i);
   } catch (e) {
     console.log(e.message);
   }

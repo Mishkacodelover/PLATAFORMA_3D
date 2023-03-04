@@ -6,8 +6,8 @@ import dayjs from "dayjs";
 const obj = {
   collectionName: "",
   collectionType: "",
-  initialDate: dayjs("01/03/2023"),
-  finishDate: dayjs("01/03/2023"),
+  initialDate: dayjs("03/01/2023"),
+  finishDate: dayjs("04/01/2023"),
 };
 
 const objUse = {
@@ -25,10 +25,10 @@ export default function Collections() {
   const [value] = useState({ isDelete: false });
   const [addCollection, setAddCollection] = useState(obj);
   const [alert, setAlert] = useState(false);
+  const [alertError, setAlertError] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [use, setUse] = useState(objUse);
   const [openCollectionUse, setOpenCollectionUse] = useState();
-  const [avatar, setAvatar] = useState();
 
   const userId = { userCreated: authorization.id };
 
@@ -104,13 +104,19 @@ export default function Collections() {
         setAlert(true);
         setCreateCollection(false);
         setTimeout(() => setAlert(false), 2000);
-        const newColletion = [...collection, collectionAdd];
-        setCollection(newColletion);
+
+        const newCollection = await response.json();
+        if (newCollection) {
+          setCollection(newCollection);
+        }
       } else {
         console.log("error al editar valor");
       }
     } catch (error) {
       console.log(error);
+      if (response.status === 409) {
+        setAlertError(true);
+      }
     }
   }
 
@@ -172,10 +178,12 @@ export default function Collections() {
       if (response.status === 200) {
         setDeleteAlert(true);
         setTimeout(() => setDeleteAlert(false), 2000);
-        const newCollection = await response.json();
-        if (newCollection) {
-          setCollection(newCollection);
-        }
+        const collectionDeleted = collection.findIndex(
+          (item) => item.id === id
+        );
+        const copyCollection = [...collection];
+        copyCollection.splice(collectionDeleted, 1);
+        setCollection(copyCollection);
       } else {
         console.log("error al eliminar la colección");
       }
@@ -184,31 +192,32 @@ export default function Collections() {
     }
   }
 
-  async function addCollectionUse(event, use) {
-    event.preventDefault();
-    const useAdd = {
-      ...use,
-      collection: idCollection.id,
-    };
-    const response = await fetch(`http://localhost:8000/collectionUse`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(useAdd),
-    });
-    try {
-      if (response.ok) {
-        setUse(obj);
-        handleCloseCollectionUse();
-      } else {
-        console.log("error al editar valor");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function addCollectionUse(event, use) {
+  //   event.preventDefault();
+  //   const useAdd = {
+  //     ...use,
+  //     collection: idCollection.id,
+  //   };
+  //   const response = await fetch(`http://localhost:8000/collectionUse`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(useAdd),
+  //   });
+  //   try {
+  //     if (response.ok) {
+  //       setUse(obj);
+  //       handleCloseCollectionUse();
+  //     } else {
+  //       console.log("error al editar valor");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
+  //más adelante....
   // useEffect(
   //   function () {
   //     async function fetchData() {
@@ -224,26 +233,12 @@ export default function Collections() {
   //   [collection.id]
   // );
 
-  useEffect(
-    function () {
-      async function fetchData() {
-        const response = await fetch(
-          `http://localhost:8000/images/avatar/${authorization.id}`
-        );
-        const data = await response.json();
-        setAvatar(data);
-      }
-      fetchData();
-    },
-    [authorization.id]
-  );
-
   return (
     <CollectionView
       addCollection={addCollection}
       addCollectionData={addCollectionData}
       alert={alert}
-      avatar={avatar}
+      alertError={alertError}
       collection={collection}
       collectionEdited={collectionEdited}
       createCollection={createCollection}
@@ -264,7 +259,6 @@ export default function Collections() {
       openCollectionUse={openCollectionUse}
       handleCloseCollectionUse={handleCloseCollectionUse}
       handleOpenCollectionUse={handleOpenCollectionUse}
-      addCollectionUse={addCollectionUse}
     />
   );
 }

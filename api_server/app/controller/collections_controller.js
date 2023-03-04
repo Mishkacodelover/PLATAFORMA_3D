@@ -3,7 +3,13 @@ import dao from "../services/dao.js";
 const controller = {};
 
 controller.addCollections = async (req, res) => {
-  const { collectionName, collectionType, initialDate, finishDate } = req.body;
+  const {
+    collectionName,
+    collectionType,
+    initialDate,
+    finishDate,
+    userCreated,
+  } = req.body;
 
   console.log(req.body);
 
@@ -16,8 +22,10 @@ controller.addCollections = async (req, res) => {
     if (collection.length > 0)
       return res.status(409).send("esta colección ya existe");
 
-    const addCollection = await dao.addCollection(req.body);
-    if (addCollection) return res.send(addCollection[0]);
+    await dao.addCollection(req.body);
+    const addCollection = await dao.getCollectionByUserId(userCreated);
+
+    if (addCollection) return res.send(addCollection);
   } catch (e) {
     console.log(e.message);
   }
@@ -67,10 +75,12 @@ controller.updateCollection = async (req, res) => {
 
 controller.logicDeleteCollection = async (req, res) => {
   try {
-    await dao.logicDeleteCollection(req.params.id);
-    const collections = await dao.getAllCollections(req.params.id);
+    const deleted = await dao.logicDeleteCollection(req.params.id);
+    if (deleted) {
+      const collections = await dao.getAllCollections(req.params.id);
 
-    return res.send(collections);
+      return res.send(collections);
+    }
   } catch (e) {
     console.log(e.message);
   }

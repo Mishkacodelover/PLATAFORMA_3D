@@ -32,7 +32,7 @@ patternQueries.getAllPatterns = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM pattern where userCreated = ?",
+      "SELECT * FROM pattern where userCreated = ? and isDelete = 0",
       id,
       "select",
       conn

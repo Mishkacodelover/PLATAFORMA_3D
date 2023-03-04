@@ -5,7 +5,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 export default function GraficResources() {
   const [resource, setResource] = useState(null);
   const [alert, setAlert] = useState(false);
-  const [avatar, setAvatar] = useState();
+
   const [value] = useState({ isDelete: false });
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
@@ -61,20 +61,6 @@ export default function GraficResources() {
     [authorization.id]
   );
 
-  useEffect(
-    function () {
-      async function fetchData() {
-        const response = await fetch(
-          `http://localhost:8000/images/avatar/${authorization.id}`
-        );
-        const data = await response.json();
-        setAvatar(data);
-      }
-      fetchData();
-    },
-    [authorization.id]
-  );
-
   const handleClickOpen = (id) => {
     setOpen(true);
     setResourceDeleted(resource.find((item) => item.id === id));
@@ -84,14 +70,17 @@ export default function GraficResources() {
     setOpen(false);
   };
 
-  async function deleteResource(id) {
-    const response = await fetch(`http://localhost:8000/images/image/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(value),
-    });
+  async function deleteResource() {
+    const response = await fetch(
+      `http://localhost:8000/images/image/${resourceDeleted.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(value),
+      }
+    );
     try {
       if (response.status === 200) {
         handleClose();
@@ -117,7 +106,6 @@ export default function GraficResources() {
       uploadImage={uploadImage}
       onFileChange={onFileChange}
       alert={alert}
-      avatar={avatar}
       deleteAlert={deleteAlert}
       deleteResource={deleteResource}
       errorAlert={errorAlert}

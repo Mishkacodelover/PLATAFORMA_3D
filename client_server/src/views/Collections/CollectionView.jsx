@@ -8,11 +8,14 @@ import {
   Backdrop,
   Alert,
   Stack,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import CreateCollection from "../../components/CreateCollection";
 import EditCollection from "../../components/EditCollection";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import Link from "../../components/Link/Link";
 import dayjs from "dayjs";
 import { style } from "../../const/modalStyle";
 
@@ -20,7 +23,7 @@ export default function CollectionView({
   addCollection,
   addCollectionData,
   alert,
-  avatar,
+  alertError,
   collection,
   collectionEdited,
 
@@ -51,11 +54,14 @@ export default function CollectionView({
             alignItems: "center",
           }}
         >
-          <InternalHeader text="Mis Colecciones" avatar={avatar} />
+          <InternalHeader text="Mis Colecciones" />
           {alert && (
             <Alert severity="success">¡Colección creada con éxito!</Alert>
           )}
           {deleteAlert && <Alert severity="success">Colección eliminada</Alert>}
+          {alertError && (
+            <Alert severity="error">El nombre de la colección ya existe</Alert>
+          )}
 
           <Grid item sx={{ paddingTop: "16px" }} md={10}>
             <Button
@@ -83,9 +89,11 @@ export default function CollectionView({
           {collection ? (
             collection.map((col) => (
               <Grid
+                key={col.id}
                 container
                 direction="row"
-                alignItems="flex-start"
+                alignItems="center"
+                justifyContent="center"
                 sx={{
                   p: "16px",
                   boxShadow: "2px 2px 2px 1px var(--azul_oscuro)",
@@ -116,6 +124,7 @@ export default function CollectionView({
                     </Typography>
                   </Grid>
                 </Grid>
+
                 <Grid item md={3}>
                   <Button
                     variant="outlined"
@@ -152,6 +161,7 @@ export default function CollectionView({
                       </Box>
                     </Fade>
                   </Modal>
+
                   <Button
                     size="small"
                     onClick={() => deleteCollection(col.id)}
@@ -160,12 +170,26 @@ export default function CollectionView({
                   >
                     Eliminar
                   </Button>
+
+                  <Link to="/u/collection-piece">
+                    <Tooltip title="Ver prendas">
+                      <IconButton>
+                        <VisibilityIcon sx={{ color: "secondary.main" }} />
+                      </IconButton>
+                    </Tooltip>
+                  </Link>
                 </Grid>
               </Grid>
             ))
           ) : (
             <Grid item md={12}>
-              <Typography>Todavía no tienes colecciones de ropa</Typography>
+              <Typography
+                variant="h5"
+                textAlign={"center"}
+                color="secondary.dark"
+              >
+                Todavía no tienes colecciones de ropa
+              </Typography>
             </Grid>
           )}
         </Grid>

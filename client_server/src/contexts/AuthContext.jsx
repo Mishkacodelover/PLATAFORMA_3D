@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext({
   login: () => {},
-  loginInvited: () => {},
+
   logout: () => {},
   authorization: {
     email: null,
@@ -48,28 +48,29 @@ export function AuthContextProvider({ children }) {
       console.log("error");
     }
   }
+  // utilizar más adelante....
 
-  async function loginInvited(values) {
-    const response = await fetch("http://localhost:8000/user/invited/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    try {
-      const token = await response.json();
-      const data = jwtDecode(token.jwt);
-      setAuthorization({ ...data, token: token.jwt });
-      window.localStorage.setItem(
-        MY_AUTH_APP,
-        JSON.stringify({ ...data, token: token.jwt })
-      );
-    } catch (error) {
-      alert("Por favor introduzca los datos correctos");
-      console.log("error");
-    }
-  }
+  // async function loginInvited(values) {
+  //   const response = await fetch("http://localhost:8000/user/invited/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(values),
+  //   });
+  //   try {
+  //     const token = await response.json();
+  //     const data = jwtDecode(token.jwt);
+  //     setAuthorization({ ...data, token: token.jwt });
+  //     window.localStorage.setItem(
+  //       MY_AUTH_APP,
+  //       JSON.stringify({ ...data, token: token.jwt })
+  //     );
+  //   } catch (error) {
+  //     alert("Por favor introduzca los datos correctos");
+  //     console.log("error");
+  //   }
+  // }
 
   function logout() {
     window.localStorage.removeItem(MY_AUTH_APP);
@@ -84,7 +85,7 @@ export function AuthContextProvider({ children }) {
   const value = {
     authorization,
     login,
-    loginInvited,
+
     logout,
   };
 
