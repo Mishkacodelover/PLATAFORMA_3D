@@ -1,6 +1,6 @@
 import { Grid, Box, Typography } from "@mui/material";
 
-import LoginWhite from "../../assets/images/otros/landing_foto.png";
+import LoginWhite from "../../assets/images/otros/landing_ocho.png";
 import LoginForm from "../../components/LoginForm";
 
 export default function LoginView() {
@@ -18,7 +18,6 @@ export default function LoginView() {
       >
         <Grid
           container
-          direction="column"
           spacing={2}
           alignItems={"flex-start"}
           sx={{
@@ -32,7 +31,7 @@ export default function LoginView() {
               Te da la bienvenida...
             </Typography>
           </Grid>
-          <Grid item md={12}>
+          <Grid item md={5}>
             <LoginForm />
           </Grid>
         </Grid>

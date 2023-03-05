@@ -16,9 +16,11 @@ controller.addUser = async (req, res) => {
 
     if (user.length > 0) return res.status(409).send("usuario ya registrado");
 
-    const addUser = await dao.addUser(req.body);
+    await dao.addUser(req.body);
 
-    if (addUser) return res.send(addUser[0]);
+    const addUser = await dao.getAllActiveUsers();
+
+    if (addUser) return res.send(addUser);
   } catch (e) {
     console.log(e.message);
   }
@@ -36,9 +38,10 @@ controller.addInvitedUser = async (req, res) => {
 
     if (user.length > 0) return res.status(409).send("usuario ya registrado");
 
-    const addUser = await dao.addInvitedUser(req.body);
+    await dao.addInvitedUser(req.body);
+    const addUser = await dao.getAllActiveUsers();
 
-    if (addUser) return res.send(addUser[0]);
+    if (addUser) return res.send(addUser);
   } catch (e) {
     console.log(e.message);
   }

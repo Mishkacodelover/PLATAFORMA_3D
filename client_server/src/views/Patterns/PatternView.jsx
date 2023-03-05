@@ -15,7 +15,11 @@ export default function PatternView({
     <Box sx={{ p: "24px" }}>
       <Grid container maxWidth={"100%"}>
         <InternalHeader text="Modelos 3d" />
-        {alert && <Alert severity="success">¡Patrón añadido con éxito!</Alert>}
+        <Box>
+          {alert && (
+            <Alert severity="success">¡Patrón añadido con éxito!</Alert>
+          )}
+        </Box>
 
         <Splide
           options={{

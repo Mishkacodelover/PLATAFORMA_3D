@@ -31,8 +31,9 @@ export default function CollectionList({
         collection.map((item) => (
           <Box
             sx={{
-              backgroundImage:
-                "radial-gradient(var(--primario_claro),var(--blanco))",
+              // backgroundImage:
+              //   "radial-gradient(var(--primario_claro),var(--blanco))",
+              boxShadow: "0px 0px 1px 4px inset var(--primario_claro)",
             }}
           >
             <ListItem key={item.id} disablePadding>

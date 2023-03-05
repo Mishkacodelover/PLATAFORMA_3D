@@ -107,7 +107,6 @@ controller.logicDeleteResource = async (req, res) => {
   try {
     const image = await dao.logicDeleteResource(req.params.id);
     if (image) {
-      console.log(req.body);
       const resource = await dao.getAllResources(req.body.userCreated);
       return res.send(resource);
     }

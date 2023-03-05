@@ -49,7 +49,7 @@ export default function GraficResourcesView({
         </Box>
         <ImageList sx={{ width: "100%", height: 424 }} cols={4} rowHeight={424}>
           {resource ? (
-            resource.map(({ path, name, id, userCreated }) => (
+            resource.map(({ path, name, id }) => (
               <>
                 <ImageListItem key={id}>
                   <img
@@ -58,6 +58,7 @@ export default function GraficResourcesView({
                     loading="lazy"
                   />
                   <ImageListItemBar
+                    key={id}
                     title={name}
                     sx={{
                       backgroundImage:

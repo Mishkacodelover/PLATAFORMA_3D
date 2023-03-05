@@ -17,7 +17,7 @@ controller.addFiscalData = async (req, res) => {
     if (data.length > 0) return res.status(409).send("este NIF ya existe");
 
     await dao.addFiscalData(req.body, req.params.id);
-    const user = await dao.getFiscalDataByUserId(req.params.id);
+    const user = await dao.getFiscalDataSuscriptionByUserId(req.params.id);
 
     return res.send(user[0]);
   } catch (e) {

@@ -36,7 +36,7 @@ export default function RegistrationView() {
               paddingBottom: "68px",
             }}
           >
-            Suscripción plan Basic de nuestra platafomra gratis durante 7 días
+            Suscripción plan Basic de nuestra plataforma gratis durante 7 días
           </Typography>
           <RegistrationForm />
         </Grid>

@@ -45,7 +45,7 @@ export default function RegistrationForm() {
   return (
     <>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <Grid container direciont="column" spacing={2} maxWidth={"100%"}>
+        <Grid container spacing={2} maxWidth={"100%"}>
           <Grid item xs={12} md={6}>
             <TextField
               type="text"

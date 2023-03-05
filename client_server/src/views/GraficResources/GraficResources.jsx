@@ -6,7 +6,6 @@ export default function GraficResources() {
   const [resource, setResource] = useState(null);
   const [alert, setAlert] = useState(false);
 
-  const [value] = useState({ isDelete: false });
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [open, setOpen] = useState(false);
@@ -91,13 +90,13 @@ export default function GraficResources() {
         console.log("error al eliminar la imagen");
         setErrorAlert(true);
         setTimeout(() => setErrorAlert(false), 2000);
-        const deletedRes = await response.json();
-        if (deletedRes) {
-          const b = resource.findIndex((item) => item.id === deletedRes.id);
-          const a = [...resource];
-          a.splice(b, 1);
-          setResource(a);
-        }
+
+        const resourceIndexDeleted = resource.findIndex(
+          (resourceItem) => resourceItem.id === resourceDeleted.id
+        );
+        const newResourceList = [...resource];
+        newResourceList.splice(resourceIndexDeleted, 1);
+        setResource(newResourceList);
       }
     } catch (error) {
       console.log(error);

@@ -90,15 +90,22 @@ export default function AdminDashboard() {
         handleCloseEditUser();
 
         const editList = await response.json();
-        if (editList) {
-          setAllUser(editList);
-          const userIndexToUpdate = allUser.findIndex(
-            (userToEdit) => userToEdit.id === userEditing.id
-          );
-          const newUserList = [...allUser];
-          newUserList[userIndexToUpdate] = editList;
-          setAllUser(newUserList);
-        }
+        // if (editList) {
+        //   setAllUser(editList);
+        //   const userIndexToUpdate = allUser.findIndex(
+        //     (userToEdit) => userToEdit.id === userEditing.id
+        //   );
+        //   const newUserList = [...allUser];
+        //   newUserList[userIndexToUpdate] = editList;
+        //   setAllUser(newUserList);
+        // }
+
+        const userIndexToUpdate = allUser.findIndex(
+          (userToEdit) => userToEdit.id === userEditing.id
+        );
+        const newUserList = [...allUser];
+        newUserList[userIndexToUpdate] = editList;
+        setAllUser(newUserList);
       } else {
         alert("Cambie los datos");
         console.log("error al editar valor");
@@ -120,8 +127,13 @@ export default function AdminDashboard() {
 
       if (response.ok) {
         handleCloseRegister();
-        const newMemberList = [...allUser, values];
-        setAllUser(newMemberList);
+        // const newMemberList = [...allUser, values];
+        // setAllUser(newMemberList);
+
+        const newCollection = await response.json();
+        if (newCollection) {
+          setAllUser(newCollection);
+        }
       } else {
         console.log("error en el registro");
       }
