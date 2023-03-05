@@ -12,6 +12,7 @@ export default function GraficResources() {
   const [open, setOpen] = useState(false);
   const [resourceDeleted, setResourceDeleted] = useState(null);
   const { authorization } = useAuthContext();
+  const userId = { userCreated: authorization.id };
 
   const formData = new FormData();
 
@@ -34,10 +35,9 @@ export default function GraficResources() {
       if (response.ok) {
         setAlert(true);
         setTimeout(() => setAlert(false), 2000);
-
-        const newResource = await response.json();
-        if (newResource) {
-          setResource(newResource);
+        const newImage = await response.json();
+        if (newImage) {
+          setResource(newImage);
         }
       } else {
         console.log("error al subir imagen");
@@ -71,6 +71,7 @@ export default function GraficResources() {
   };
 
   async function deleteResource() {
+    const user = { userCreated: userId.userCreated };
     const response = await fetch(
       `http://localhost:8000/images/image/${resourceDeleted.id}`,
       {
@@ -78,7 +79,7 @@ export default function GraficResources() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(value),
+        body: JSON.stringify(user),
       }
     );
     try {
@@ -86,14 +87,17 @@ export default function GraficResources() {
         handleClose();
         setDeleteAlert(true);
         setTimeout(() => setDeleteAlert(false), 2000);
-        const newResource = await response.json();
-        if (newResource) {
-          setResource(newResource);
-        }
       } else {
         console.log("error al eliminar la imagen");
         setErrorAlert(true);
         setTimeout(() => setErrorAlert(false), 2000);
+        const deletedRes = await response.json();
+        if (deletedRes) {
+          const b = resource.findIndex((item) => item.id === deletedRes.id);
+          const a = [...resource];
+          a.splice(b, 1);
+          setResource(a);
+        }
       }
     } catch (error) {
       console.log(error);
