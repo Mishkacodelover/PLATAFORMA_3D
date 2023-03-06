@@ -86,17 +86,20 @@ export default function GraficResources() {
         handleClose();
         setDeleteAlert(true);
         setTimeout(() => setDeleteAlert(false), 2000);
-      } else {
-        console.log("error al eliminar la imagen");
-        setErrorAlert(true);
-        setTimeout(() => setErrorAlert(false), 2000);
-
+        // const editList = await response.json();
+        // if (editList) {
+        //   setResource(editList);
+        // }...de esta forma funciona pero más lento...
         const resourceIndexDeleted = resource.findIndex(
           (resourceItem) => resourceItem.id === resourceDeleted.id
         );
         const newResourceList = [...resource];
         newResourceList.splice(resourceIndexDeleted, 1);
         setResource(newResourceList);
+      } else {
+        console.log("error al eliminar la imagen");
+        setErrorAlert(true);
+        setTimeout(() => setErrorAlert(false), 2000);
       }
     } catch (error) {
       console.log(error);

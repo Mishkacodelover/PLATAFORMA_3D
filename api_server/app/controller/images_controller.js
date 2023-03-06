@@ -43,19 +43,18 @@ controller.uploadAvatar = async (req, res) => {
 
     const images = !req.files.file.length ? [req.files.file] : req.files.file;
 
-    images.forEach(async (image) => {
+    for await (const image of images) {
       let uploadPath = __dirname + "/public/images/products/" + image.name;
       let BBDDPath = "images/products/" + image.name;
-      image.mv(uploadPath, (err) => {
-        if (err) return res.status(500).send(err);
-      });
+      image.mv(uploadPath);
       await dao.addAvatar({
         name: image.name,
         path: BBDDPath,
         userCreated: req.body.userCreated,
       });
-    });
-    return res.send(images[0]);
+    }
+    const avatar = await dao.getAvatarByUserId(req.body.userCreated);
+    return res.send(avatar[0]);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);

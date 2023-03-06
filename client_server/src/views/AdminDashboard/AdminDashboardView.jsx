@@ -29,7 +29,7 @@ export default function AdminDashboardView({
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
-        <InternalHeader text="Panel de administador" />
+        <InternalHeader text="Panel de administrador" />
         <Grid
           container
           alignItems="flex-start"

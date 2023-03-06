@@ -49,7 +49,7 @@ export default function CollectionList({
                     tabIndex={-1}
                   />
                 </ListItemIcon>
-                <ListItemText primary={`Colección  ${item.collectionName}`} />
+                <ListItemText primary={`Colección: ${item.collectionName}`} />
               </ListItemButton>
             </ListItem>
           </Box>

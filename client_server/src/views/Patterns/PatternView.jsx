@@ -1,4 +1,16 @@
-import { Box, Grid, Button, Typography, InputBase, Alert } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Button,
+  Typography,
+  InputBase,
+  Alert,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  DialogContentText,
+} from "@mui/material";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import fotoMentira from "../../assets/images/otros/foto_mentira.jpeg";
@@ -10,6 +22,13 @@ export default function PatternView({
   onFileChange,
   uploadPattern,
   alert,
+  deletePattern,
+  deleteAlert,
+
+  handleClickOpen,
+  handleClose,
+
+  open,
 }) {
   return (
     <Box sx={{ p: "24px" }}>
@@ -17,8 +36,9 @@ export default function PatternView({
         <InternalHeader text="Modelos 3d" />
         <Box>
           {alert && (
-            <Alert severity="success">¡Patrón añadido con éxito!</Alert>
+            <Alert severity="success">¡Modelo 3d añadido con éxito!</Alert>
           )}
+          {deleteAlert && <Alert severity="success">Imagen eliminada</Alert>}
         </Box>
 
         <Splide
@@ -33,13 +53,49 @@ export default function PatternView({
         >
           {pattern ? (
             pattern.map((item) => (
-              <SplideSlide key={item.id}>
-                <img
-                  src={`http://localhost:8000/${item.pathPattern}`}
-                  alt={item.patternName}
-                  width="328px"
-                />
-              </SplideSlide>
+              <>
+                <SplideSlide key={item.id}>
+                  <img
+                    src={`http://localhost:8000/${item.pathPattern}`}
+                    alt={item.patternName}
+                    width="328px"
+                  />
+                  <div>
+                    <Grid container justifyContent="center">
+                      <Button
+                        variant="contained"
+                        onClick={() => handleClickOpen(item.id)}
+                      >
+                        Eliminar
+                      </Button>
+                    </Grid>
+                  </div>
+                </SplideSlide>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"¿Desea eliminar este modelo 3d?"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      Al aceptar, el modelo 3d seleccionado será eliminado de la
+                      lista. Si este resurso gráfico lo está utilizando en
+                      alguna prenda, primero tiene que eliminar la prenda, para
+                      poder eliminar el modelo 3d.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose}>Cancelar</Button>
+                    <Button onClick={deletePattern} autoFocus>
+                      Aceptar
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </>
             ))
           ) : (
             <>

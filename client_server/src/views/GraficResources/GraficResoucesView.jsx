@@ -23,7 +23,7 @@ export default function GraficResourcesView({
   uploadImage,
   onFileChange,
   alert,
-  avatar,
+
   deleteAlert,
   deleteResource,
   errorAlert,

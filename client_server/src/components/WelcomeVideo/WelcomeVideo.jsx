@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import video from "../../assets/videos/video_preview_bolso.mp4";
+import video from "../../assets/videos/METAPLATAFORM.mp4";
 import { Grid } from "@mui/material";
 
 export default function WelcomeVideo() {

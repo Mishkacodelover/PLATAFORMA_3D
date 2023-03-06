@@ -3,7 +3,7 @@ import { Grid, Typography, Avatar } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useAuthContext } from "../../contexts/AuthContext";
 
-export default function InternalHeaderView({ text, avatar }) {
+export default function InternalHeaderView({ children, avatar }) {
   const { authorization } = useAuthContext();
   return (
     <>
@@ -18,10 +18,6 @@ export default function InternalHeaderView({ text, avatar }) {
           justifyContent: "flex-end",
         }}
       >
-        <Grid item sx={{ paddingRight: "724px" }}>
-          <Typography>{text}</Typography>
-        </Grid>
-
         <Grid item>
           <Typography variant="h5" color="secondary.dark">
             Bienvenid@ {authorization.name}{" "}

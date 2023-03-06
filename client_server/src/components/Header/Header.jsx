@@ -10,8 +10,13 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "common.white" }}>
-        <Grid container direction="row" alignItems={"center"}>
-          <Grid item sx={{ justifyContent: "left", marginLeft: "24px" }} md={8}>
+        <Grid
+          container
+          direction="row"
+          alignItems={"center"}
+          justifyContent="space-evenly"
+        >
+          <Grid item sx={{ justifyContent: "left" }} md={8}>
             <Link to="/">
               <img src={logo} alt="logo" width="440px" />
             </Link>

@@ -1,6 +1,6 @@
 import { Grid, Box, Typography } from "@mui/material";
 
-import LoginWhite from "../../assets/images/otros/landing_ocho.png";
+import LoginWhite from "../../assets/images/otros/landing_foto.png";
 import LoginForm from "../../components/LoginForm";
 
 export default function LoginView() {

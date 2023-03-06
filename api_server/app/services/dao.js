@@ -82,6 +82,9 @@ dao.getAllPatterns = async (id) => await patternQueries.getAllPatterns(id);
 dao.addPattern = async (imageData) =>
   await patternQueries.addPattern(imageData);
 
+dao.logicDeletePattern = async (id) =>
+  await patternQueries.logicDeletePattern(id);
+
 dao.addFiscalData = async (fiscalData, userId) =>
   await fiscalDataQueries.addFiscalData(fiscalData, userId);
 

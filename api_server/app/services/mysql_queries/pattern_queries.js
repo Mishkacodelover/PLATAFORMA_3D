@@ -44,4 +44,21 @@ patternQueries.getAllPatterns = async (id) => {
   }
 };
 
+patternQueries.logicDeletePattern = async (id) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "UPDATE pattern set isDelete = 1 WHERE id = ?",
+      id,
+      "update",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 export default patternQueries;

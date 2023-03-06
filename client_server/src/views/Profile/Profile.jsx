@@ -28,8 +28,10 @@ export default function Profile() {
 
       if (response.ok) {
         const newAvatar = await response.json();
-        const name = newAvatar.find((item) => item.name === avatar.name);
-        setAvatar(name);
+        // const name = newAvatar.find((item) => item.name === avatar.name);
+        if (newAvatar) {
+          setAvatar(newAvatar);
+        }
       } else {
         console.log("error en el registro");
       }

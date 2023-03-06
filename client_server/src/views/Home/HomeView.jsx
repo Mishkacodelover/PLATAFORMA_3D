@@ -5,7 +5,7 @@ import Link from "../../components/Link/Link";
 import { Box, Typography, Stack, Grid, Button } from "@mui/material";
 import Partners from "../../components/Partners/Partners";
 
-import video from "../../assets/videos/video_preview_bolso.mp4";
+import video from "../../assets/videos/METAPLATAFORM.mp4";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 

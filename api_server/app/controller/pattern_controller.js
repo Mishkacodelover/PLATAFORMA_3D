@@ -47,4 +47,16 @@ controller.getAllPatterns = async (req, res) => {
   }
 };
 
+controller.logicDeletePattern = async (req, res) => {
+  try {
+    const image = await dao.logicDeletePattern(req.params.id);
+    if (image) {
+      const pattern = await dao.getAllResources(req.body.userCreated);
+      return res.send(pattern);
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 export default controller;
