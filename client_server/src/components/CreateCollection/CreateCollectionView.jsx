@@ -11,6 +11,7 @@ export default function CreateCollectionView({
   addCollection,
   handleCollection,
   setAddCollection,
+  handleToggle,
 }) {
   return (
     <>
@@ -98,6 +99,7 @@ export default function CreateCollectionView({
 
             <Grid item md={12}>
               <Button
+                onClick={() => handleToggle()}
                 type="submit"
                 fullWidth
                 variant="contained"

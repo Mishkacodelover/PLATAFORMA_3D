@@ -10,6 +10,7 @@ import {
   Stack,
   IconButton,
   Tooltip,
+  CircularProgress,
 } from "@mui/material";
 import InternalHeader from "../../components/InternalHeader/InternalHeader";
 import CreateCollection from "../../components/CreateCollection";
@@ -36,10 +37,12 @@ export default function CollectionView({
   handleCloseEditCollection,
   handleOpenEditCollection,
   openEditCollection,
-
+  open,
+  openCircleTwo,
   setAddCollection,
   setEditCollection,
   updateCollection,
+  handleToggle,
 }) {
   return (
     <>
@@ -73,6 +76,11 @@ export default function CollectionView({
             </Button>
           </Grid>
         </Grid>
+        {open && (
+          <CircularProgress
+            sx={{ position: "absolute", top: "40%", left: "55%" }}
+          />
+        )}
         {createCollection && (
           <Stack justifyContent="center" alignItems="center">
             <Box sx={{ width: "70%" }}>
@@ -81,11 +89,17 @@ export default function CollectionView({
                 addCollectionData={addCollectionData}
                 addCollection={addCollection}
                 handleCollection={handleCollection}
+                handleToggle={handleToggle}
               />
             </Box>
           </Stack>
         )}
         <Grid sx={{ paddingTop: "24px" }}>
+          {openCircleTwo && (
+            <CircularProgress
+              sx={{ position: "absolute", top: "40%", left: "55%" }}
+            />
+          )}
           {collection ? (
             collection.map((col) => (
               <Grid
@@ -157,6 +171,7 @@ export default function CollectionView({
                           collectionEdited={collectionEdited}
                           setEditCollection={setEditCollection}
                           updateCollection={updateCollection}
+                          handleToggle={handleToggle}
                         />
                       </Box>
                     </Fade>

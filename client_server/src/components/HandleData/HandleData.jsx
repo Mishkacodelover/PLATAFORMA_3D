@@ -11,6 +11,8 @@ export default function HandleData({
   errors,
   isSubmitting,
   handleSubmit,
+  handleToggleCircle,
+  openCircle,
 }) {
   const [checked, setChecked] = useState(true);
 
@@ -31,6 +33,8 @@ export default function HandleData({
       errors={errors}
       isSubmitting={isSubmitting}
       handleSubmit={handleSubmit}
+      handleToggleCircle={handleToggleCircle}
+      openCircle={openCircle}
     />
   );
 }

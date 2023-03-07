@@ -8,6 +8,8 @@ export default function InviteMember({
   handleChange,
   errors,
   isSubmitting,
+
+  handleToggleCircle,
 }) {
   return (
     <>
@@ -90,6 +92,7 @@ export default function InviteMember({
 
           <Grid item xs={8} md={12} sx={{ paddingTop: "16px" }}>
             <Button
+              onClick={() => handleToggleCircle()}
               disabled={isSubmitting}
               fullWidth
               type="submit"

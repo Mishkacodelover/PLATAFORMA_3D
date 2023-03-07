@@ -23,8 +23,22 @@ export default function Collections() {
   const [alertError, setAlertError] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [openCollectionUse, setOpenCollectionUse] = useState();
-
+  const [open, setOpen] = useState(false);
+  const [openCircleTwo, setOpenCircleTwo] = useState(false);
   const userId = { userCreated: authorization.id };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+  const handleCloseCircleTwo = () => {
+    setOpenCircleTwo(false);
+  };
+  const handleToggleCircleTwo = () => {
+    setOpenCircleTwo(!open);
+  };
 
   const handleOpenEditCollection = function (id) {
     setOpenEditCollection(true);
@@ -95,6 +109,7 @@ export default function Collections() {
         const newCollection = await response.json();
         if (newCollection) {
           setCollection(newCollection);
+          handleClose();
         }
       } else {
         console.log("error al editar valor");
@@ -134,6 +149,7 @@ export default function Collections() {
     );
     try {
       if (response.ok) {
+        handleClose();
         setEditCollection(obj);
         setOpenEditCollection(false);
         console.log(response);
@@ -154,6 +170,7 @@ export default function Collections() {
   }
 
   async function deleteCollection(id) {
+    handleToggleCircleTwo();
     const response = await fetch(`http://localhost:8000/collections/${id}`, {
       method: "DELETE",
       headers: {
@@ -165,12 +182,14 @@ export default function Collections() {
       if (response.status === 200) {
         setDeleteAlert(true);
         setTimeout(() => setDeleteAlert(false), 2000);
+        handleCloseCircleTwo();
         const collectionDeleted = collection.findIndex(
           (item) => item.id === id
         );
         const copyCollection = [...collection];
         copyCollection.splice(collectionDeleted, 1);
         setCollection(copyCollection);
+        handleClose();
       } else {
         console.log("error al eliminar la colección");
       }
@@ -203,6 +222,9 @@ export default function Collections() {
       openCollectionUse={openCollectionUse}
       handleCloseCollectionUse={handleCloseCollectionUse}
       handleOpenCollectionUse={handleOpenCollectionUse}
+      handleToggle={handleToggle}
+      open={open}
+      openCircleTwo={openCircleTwo}
     />
   );
 }

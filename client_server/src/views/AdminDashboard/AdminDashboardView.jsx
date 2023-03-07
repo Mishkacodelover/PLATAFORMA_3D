@@ -22,14 +22,17 @@ export default function AdminDashboardView({
   handleClickOpen,
   handleClose,
   open,
+  openCircle,
   openEditUser,
   userEditing,
   updateUser,
+  handleToggleCircle,
 }) {
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
         <InternalHeader text="Panel de administrador" />
+
         <Grid
           container
           alignItems="flex-start"
@@ -50,8 +53,11 @@ export default function AdminDashboardView({
               errors={errors}
               isSubmitting={isSubmitting}
               handleSubmit={handleSubmit}
+              handleToggleCircle={handleToggleCircle}
+              openCircle={openCircle}
             />
           </Grid>
+
           <Grid item xs={10} md={6}>
             <HandleUser
               allUser={allUser}
@@ -61,6 +67,7 @@ export default function AdminDashboardView({
               handleClose={handleClose}
               handleClickOpen={handleClickOpen}
               handleInputData={handleInputData}
+              handleToggleCircle={handleToggleCircle}
               open={open}
               openEditUser={openEditUser}
               updateUser={updateUser}

@@ -7,6 +7,7 @@ import {
   Fade,
   Backdrop,
   Switch,
+  CircularProgress,
 } from "@mui/material";
 
 import FiscalData from "../FiscalData/FiscalData";
@@ -16,7 +17,7 @@ import { style } from "../../const/modalStyle";
 export default function HandleDataView({
   checked,
   handleCheck,
-
+  handleToggleCircle,
   handleOpenRegister,
   openRegister,
   handleCloseRegister,
@@ -25,6 +26,7 @@ export default function HandleDataView({
   handleChange,
   errors,
   isSubmitting,
+  openCircle,
 }) {
   return (
     <>
@@ -82,12 +84,18 @@ export default function HandleDataView({
             >
               <Fade in={openRegister}>
                 <Box sx={style}>
+                  {openCircle && (
+                    <CircularProgress
+                      sx={{ position: "absolute", top: "50%", left: "50%" }}
+                    />
+                  )}
                   <InviteMember
                     handleSubmit={handleSubmit}
                     values={values}
                     handleChange={handleChange}
                     errors={errors}
                     isSubmitting={isSubmitting}
+                    handleToggleCircle={handleToggleCircle}
                   />
                 </Box>
               </Fade>

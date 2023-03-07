@@ -12,6 +12,14 @@ export default function AdminDashboard() {
   const [openEditUser, setOpenEditUser] = useState(false);
   const [userEditing, setUserEditing] = useState(null);
   const [open, setOpen] = useState(false);
+  const [openCircle, setOpenCircle] = useState(false);
+
+  const handleCloseCircle = () => {
+    setOpenCircle(false);
+  };
+  const handleToggleCircle = () => {
+    setOpenCircle(!open);
+  };
 
   const handleCloseRegister = () => setOpenRegister(false);
   const handleOpenRegister = () => setOpenRegister(true);
@@ -127,6 +135,7 @@ export default function AdminDashboard() {
 
       if (response.ok) {
         handleCloseRegister();
+        handleCloseCircle();
         // const newMemberList = [...allUser, values];
         // setAllUser(newMemberList);
 
@@ -172,7 +181,9 @@ export default function AdminDashboard() {
       handleClose={handleClose}
       handleClickOpen={handleClickOpen}
       handleInputData={handleInputData}
+      handleToggleCircle={handleToggleCircle}
       open={open}
+      openCircle={openCircle}
       openEditUser={openEditUser}
       updateUser={updateUser}
       userEditing={userEditing}

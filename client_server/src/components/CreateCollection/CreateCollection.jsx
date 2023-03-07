@@ -5,6 +5,7 @@ export default function CreateCollection({
   addCollection,
   handleCollection,
   setAddCollection,
+  handleToggle,
 }) {
   return (
     <CreateCollectionView
@@ -12,6 +13,7 @@ export default function CreateCollection({
       addCollection={addCollection}
       handleCollection={handleCollection}
       setAddCollection={setAddCollection}
+      handleToggle={handleToggle}
     />
   );
 }

@@ -35,6 +35,8 @@ export default function HandleUserView({
   handleInputData,
   handleClickOpen,
   handleClose,
+  handleToggleCircle,
+
   open,
   openEditUser,
   userEditing,
