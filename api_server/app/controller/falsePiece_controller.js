@@ -43,7 +43,7 @@ controller.getFalsePieceImgByCollection = async (req, res) => {
     if (piece.length <= 0)
       return res.status(404).send("no existe la pieza con los recursos");
 
-    return res.send(piece[0]);
+    return res.send(piece);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);

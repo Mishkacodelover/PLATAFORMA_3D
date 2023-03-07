@@ -171,7 +171,7 @@ export default function CollectionView({
                     Eliminar
                   </Button>
 
-                  <Link to="/u/collection-piece">
+                  <Link to={`/u/collection-piece/${col.id}`}>
                     <Tooltip title="Ver prendas">
                       <IconButton>
                         <VisibilityIcon sx={{ color: "secondary.main" }} />

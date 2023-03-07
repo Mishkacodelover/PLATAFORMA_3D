@@ -1,5 +1,6 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
+
+import { useState } from "react";
 
 import {
   Card,
@@ -32,7 +33,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function PieceCard({ collectionId }) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -47,62 +48,64 @@ export default function PieceCard({ collectionId }) {
         justifyContent="center"
       >
         {collectionId ? (
-          <Grid item sx={{ height: "194px" }}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardHeader
-                title={collectionId.clotheName}
-                subheader={`Colección: ${collectionId.collectionName}`}
-                sx={{ color: "secondary.main" }}
-              />
-              <CardMedia
-                component="img"
-                height="194"
-                image={`http://localhost:8000/${collectionId.path}`}
-                alt="resource"
-              />
-              <CardContent>
-                <Typography variant="body2">Ver características:</Typography>
-              </CardContent>
-              <CardActions disableSpacing>
-                <Tooltip title="Eliminar" arrow>
-                  <IconButton aria-label="add to favorites">
-                    <DeleteIcon sx={{ color: "secondary.main" }} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Editar" arrow>
-                  <IconButton aria-label="share">
-                    <EditIcon sx={{ color: "primary.dark" }} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Enviar a producción" arrow>
-                  <IconButton>
-                    <DoneOutlineIcon sx={{ color: "secondary.main" }} />
-                  </IconButton>
-                </Tooltip>
-                <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                >
-                  <ExpandMoreIcon />
-                </ExpandMore>
-              </CardActions>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
+          collectionId.map((item) => (
+            <Grid item sx={{ height: "194px" }}>
+              <Card sx={{ maxWidth: 345 }}>
+                <CardHeader
+                  title={item.clotheName}
+                  subheader={`Colección: ${item.collectionName}`}
+                  sx={{ color: "secondary.main" }}
+                />
+                <CardMedia
+                  component="img"
+                  height="194"
+                  image={`http://localhost:8000/${item.path}`}
+                  alt="resource"
+                />
                 <CardContent>
-                  <Typography paragraph>Tela: {collectionId.fabric}</Typography>
-                  <Typography paragraph>Talla: {collectionId.size}</Typography>
-                  <Typography paragraph>Color: {collectionId.color}</Typography>
-                  <Typography paragraph>
-                    Modelo 3d elegido: {collectionId.patternName}
-                  </Typography>
-                  <Typography paragraph>
-                    Recurso gráfico: {collectionId.name}
-                  </Typography>
+                  <Typography variant="body2">Ver características:</Typography>
                 </CardContent>
-              </Collapse>
-            </Card>
-          </Grid>
+                <CardActions disableSpacing>
+                  <Tooltip title="Eliminar" arrow>
+                    <IconButton aria-label="add to favorites">
+                      <DeleteIcon sx={{ color: "secondary.main" }} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Editar" arrow>
+                    <IconButton aria-label="share">
+                      <EditIcon sx={{ color: "primary.dark" }} />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Enviar a producción" arrow>
+                    <IconButton>
+                      <DoneOutlineIcon sx={{ color: "secondary.main" }} />
+                    </IconButton>
+                  </Tooltip>
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </ExpandMore>
+                </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <CardContent>
+                    <Typography paragraph>Tela: {item.fabric}</Typography>
+                    <Typography paragraph>Talla: {item.size}</Typography>
+                    <Typography paragraph>Color: {item.color}</Typography>
+                    <Typography paragraph>
+                      Modelo 3d elegido: {item.patternName}
+                    </Typography>
+                    <Typography paragraph>
+                      Recurso gráfico: {item.name}
+                    </Typography>
+                  </CardContent>
+                </Collapse>
+              </Card>
+            </Grid>
+          ))
         ) : (
           <Typography variant="h5" sx={{ paddingLeft: "24px" }}>
             Todavía no tienes prendas creadas

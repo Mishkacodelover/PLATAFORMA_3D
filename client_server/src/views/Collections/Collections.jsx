@@ -10,11 +10,6 @@ const obj = {
   finishDate: dayjs("04/01/2023"),
 };
 
-const objUse = {
-  uses: "",
-  description: "",
-};
-
 export default function Collections() {
   const { authorization } = useAuthContext();
   const [collection, setCollection] = useState(null);
@@ -27,7 +22,6 @@ export default function Collections() {
   const [alert, setAlert] = useState(false);
   const [alertError, setAlertError] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
-  const [use, setUse] = useState(objUse);
   const [openCollectionUse, setOpenCollectionUse] = useState();
 
   const userId = { userCreated: authorization.id };
@@ -52,13 +46,6 @@ export default function Collections() {
   };
 
   const handleCloseCollectionUse = () => setOpenCollectionUse(false);
-
-  function handleUse(event) {
-    setUse({
-      ...use,
-      [event.target.name]: event.target.value,
-    });
-  }
 
   useEffect(
     function () {
@@ -192,47 +179,6 @@ export default function Collections() {
     }
   }
 
-  // async function addCollectionUse(event, use) {
-  //   event.preventDefault();
-  //   const useAdd = {
-  //     ...use,
-  //     collection: idCollection.id,
-  //   };
-  //   const response = await fetch(`http://localhost:8000/collectionUse`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(useAdd),
-  //   });
-  //   try {
-  //     if (response.ok) {
-  //       setUse(obj);
-  //       handleCloseCollectionUse();
-  //     } else {
-  //       console.log("error al editar valor");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  //más adelante....
-  // useEffect(
-  //   function () {
-  //     async function fetchData() {
-  //       const response = await fetch(
-  //         `http://localhost:8000/collectionUse/collectionName/${collection.id}`
-  //       );
-  //       const data = await response.json();
-
-  //       setCollectionUse(data);
-  //     }
-  //     fetchData();
-  //   },
-  //   [collection.id]
-  // );
-
   return (
     <CollectionView
       addCollection={addCollection}
@@ -254,8 +200,6 @@ export default function Collections() {
       setEditCollection={setEditCollection}
       setAlert={setAlert}
       updateCollection={updateCollection}
-      use={use}
-      handleUse={handleUse}
       openCollectionUse={openCollectionUse}
       handleCloseCollectionUse={handleCloseCollectionUse}
       handleOpenCollectionUse={handleOpenCollectionUse}

@@ -67,7 +67,7 @@ function App() {
                     <Route path="piece-all" element={<FinalPiece />} />
 
                     <Route
-                      path="collection-piece"
+                      path="collection-piece/:id"
                       element={<CollectionById />}
                     />
 
