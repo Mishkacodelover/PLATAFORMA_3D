@@ -57,19 +57,20 @@ export default function AdminDashboard() {
   }, []);
 
   async function deleteUser(id) {
-    handleToggleCircle();
-    const response = await fetch(`http://localhost:8000/user/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(value),
-    });
+    const response = await fetch(
+      `http://localhost:8000/user/${userEditing.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(value),
+      }
+    );
     try {
       if (response.ok) {
         console.log(response);
         handleClose();
-        handleCloseCircle();
 
         const editList = await response.json();
         if (editList) {
