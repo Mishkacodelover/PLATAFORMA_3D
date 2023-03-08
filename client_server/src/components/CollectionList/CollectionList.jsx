@@ -57,7 +57,7 @@ export default function CollectionList({
       ) : (
         <>
           <ListItem>
-            <Typography>No hay todavía modelos 3d</Typography>
+            <Typography>No hay todavía colecciones de ropa</Typography>
           </ListItem>
         </>
       )}

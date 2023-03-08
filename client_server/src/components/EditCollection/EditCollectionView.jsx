@@ -10,7 +10,6 @@ export default function EditCollectionView({
   collectionEdited,
   setEditCollection,
   updateCollection,
-  handleToggle,
 }) {
   return (
     <Box>
@@ -87,7 +86,6 @@ export default function EditCollectionView({
 
           <Grid item md={12}>
             <Button
-              onClick={handleToggle}
               type="submit"
               fullWidth
               variant="contained"

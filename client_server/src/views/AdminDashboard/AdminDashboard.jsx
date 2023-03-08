@@ -13,12 +13,19 @@ export default function AdminDashboard() {
   const [userEditing, setUserEditing] = useState(null);
   const [open, setOpen] = useState(false);
   const [openCircle, setOpenCircle] = useState(false);
+  const [openCircleEdit, setOpenCircleEdit] = useState(false);
 
   const handleCloseCircle = () => {
     setOpenCircle(false);
   };
+  const handleCloseCircleEdit = () => {
+    setOpenCircleEdit(false);
+  };
   const handleToggleCircle = () => {
     setOpenCircle(!open);
+  };
+  const handleToggleCircleEdit = () => {
+    setOpenCircleEdit(!open);
   };
 
   const handleCloseRegister = () => setOpenRegister(false);
@@ -50,6 +57,7 @@ export default function AdminDashboard() {
   }, []);
 
   async function deleteUser(id) {
+    handleToggleCircle();
     const response = await fetch(`http://localhost:8000/user/${id}`, {
       method: "DELETE",
       headers: {
@@ -61,6 +69,7 @@ export default function AdminDashboard() {
       if (response.ok) {
         console.log(response);
         handleClose();
+        handleCloseCircle();
 
         const editList = await response.json();
         if (editList) {
@@ -96,6 +105,7 @@ export default function AdminDashboard() {
     try {
       if (response.ok) {
         handleCloseEditUser();
+        handleCloseCircleEdit();
 
         const editList = await response.json();
         // if (editList) {
@@ -182,8 +192,10 @@ export default function AdminDashboard() {
       handleClickOpen={handleClickOpen}
       handleInputData={handleInputData}
       handleToggleCircle={handleToggleCircle}
+      handleToggleCircleEdit={handleToggleCircleEdit}
       open={open}
       openCircle={openCircle}
+      openCircleEdit={openCircleEdit}
       openEditUser={openEditUser}
       updateUser={updateUser}
       userEditing={userEditing}

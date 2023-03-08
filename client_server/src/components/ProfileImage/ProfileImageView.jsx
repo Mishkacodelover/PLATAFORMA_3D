@@ -2,6 +2,7 @@ import * as React from "react";
 
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import { useAvatarContext } from "../../contexts/AvatarContext";
 
 import {
   Box,
@@ -12,11 +13,8 @@ import {
   Avatar,
 } from "@mui/material";
 
-export default function ProfileImageView({
-  onFileChange,
-  uploadImage,
-  avatar,
-}) {
+export default function ProfileImageView() {
+  const { onFileChange, uploadImage, avatar } = useAvatarContext();
   return (
     <Box sx={{ p: "24px" }}>
       <Grid

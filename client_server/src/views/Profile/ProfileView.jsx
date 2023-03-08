@@ -7,7 +7,7 @@ import InternalHeader from "../../components/InternalHeader/InternalHeader";
 
 import WelcomeVideo from "../../components/WelcomeVideo/WelcomeVideo";
 
-export default function ProfileView({ onFileChange, uploadImage, avatar }) {
+export default function ProfileView() {
   return (
     <Box>
       <Grid container maxWidth={"100%"} sx={{ maxHeight: "100%" }}>
@@ -30,11 +30,7 @@ export default function ProfileView({ onFileChange, uploadImage, avatar }) {
             <UserData />
           </Grid>
           <Grid item xs={10} md={5}>
-            <ProfileImage
-              onFileChange={onFileChange}
-              uploadImage={uploadImage}
-              avatar={avatar}
-            />
+            <ProfileImage />
           </Grid>
         </Grid>
       </Grid>

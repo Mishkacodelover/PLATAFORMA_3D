@@ -23,10 +23,12 @@ export default function AdminDashboardView({
   handleClose,
   open,
   openCircle,
+  openCircleEdit,
   openEditUser,
   userEditing,
   updateUser,
   handleToggleCircle,
+  handleToggleCircleEdit,
 }) {
   return (
     <Box>
@@ -67,8 +69,10 @@ export default function AdminDashboardView({
               handleClose={handleClose}
               handleClickOpen={handleClickOpen}
               handleInputData={handleInputData}
-              handleToggleCircle={handleToggleCircle}
+              handleToggleCircleEdit={handleToggleCircleEdit}
               open={open}
+              openCircle={openCircle}
+              openCircleEdit={openCircleEdit}
               openEditUser={openEditUser}
               updateUser={updateUser}
               userEditing={userEditing}

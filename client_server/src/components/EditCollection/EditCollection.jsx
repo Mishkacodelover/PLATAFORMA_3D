@@ -5,7 +5,6 @@ export default function EditCollection({
   collectionEdited,
   setEditCollection,
   updateCollection,
-  handleToggle,
 }) {
   return (
     <>
@@ -14,7 +13,6 @@ export default function EditCollection({
         collectionEdited={collectionEdited}
         setEditCollection={setEditCollection}
         updateCollection={updateCollection}
-        handleToggle={handleToggle}
       />
     </>
   );

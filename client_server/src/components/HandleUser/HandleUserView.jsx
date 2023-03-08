@@ -20,6 +20,7 @@ import {
   DialogTitle,
   DialogActions,
   DialogContentText,
+  CircularProgress,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -35,8 +36,9 @@ export default function HandleUserView({
   handleInputData,
   handleClickOpen,
   handleClose,
-  handleToggleCircle,
-
+  handleToggleCircleEdit,
+  openCircleEdit,
+  openCircle,
   open,
   openEditUser,
   userEditing,
@@ -114,10 +116,20 @@ export default function HandleUserView({
                   >
                     <Fade in={openEditUser}>
                       <Box sx={style}>
+                        {openCircleEdit && (
+                          <CircularProgress
+                            sx={{
+                              position: "absolute",
+                              top: "40%",
+                              left: "45%",
+                            }}
+                          />
+                        )}
                         <EditUser
                           handleInputData={handleInputData}
                           updateUser={updateUser}
                           user={userEditing}
+                          handleToggleCircleEdit={handleToggleCircleEdit}
                         />
                       </Box>
                     </Fade>
@@ -138,6 +150,15 @@ export default function HandleUserView({
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                   >
+                    {openCircle && (
+                      <CircularProgress
+                        sx={{
+                          position: "absolute",
+                          top: "40%",
+                          left: "45%",
+                        }}
+                      />
+                    )}
                     <DialogTitle id="alert-dialog-title">
                       {"¿Está seguro de que quiere eliminar al usuario?"}
                     </DialogTitle>

@@ -8,11 +8,13 @@ export default function HandleUser({
   handleInputData,
   handleClickOpen,
   handleClose,
+  handleToggleCircleEdit,
   open,
+  openCircle,
+  openCircleEdit,
   openEditUser,
   userEditing,
   updateUser,
-  handleToggleCircle,
 }) {
   return (
     <HandleUserView
@@ -23,8 +25,10 @@ export default function HandleUser({
       handleClose={handleClose}
       handleClickOpen={handleClickOpen}
       handleInputData={handleInputData}
-      handleToggleCircle={handleToggleCircle}
+      handleToggleCircleEdit={handleToggleCircleEdit}
       open={open}
+      openCircle={openCircle}
+      openCircleEdit={openCircleEdit}
       openEditUser={openEditUser}
       updateUser={updateUser}
       userEditing={userEditing}

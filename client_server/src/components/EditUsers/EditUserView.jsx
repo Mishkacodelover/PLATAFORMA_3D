@@ -5,6 +5,7 @@ export default function EditUserView({
   inputData,
   handleInputData,
   updateUser,
+  handleToggleCircleEdit,
 }) {
   return (
     <>
@@ -77,6 +78,7 @@ export default function EditUserView({
 
           <Grid item xs={8} md={12} sx={{ paddingTop: "8px" }}>
             <Button
+              onClick={() => handleToggleCircleEdit()}
               fullWidth
               type="submit"
               variant="contained"
