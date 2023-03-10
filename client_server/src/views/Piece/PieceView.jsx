@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Alert } from "@mui/material";
+import { Box, Grid, Typography, Alert, CircularProgress } from "@mui/material";
 import InternalHeader from "../../components/InternalHeader";
 import PieceForm from "../../components/PieceForm/PieceForm";
 
@@ -17,6 +17,8 @@ export default function PieceView({
   handleResource,
   collectionChecked,
   handleCollection,
+  handleOpen,
+  open,
 }) {
   return (
     <>
@@ -38,6 +40,15 @@ export default function PieceView({
               maxWidth: "100%",
             }}
           >
+            {open && (
+              <CircularProgress
+                sx={{
+                  position: "absolute",
+                  top: "40%",
+                  left: "55%",
+                }}
+              />
+            )}
             <PieceForm
               addPiece={addPiece}
               pattern={pattern}
@@ -51,6 +62,7 @@ export default function PieceView({
               handleResource={handleResource}
               collectionChecked={collectionChecked}
               handleCollection={handleCollection}
+              handleOpen={handleOpen}
             />
           </Grid>
         </Grid>

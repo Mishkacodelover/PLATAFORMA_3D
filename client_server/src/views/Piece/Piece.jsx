@@ -20,7 +20,16 @@ export default function Piece() {
   const [resourceChecked, setResourceChecked] = useState(null);
   const [collectionChecked, setCollectionChecked] = useState(null);
   const [alert, setAlert] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const { authorization } = useAuthContext();
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handlePattern = (value) => () => {
     setPatternChecked(value);
@@ -111,6 +120,7 @@ export default function Piece() {
     try {
       if (response.ok) {
         setAddPiece(falsePiece);
+        handleClose();
         setAlert(true);
         setTimeout(() => setAlert(false), 2000);
       } else {
@@ -136,6 +146,8 @@ export default function Piece() {
       handleResource={handleResource}
       collectionChecked={collectionChecked}
       handleCollection={handleCollection}
+      handleOpen={handleOpen}
+      open={open}
     />
   );
 }

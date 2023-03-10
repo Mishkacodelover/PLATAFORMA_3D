@@ -22,6 +22,7 @@ export default function PieceForm({
   handleResource,
   collectionChecked,
   handleCollection,
+  handleOpen,
 }) {
   return (
     <>
@@ -133,6 +134,7 @@ export default function PieceForm({
             </Grid>
             <Grid item xs={12} md={12}>
               <Button
+                onClick={() => handleOpen()}
                 fullWidth
                 type="submit"
                 variant="contained"
